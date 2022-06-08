@@ -1,0 +1,18 @@
+default:
+  tags:
+    - DRP19
+    
+build-app:
+  stage: build
+  script:
+    - gradle build
+    
+test-app:
+  stage: test
+  script:
+    - gradle test
+    
+deploy-app:
+  stage: deploy
+  script:
+    - gradle assemble
