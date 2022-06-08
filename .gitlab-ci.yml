@@ -5,14 +5,14 @@ default:
 build-app:
   stage: build
   script:
-    - gradle build
+    - ./gradlew build
     
 test-app:
   stage: test
   script:
-    - gradle test
+    - ./gradlew test
     
 deploy-app:
   stage: deploy
   script:
-    - gradle assemble
+    - ./gradlew assemble
