@@ -11,12 +11,10 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-    loadTable(listOf("1", "2"))
     refresh()
   }
 
-  fun loadTable(data: List<String>) {
-    val table = findViewById<TableLayout>(R.id.table)
+  fun appendTable(data: List<String>, table: TableLayout) {
     for (book: String in data) {
       val row = createRow(book)
       table.addView(row)
@@ -41,6 +39,6 @@ class MainActivity : AppCompatActivity() {
   fun refresh() {
     val table = findViewById<TableLayout>(R.id.table)
     table.removeAllViews()
-    loadTable(listOf("New", "Book", "Added"))
+    appendTable(listOf("New", "Book", "Added"), table)
   }
 }
