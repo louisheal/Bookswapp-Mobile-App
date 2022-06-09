@@ -1,0 +1,27 @@
+default:
+  tags:
+    - DRP19
+    
+before_script:
+  - ./gradlew --stop
+    
+build-app:
+  stage: build
+  script:
+    - ./gradlew build
+  only:
+    - master
+    
+test-app:
+  stage: test
+  script:
+    - ./gradlew test
+  only:
+    - master
+    
+deploy-app:
+  stage: deploy
+  script:
+    - ./gradlew assemble
+  only:
+    - master
