@@ -23,7 +23,6 @@ deploy-app:
   stage: deploy
   script:
     - ./gradlew assemble
-    - scp app/build/outputs/apk/release/app-release-unsigned.apk ad4220@shell4.do
-c.ic.ac.uk:~/public_html/app.apk
+    - scp app/build/outputs/apk/release/app-release-unsigned.apk ad4220@shell4.doc.ic.ac.uk:~/public_html/app.apk
   only:
     - master
