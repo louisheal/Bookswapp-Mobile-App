@@ -2,9 +2,6 @@ default:
   tags:
     - DRP19
     
-before_script:
-  - ./gradlew --stop
-    
 build-app:
   stage: build
   script:
