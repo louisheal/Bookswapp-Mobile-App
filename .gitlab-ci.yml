@@ -8,7 +8,7 @@ before_script:
 build-app:
   stage: build
   script:
-    - ./gradlew build --no-daemon
+    - ./gradlew build
   only:
     - master
     
@@ -23,6 +23,6 @@ deploy-app:
   stage: deploy
   script:
     - ./gradlew assembleDebug
-    - scp drp-book-app/app/build/outputs/apk/app-debug.apk ad4220@shell4.doc.ic.ac.uk:~/public_html/app.apk
+    - scp drp-book-app/app/build/outputs/apk/debug/app-debug.apk ad4220@shell4.doc.ic.ac.uk:~/public_html/app.apk
   only:
     - master
