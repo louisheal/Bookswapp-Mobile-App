@@ -18,9 +18,8 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-    val response : List<MarsPhoto> = getMarsPhotos()
-    println(response.size)
-    refresh()
+    val response : List<Book> = getBooks()
+    displayBooks(response)
   }
 
   fun appendTable(data: List<String>, table: TableLayout) {
@@ -45,18 +44,39 @@ class MainActivity : AppCompatActivity() {
     return row
   }
 
-  fun refresh() {
+  fun refresh(debugString : String) {
     val table = findViewById<TableLayout>(R.id.table)
     table.removeAllViews()
-    appendTable(listOf("New", "Book", "Added"), table)
-
+    appendTable(listOf("New", "Book", debugString), table)
   }
 
-  private fun getMarsPhotos(): List<MarsPhoto> {
-    var response : List<MarsPhoto> = listOf()
+  fun displayBooks(books : List<Book>) {
+    val table = findViewById<TableLayout>(R.id.table)
+    val bookNames : MutableList<String> = mutableListOf()
+    table.removeAllViews()
+    for (book in books) {
+      bookNames.add(book.title)
+    }
+    appendTable(bookNames, table)
+  }
+
+  private fun getBooks(): List<Book> {
+    var response : List<Book> = listOf()
     runBlocking {
       try {
-        response = MarsApi.retrofitService.getPhotos()
+        response = BookApi.retrofitService.getBooks()
+      } catch (e: Exception) {
+        e.printStackTrace()
+      }
+    }
+    return response
+  }
+
+  private fun getUsers(): List<User> {
+    var response : List<User> = listOf()
+    runBlocking {
+      try {
+        response = BookApi.retrofitService.getUsers()
       } catch (e: Exception) {
         e.printStackTrace()
       }
@@ -70,20 +90,35 @@ private val moshi = Moshi.Builder()
   .build()
 
 val retrofit = Retrofit.Builder()
-  .baseUrl("https://android-kotlin-fun-mars-server.appspot.com")
+  .baseUrl("http://146.169.43.115:8080/")
   .addConverterFactory(MoshiConverterFactory.create(moshi))
   .build()
 
-interface MarsApiService {
-  @GET("photos")
-  suspend fun getPhotos() : List<MarsPhoto>
+interface BookApiService {
+  @GET("books")
+  suspend fun getBooks() : List<Book>
+
+  @GET("users")
+  suspend fun getUsers() : List<User>
 }
 
-object MarsApi {
-  val retrofitService: MarsApiService by lazy { retrofit.create(MarsApiService::class.java) }
+object BookApi {
+  val retrofitService: BookApiService by lazy { retrofit.create(BookApiService::class.java) }
 }
 
-data class MarsPhoto(
+data class Book(
   val id: String,
-  @Json(name = "img_src") val imgSrcUrl: String
+  val isbn: String,
+  val title: String,
+  val published: String
+)
+
+data class User(
+  val id: String,
+  val username: String,
+  val passwdHash: String,
+  val name: String,
+  val email: String,
+  val phone: String,
+  val joinDate: String
 )
