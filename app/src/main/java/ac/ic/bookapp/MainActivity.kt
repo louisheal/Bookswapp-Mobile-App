@@ -4,16 +4,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.GET
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.*
+import retrofit2.Response
+import retrofit2.http.*
 
 class MainActivity : AppCompatActivity() {
 
-  private val BORROW: String = "Borrow"
+  private val BORROW: String = "Duplicate"
+  private var currentID: Int = 5
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -22,42 +25,47 @@ class MainActivity : AppCompatActivity() {
     displayBooks(response)
   }
 
-  fun appendTable(data: List<String>, table: TableLayout) {
-    for (book: String in data) {
-      val row = createRow(book)
-      table.addView(row)
-    }
-  }
-
-  fun createRow(book: String): TableRow {
+  fun createRow(book: Book): TableRow {
     val row = TableRow(this)
     val text = TextView(this)
-    text.setText(book)
+    text.setText(book.title)
     row.addView(text)
     val button = Button(this)
     button.setText(BORROW)
     button.setOnClickListener {
-      val borrowToast = Toast.makeText(this, "Book Borrowed", Toast.LENGTH_SHORT)
-      borrowToast.show()
+//      val borrowToast = Toast.makeText(this, "Book Duplicated", Toast.LENGTH_SHORT)
+//      borrowToast.show()
+      book.id = currentID.toString()
+      currentID++
+      borrowBook(book)
     }
     row.addView(button)
     return row
   }
 
-  fun refresh(debugString : String) {
-    val table = findViewById<TableLayout>(R.id.table)
-    table.removeAllViews()
-    appendTable(listOf("New", "Book", debugString), table)
+  private fun borrowBook(book: Book) {
+//    val table = findViewById<TableLayout>(R.id.table)
+//    val row = createRow(book)
+//    table.addView(row)
+    runBlocking {
+      try {
+        val response = BookApi.retrofitService.postBook(JBook("5", "new book", "today"))
+        val toast = Toast.makeText(this@MainActivity,
+          response.code().toString(), Toast.LENGTH_SHORT)
+        toast.show()
+      } catch (e: Exception) {
+        e.printStackTrace()
+      }
+    }
   }
 
-  fun displayBooks(books : List<Book>) {
+  fun displayBooks(books: List<Book>) {
     val table = findViewById<TableLayout>(R.id.table)
-    val bookNames : MutableList<String> = mutableListOf()
     table.removeAllViews()
     for (book in books) {
-      bookNames.add(book.title)
+      val row = createRow(book)
+      table.addView(row)
     }
-    appendTable(bookNames, table)
   }
 
   private fun getBooks(): List<Book> {
@@ -100,6 +108,10 @@ interface BookApiService {
 
   @GET("users")
   suspend fun getUsers() : List<User>
+
+  @Headers("Content-Type: application/json")
+  @POST("books")
+  suspend fun postBook(@Body book : JBook) : Response<Unit>
 }
 
 object BookApi {
@@ -107,10 +119,17 @@ object BookApi {
 }
 
 data class Book(
-  val id: String,
-  val isbn: String,
-  val title: String,
-  val published: String
+  @field:Json(name = "id") var id: String,
+  @field:Json(name = "isbn") val isbn: String,
+  @field:Json(name = "title") val title: String,
+  @field:Json(name = "published") val published: String
+)
+
+@JsonClass(generateAdapter = true)
+data class JBook(
+  @field:Json(name = "isbn") val isbn: String,
+  @field:Json(name = "title") val title: String,
+  @field:Json(name = "published") val published: String
 )
 
 data class User(
