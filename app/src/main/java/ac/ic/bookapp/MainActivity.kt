@@ -1,9 +1,15 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.databinding.ActivityMainBinding
+import android.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.marginEnd
+import androidx.viewpager.widget.ViewPager
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
@@ -31,9 +37,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun createRow(book: Book): TableRow {
         val row = TableRow(this)
+
+        val icon = ImageView(this)
+        icon.id = View.generateViewId()
+        icon.setImageResource(R.drawable.ic_book)
+        icon.importantForAccessibility = ViewGroup.IMPORTANT_FOR_ACCESSIBILITY_NO
+        icon.layoutParams = TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.MATCH_PARENT)
+        row.addView(icon)
+
         val text = TextView(this)
         text.setText(book.title)
         row.addView(text)
+
         val button = Button(this)
         button.setText(BORROW)
         button.setOnClickListener {
