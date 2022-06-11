@@ -1,5 +1,6 @@
 package ac.ic.bookapp
 
+import ac.ic.bookapp.databinding.ActivityMainBinding
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -18,9 +19,12 @@ class MainActivity : AppCompatActivity() {
     private val BORROW: String = "Duplicate"
     private var currentID: Int = 5
 
+  private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val response: List<Book> = getBooks()
         displayBooks(response)
     }
@@ -62,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayBooks(books: List<Book>) {
-        val table = findViewById<TableLayout>(R.id.table)
+        val table = binding.table
         table.removeAllViews()
         for (book in books) {
             val row = createRow(book)
