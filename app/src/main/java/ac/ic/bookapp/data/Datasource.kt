@@ -47,7 +47,7 @@ object Datasource {
         .build()
 
     val retrofit = Retrofit.Builder()
-        .baseUrl("http://146.169.43.115:8080/")
+        .baseUrl("https://drp19.herokuapp.com/")
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
@@ -58,9 +58,8 @@ object Datasource {
         @GET("users")
         suspend fun getUsers(): List<User>
 
-        @Headers("Content-Type: application/json")
         @POST("books")
-        suspend fun postBook(@Body book: JBook): Response<Unit>
+        suspend fun postBook(@Body book: JBook): JBook
     }
 
     object BookApi {

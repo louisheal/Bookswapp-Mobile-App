@@ -4,7 +4,6 @@ import ac.ic.bookapp.data.Datasource
 import ac.ic.bookapp.databinding.ActivityMainBinding
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.JBook
-import ac.ic.bookapp.model.User
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,7 +13,7 @@ import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val BORROW: String = "Duplicate"
+    private val BORROW: String = "Borrow"
     private var currentID: Int = 5
 
     private lateinit var binding: ActivityMainBinding
@@ -58,23 +57,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun borrowBook(book: Book) {
-//    val table = findViewById<TableLayout>(R.id.table)
-//    val row = createRow(book)
-//    table.addView(row)
         runBlocking {
             try {
                 val response =
-                    Datasource.BookApi.retrofitService.postBook(JBook("5", "new book", "today"))
+                    Datasource.BookApi.retrofitService.postBook(
+                        JBook(
+                            "5",
+                            "new book",
+                            "2020-05-03"
+                        )
+                    )
                 val toast = Toast.makeText(
                     this@MainActivity,
-                    response.code().toString(), Toast.LENGTH_SHORT
+                    response.title, Toast.LENGTH_SHORT
                 )
                 toast.show()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+        val response: List<Book> = Datasource.getBooks()
+        displayBooks(response)
     }
+    
 
     private fun displayBooks(books: List<Book>) {
         val table = binding.table
@@ -84,7 +89,4 @@ class MainActivity : AppCompatActivity() {
             table.addView(row)
         }
     }
-
-
 }
-
