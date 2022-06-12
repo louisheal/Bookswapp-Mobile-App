@@ -19,6 +19,6 @@ deploy-app:
   stage: deploy
   script:
     - ./gradlew assembleDebug
-    - scp drp-book-app/app/build/outputs/apk/debug/app-debug.apk ad4220@shell4.doc.ic.ac.uk:~/public_html/app.apk
+    - scp app/build/outputs/apk/debug/app-debug.apk ad4220@shell4.doc.ic.ac.uk:~/public_html/app.apk
   only:
     - master
