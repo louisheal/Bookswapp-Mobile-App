@@ -3,21 +3,17 @@ default:
     - DRP19
     
 before_script:
-  - ./gradlew --stop
-    
+  - ./gradlew clean
+
 build-app:
   stage: build
   script:
-    - ./gradlew build
-  only:
-    - master
+    - ./gradlew :app:lintDebug
     
 test-app:
   stage: test
   script:
-    - ./gradlew test
-  only:
-    - master
+    - ./gradlew :app:testDebug
     
 deploy-app:
   stage: deploy
