@@ -1,6 +1,7 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.data.Datasource
+import ac.ic.bookapp.databinding.ActivityMainBinding
 import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.JBook
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.runBlocking
 
 class MyBooksFragment : Fragment() {
@@ -18,7 +20,7 @@ class MyBooksFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    private val BORROW: String = "Duplicate"
+    private val BORROW: String = "Borrow"
     private var currentID: Int = 5
 
     private val TAG = "MyBooksFragment"
@@ -93,21 +95,26 @@ class MyBooksFragment : Fragment() {
     }
 
     private fun borrowBook(book: Book) {
-//    val table = findViewById<TableLayout>(R.id.table)
-//    val row = createRow(book)
-//    table.addView(row)
         runBlocking {
             try {
                 val response =
-                    Datasource.BookApi.retrofitService.postBook(JBook("5", "new book", "today"))
+                    Datasource.BookApi.retrofitService.postBook(
+                        JBook(
+                            "5",
+                            "new book",
+                            "2020-05-03"
+                        )
+                    )
                 val toast = Toast.makeText(
                     context,
-                    response.code().toString(), Toast.LENGTH_SHORT
+                    response.title, Toast.LENGTH_SHORT
                 )
                 toast.show()
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+        val response: List<Book> = Datasource.getBooks()
+        displayBooks(response)
     }
 }
