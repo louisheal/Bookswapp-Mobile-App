@@ -50,7 +50,7 @@ class MyBooksFragment : Fragment() {
         displayBooks(response)
 
         binding.addBookFloatingButton.setOnClickListener {
-            val intent: Intent = Intent(context, AddBookActivity::class.java)
+            val intent = Intent(context, AddBookActivity::class.java)
             context?.startActivity(intent)
         }
     }
