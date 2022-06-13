@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
     tools:context=".MyBooksFragment">
 
-    <TableLayout
-        android:id="@+id/table"
-        android:layout_width="330dp"
-        android:layout_height="625dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_books_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager" />
 </FrameLayout>
