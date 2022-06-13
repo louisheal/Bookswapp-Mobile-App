@@ -1,5 +1,6 @@
 package ac.ic.bookapp
 
+import ac.ic.bookapp.data.Datasource
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +9,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import ac.ic.bookapp.databinding.ActivityAddBookBinding
+import ac.ic.bookapp.model.Book
+import ac.ic.bookapp.model.JBook
 import android.util.Log
+import android.widget.Toast
+import kotlinx.coroutines.runBlocking
 
 class AddBookActivity : AppCompatActivity() {
 
@@ -34,5 +39,8 @@ class AddBookActivity : AppCompatActivity() {
         Log.i(TAG, title.text.toString())
         Log.i(TAG, isbn.text.toString())
         Log.i(TAG, published.text.toString())
+
+
+        finish()
     }
 }
