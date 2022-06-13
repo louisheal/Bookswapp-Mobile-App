@@ -40,6 +40,23 @@ class AddBookActivity : AppCompatActivity() {
         Log.i(TAG, isbn.text.toString())
         Log.i(TAG, published.text.toString())
 
+        val book = JBook(isbn.text.toString(),
+            title.text.toString(),
+            published.text.toString())
+
+        runBlocking {
+            try {
+                val response =
+                    Datasource.BookApi.retrofitService.postBook(book)
+                val toast = Toast.makeText(
+                    this@AddBookActivity,
+                    response.title, Toast.LENGTH_SHORT
+                )
+                toast.show()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
 
         finish()
     }
