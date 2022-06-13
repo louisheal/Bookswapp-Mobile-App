@@ -16,11 +16,8 @@
         android:theme="@style/Theme.BookApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".AddBookActivity"
-            android:exported="false"
-            android:label="@string/title_activity_add_book"
-            android:theme="@style/Theme.BookApp.NoActionBar" />
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -30,6 +27,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".AddBookActivity"
+            android:exported="false"
+            android:label="@string/title_activity_add_book"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.BookApp.NoActionBar">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

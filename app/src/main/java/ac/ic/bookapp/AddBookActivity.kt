@@ -26,6 +26,10 @@ class AddBookActivity : AppCompatActivity() {
         binding = ActivityAddBookBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = ""
+
         binding.addBookButton.setOnClickListener {
             postBook()
         }
