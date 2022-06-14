@@ -21,6 +21,8 @@ class BorrowBookRowAdapter(private val context: Context,
         lateinit var book: Book
     }
 
+    private val mutableBooksList = booksList.toMutableList()
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -30,7 +32,7 @@ class BorrowBookRowAdapter(private val context: Context,
     }
 
     override fun onBindViewHolder(holder: BorrowBookRowViewHolder, position: Int) {
-        val book = booksList[position]
+        val book = mutableBooksList[position]
         holder.bookTitle.text = book.title
         holder.book = book
 
@@ -40,8 +42,11 @@ class BorrowBookRowAdapter(private val context: Context,
                 book.title + " borrowed!", Toast.LENGTH_LONG
             )
             toast.show()
+
+            mutableBooksList.removeAt(position)
+            notifyItemRemoved(position)
         }
     }
 
-    override fun getItemCount(): Int = booksList.size
+    override fun getItemCount(): Int = mutableBooksList.size
 }
