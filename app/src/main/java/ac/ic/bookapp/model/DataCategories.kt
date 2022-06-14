@@ -13,6 +13,10 @@ data class LibBook(
     val title: String
 )
 
+data class Isbn(
+    val isbn: String
+)
+
 data class User(
     val id: String,
     val username: String,

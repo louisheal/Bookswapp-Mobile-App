@@ -1,5 +1,7 @@
 package ac.ic.bookapp
 
+import ac.ic.bookapp.data.Datasource
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -33,7 +35,10 @@ class ScannerViewActivity : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
-                Toast.makeText(this, "Scan result: ${it.text}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Book Added!", Toast.LENGTH_LONG).show()
+                Datasource.postBook(it.text)
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
@@ -42,7 +47,6 @@ class ScannerViewActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG).show()
             }
         }
-
         scannerView.setOnClickListener {
             codeScanner.startPreview()
         }

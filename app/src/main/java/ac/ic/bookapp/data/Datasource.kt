@@ -1,11 +1,9 @@
 package ac.ic.bookapp.data
 
 import ac.ic.bookapp.model.*
-import android.widget.Toast
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.runBlocking
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
@@ -24,6 +22,16 @@ object Datasource {
         return response
     }
 
+    fun postBook(isbn: String) {
+        runBlocking {
+            try {
+                BookApi.retrofitService.postBook(isbn)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     fun getUsers(): List<User> {
         var response: List<User> = listOf()
         runBlocking {
@@ -36,18 +44,12 @@ object Datasource {
         return response
     }
 
-
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
 
     val retrofitBook = Retrofit.Builder()
-        .baseUrl("https://drp19-staging.herokuapp.com/")
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .build()
-
-    val retrofitLibrary = Retrofit.Builder()
-        .baseUrl("https://openlibrary.org")
+        .baseUrl("http://drp19-staging.herokuapp.com/")
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
@@ -59,19 +61,10 @@ object Datasource {
         suspend fun getUsers(): List<User>
 
         @POST("books")
-        suspend fun postBook(@Body book: Book): Book
-    }
-
-    interface LibraryApiService {
-        @GET("isbn/{isbn}.json")
-        suspend fun lookupIsbn(@Path("isbn") isbn: String): LibBook
+        suspend fun postBook(@Body isbn: String): Unit
     }
 
     object BookApi {
         val retrofitService: BookApiService by lazy { retrofitBook.create(BookApiService::class.java) }
-    }
-
-    object LibraryApi {
-        val retrofitService: LibraryApiService by lazy { retrofitLibrary.create(LibraryApiService::class.java) }
     }
 }

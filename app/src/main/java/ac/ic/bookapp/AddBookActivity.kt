@@ -13,7 +13,6 @@ import ac.ic.bookapp.MainActivity as MainActivity
 class AddBookActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddBookBinding
-    private val TAG = "AddBookActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,27 +24,15 @@ class AddBookActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
 
-        binding.addBookButton.setOnClickListener { addMyBook() }
-        binding.scanBookButton.setOnClickListener{
+        binding.addBookButton.setOnClickListener { addMyBook(binding.isbnEditText.text.toString()) }
+        binding.scanBookButton.setOnClickListener {
             val intent = Intent(this, ScannerViewActivity::class.java)
             this.startActivity(intent)
         }
     }
 
-    private fun addMyBook() {
-
-        val isbn = binding.isbnEditText.text.toString()
-        Log.i(TAG, isbn)
-
-        runBlocking {
-            try {
-                val bookInfo = Datasource.LibraryApi.retrofitService.lookupIsbn(isbn)
-                val book = Book(isbn, bookInfo.title, "01-01-1970")
-                Datasource.BookApi.retrofitService.postBook(book)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+    private fun addMyBook(isbn: String) {
+        Datasource.postBook(isbn)
         // TODO: starts MainActivity, might not be MyBooks when there are more
         startActivity(Intent(this, MainActivity::class.java))
         finish()
