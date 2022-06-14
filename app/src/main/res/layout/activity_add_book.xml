@@ -33,6 +33,7 @@
         android:layout_marginEnd="145dp"
         android:layout_marginBottom="57dp"
         android:text="@string/add_book_heading"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,17 +41,37 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:layout_constraintVertical_bias="0.07" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Scan a Barcode or Enter the Book's ISBN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_book_heading" />
+
+    <Button
+        android:id="@+id/scan_book_button"
+        android:layout_width="192dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="112dp"
+        android:text="@string/scan_barcode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_book_heading" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/isbn_text_input"
         android:layout_width="301dp"
         android:layout_height="55dp"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="112dp"
         android:layout_marginEnd="55dp"
         android:hint="@string/book_isbn_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_book_heading">
+        app:layout_constraintTop_toBottomOf="@+id/scan_book_button">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/isbn_edit_text"
@@ -62,9 +83,11 @@
         android:id="@+id/add_book_button"
         android:layout_width="192dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="113dp"
+        android:layout_marginTop="12dp"
         android:text="@string/add_book"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/isbn_text_input" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

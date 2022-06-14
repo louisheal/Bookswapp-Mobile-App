@@ -26,6 +26,10 @@ class AddBookActivity : AppCompatActivity() {
         supportActionBar?.title = ""
 
         binding.addBookButton.setOnClickListener { addMyBook() }
+        binding.scanBookButton.setOnClickListener{
+            val intent = Intent(this, ScannerViewActivity::class.java)
+            this.startActivity(intent)
+        }
     }
 
     private fun addMyBook() {

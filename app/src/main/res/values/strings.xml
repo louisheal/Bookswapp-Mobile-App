@@ -16,7 +16,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="book_title_hint">Book Title</string>
     <string name="add_book">Add Book</string>
+    <string name="scan_barcode">Scan Barcode</string>
     <string name="book_isbn_hint">Book ISBN</string>
     <string name="book_published_date_hint">Book Published Date</string>
     <string name="add_book_heading">Add New Book</string>
+    <string name="scan_a_barcode">Scan a Barcode...</string>
 </resources>
