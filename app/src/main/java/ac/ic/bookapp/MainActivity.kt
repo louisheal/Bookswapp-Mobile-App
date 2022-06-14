@@ -1,22 +1,11 @@
 package ac.ic.bookapp
 
-import ac.ic.bookapp.data.Datasource
 import ac.ic.bookapp.databinding.ActivityMainBinding
-import ac.ic.bookapp.model.Book
-import ac.ic.bookapp.model.JBook
-import ac.ic.bookapp.model.User
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.*
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
