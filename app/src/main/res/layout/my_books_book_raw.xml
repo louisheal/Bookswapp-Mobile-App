@@ -15,15 +15,8 @@
 
     <TextView
         android:id="@+id/my_books_book_text"
-        android:layout_width="225dp"
+        android:layout_width="274dp"
         android:layout_height="45dp"
         android:text="@string/my_books_book" />
 
-    <Button
-        android:id="@+id/my_books_book_button"
-        android:layout_width="100dp"
-        android:layout_height="45dp"
-        android:text="@string/borrow_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/my_books_book_text" />
 </TableRow>
