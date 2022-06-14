@@ -5,9 +5,5 @@
         android:id="@+id/myBooksFragment"
         android:title="@string/my_books"
         android:icon="@drawable/ic_my_books" />
-    <item
-        android:id="@+id/searchFragment"
-        android:title="@string/search"
-        android:icon="@drawable/ic_search" />
 
 </menu>
