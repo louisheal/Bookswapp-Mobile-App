@@ -1,21 +1,21 @@
 package ac.ic.bookapp
 
+import ac.ic.bookapp.MainActivity
 import ac.ic.bookapp.data.Datasource
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import ac.ic.bookapp.databinding.ActivityAddBookBinding
-import ac.ic.bookapp.model.Book
+import android.app.SearchManager
 import android.content.Intent
-import android.util.Log
+import android.os.Bundle
 import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
 import android.widget.Toast.LENGTH_SHORT
-import kotlinx.coroutines.runBlocking
-import ac.ic.bookapp.MainActivity as MainActivity
+import androidx.appcompat.app.AppCompatActivity
+
 
 class AddBookActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddBookBinding
+
+    private val ISBN_INFO_QUERY = "https://www.google.com/search?q=what+is+isbn"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +31,12 @@ class AddBookActivity : AppCompatActivity() {
         binding.scanBookButton.setOnClickListener {
             val intent = Intent(this, ScannerViewActivity::class.java)
             this.startActivity(intent)
+        }
+
+        binding.isbnInfo.setOnClickListener {
+            val intent = Intent(Intent.ACTION_WEB_SEARCH)
+            intent.putExtra(SearchManager.QUERY, ISBN_INFO_QUERY)
+            startActivity(intent)
         }
     }
 
