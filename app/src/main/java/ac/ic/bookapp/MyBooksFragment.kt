@@ -42,7 +42,11 @@ class MyBooksFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d(TAG, "Loading books")
+        displayBooks(Datasource.getBooks())
+    }
+
+    override fun onResume() {
+        super.onResume()
         displayBooks(Datasource.getBooks())
     }
 
