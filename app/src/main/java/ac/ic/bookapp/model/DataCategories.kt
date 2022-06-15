@@ -4,17 +4,13 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 data class Book(
-    @field:Json(name = "isbn") val isbn: String,
-    @field:Json(name = "title") val title: String,
-    @field:Json(name = "published") val published: String
+    val isbn: String,
+    val title: String,
+    val published: String
 )
 
-data class LibBook(
-    val title: String
-)
-
-data class Isbn(
-    val isbn: String
+data class Response(
+    val code: Int
 )
 
 data class User(

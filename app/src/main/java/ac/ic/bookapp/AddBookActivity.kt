@@ -7,6 +7,9 @@ import ac.ic.bookapp.databinding.ActivityAddBookBinding
 import ac.ic.bookapp.model.Book
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
+import android.widget.Toast.LENGTH_SHORT
 import kotlinx.coroutines.runBlocking
 import ac.ic.bookapp.MainActivity as MainActivity
 
@@ -32,9 +35,13 @@ class AddBookActivity : AppCompatActivity() {
     }
 
     private fun addMyBook(isbn: String) {
-        Datasource.postBook(isbn)
-        // TODO: starts MainActivity, might not be MyBooks when there are more
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        if (Datasource.postBook(isbn).code == 200) {
+            Toast.makeText(applicationContext, "Book Added!", LENGTH_SHORT).show()
+            // TODO: starts MainActivity, might not be MyBooks when there are more
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        } else {
+            Toast.makeText(applicationContext, "Error", LENGTH_SHORT).show()
+        }
     }
 }

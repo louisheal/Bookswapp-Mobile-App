@@ -22,14 +22,12 @@ object Datasource {
         return response
     }
 
-    fun postBook(isbn: String) {
+    fun postBook(isbn: String): Response {
+        var response = Response(0)
         runBlocking {
-            try {
-                BookApi.retrofitService.postBook(isbn)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+            response = BookApi.retrofitService.postBook(isbn)
         }
+        return response
     }
 
     fun getUsers(): List<User> {
@@ -49,7 +47,7 @@ object Datasource {
         .build()
 
     val retrofitBook = Retrofit.Builder()
-        .baseUrl("http://drp19-staging.herokuapp.com/")
+        .baseUrl("https://drp19-staging.herokuapp.com/")
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
@@ -61,7 +59,7 @@ object Datasource {
         suspend fun getUsers(): List<User>
 
         @POST("books")
-        suspend fun postBook(@Body isbn: String): Unit
+        suspend fun postBook(@Body isbn: String): Response
     }
 
     object BookApi {

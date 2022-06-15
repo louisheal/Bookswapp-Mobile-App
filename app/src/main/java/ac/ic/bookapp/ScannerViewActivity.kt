@@ -35,10 +35,14 @@ class ScannerViewActivity : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
-                Toast.makeText(this, "Book Added!", Toast.LENGTH_LONG).show()
-                Datasource.postBook(it.text)
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                if (Datasource.postBook(it.text).code == 200) {
+                    Toast.makeText(applicationContext, "Book Added!", Toast.LENGTH_SHORT).show()
+                    // TODO: starts MainActivity, might not be MyBooks when there are more
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(applicationContext, "Error", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
