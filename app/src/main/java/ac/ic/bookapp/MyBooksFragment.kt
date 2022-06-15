@@ -1,16 +1,17 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.adaptors.BookRowAdapter
-import ac.ic.bookapp.data.Datasource
+import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.FragmentMyBooksBinding
+import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
 class MyBooksFragment : Fragment() {
@@ -43,7 +44,11 @@ class MyBooksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, "Loading books")
-        displayBooks(Datasource.getBooks())
+        displayBooks(
+            UserDatasource.getUserBooks(
+                LoginPreferences.getUserLoginId(this.requireActivity())
+            )
+        )
     }
 
     override fun onDestroy() {

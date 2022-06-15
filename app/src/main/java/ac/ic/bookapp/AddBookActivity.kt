@@ -1,14 +1,11 @@
 package ac.ic.bookapp
 
-import ac.ic.bookapp.data.Datasource
+import ac.ic.bookapp.MainActivity
+import ac.ic.bookapp.data.BookDatasource
+import ac.ic.bookapp.databinding.ActivityAddBookBinding
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ac.ic.bookapp.databinding.ActivityAddBookBinding
-import ac.ic.bookapp.model.Book
-import android.content.Intent
-import android.util.Log
-import kotlinx.coroutines.runBlocking
-import ac.ic.bookapp.MainActivity as MainActivity
 
 class AddBookActivity : AppCompatActivity() {
 
@@ -32,7 +29,7 @@ class AddBookActivity : AppCompatActivity() {
     }
 
     private fun addMyBook(isbn: String) {
-        Datasource.postBook(isbn)
+        BookDatasource.postBook(isbn)
         // TODO: starts MainActivity, might not be MyBooks when there are more
         startActivity(Intent(this, MainActivity::class.java))
         finish()
