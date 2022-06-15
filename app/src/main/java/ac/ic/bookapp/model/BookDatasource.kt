@@ -1,10 +1,11 @@
-package ac.ic.bookapp.data
+package ac.ic.bookapp.model
 
-import ac.ic.bookapp.model.Book
+import ac.ic.bookapp.data.Book
 import kotlinx.coroutines.runBlocking
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import java.lang.Exception
 
 object BookDatasource : Datasource<BookService>(BookService::class.java) {
 
@@ -14,9 +15,13 @@ object BookDatasource : Datasource<BookService>(BookService::class.java) {
         }
     }
 
-    fun postBook(isbn: String) {
-        runBlocking {
-            service.postBook(isbn)
+    fun postBook(isbn: String): Book? {
+        return runBlocking {
+            try {
+                service.postBook(isbn)
+            } catch (e: Exception) {
+                null
+            }
         }
     }
 }
@@ -26,5 +31,5 @@ interface BookService {
     suspend fun getBooks(): List<Book>
 
     @POST("books")
-    suspend fun postBook(@Body isbn: String)
+    suspend fun postBook(@Body isbn: String): Book
 }

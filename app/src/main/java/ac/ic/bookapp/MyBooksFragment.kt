@@ -1,10 +1,10 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.adaptors.BookRowAdapter
-import ac.ic.bookapp.data.UserDatasource
+import ac.ic.bookapp.model.UserDatasource
 import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.filesys.LoginPreferences
-import ac.ic.bookapp.model.Book
+import ac.ic.bookapp.data.Book
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log

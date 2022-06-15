@@ -1,4 +1,4 @@
-package ac.ic.bookapp.data
+package ac.ic.bookapp.model
 
 abstract class Datasource<T>(
     private val apiClass: Class<T>

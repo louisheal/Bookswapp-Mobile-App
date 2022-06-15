@@ -1,7 +1,7 @@
 package ac.ic.bookapp.adaptors
 
 import ac.ic.bookapp.R
-import ac.ic.bookapp.model.Book
+import ac.ic.bookapp.data.Book
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View

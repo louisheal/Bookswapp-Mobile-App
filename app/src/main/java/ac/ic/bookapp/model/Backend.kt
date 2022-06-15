@@ -1,4 +1,4 @@
-package ac.ic.bookapp.data
+package ac.ic.bookapp.model
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

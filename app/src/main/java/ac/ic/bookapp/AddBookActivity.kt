@@ -1,19 +1,22 @@
 package ac.ic.bookapp
 
-import ac.ic.bookapp.data.BookDatasource
+import ac.ic.bookapp.model.BookDatasource
 import ac.ic.bookapp.databinding.ActivityAddBookBinding
+import ac.ic.bookapp.filesys.LoginPreferences
+import ac.ic.bookapp.model.UserDatasource
 import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
+import java.lang.NullPointerException
+
+private val ISBN_INFO_QUERY = "https://www.google.com/search?q=what+is+isbn"
 
 open class AddBookActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddBookBinding
-
-    private val ISBN_INFO_QUERY = "https://www.google.com/search?q=what+is+isbn"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +44,12 @@ open class AddBookActivity : AppCompatActivity() {
 
     protected fun addMyBook(isbn: String) {
         val toastText: String = try {
-            val book = BookDatasource.postBook(isbn)
+            val book = BookDatasource.postBook(isbn)!!
+            val userId = LoginPreferences.getUserLoginId(this)
+            UserDatasource.postOwnership(userId, book.id, 1, 1)
             "Book Added!"
-        } catch (e: Exception) {
-            "Error"
+        } catch (e: NullPointerException) {
+            "Error: ISBN not found"
         }
         Toast.makeText(applicationContext, toastText, LENGTH_SHORT).show()
         finish()
