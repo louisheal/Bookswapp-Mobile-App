@@ -1,18 +1,10 @@
 package ac.ic.bookapp
 
-import ac.ic.bookapp.data.BookDatasource
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.budiyev.android.codescanner.AutoFocusMode
-import com.budiyev.android.codescanner.CodeScanner
-import com.budiyev.android.codescanner.CodeScannerView
-import com.budiyev.android.codescanner.DecodeCallback
-import com.budiyev.android.codescanner.ErrorCallback
-import com.budiyev.android.codescanner.ScanMode
+import com.budiyev.android.codescanner.*
 
-class ScannerViewActivity : AppCompatActivity() {
+class ScannerViewActivity : AddBookActivity() {
     private lateinit var codeScanner: CodeScanner
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +26,8 @@ class ScannerViewActivity : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
-                Toast.makeText(this, "Book Added!", Toast.LENGTH_LONG).show()
-                BookDatasource.postBook(it.text)
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                val isbn = it.text
+                addMyBook(isbn)
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS

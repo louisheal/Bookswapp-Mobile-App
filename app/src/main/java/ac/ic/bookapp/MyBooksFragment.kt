@@ -14,14 +14,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
+private const val TAG = "MyBooksFragment"
+
 class MyBooksFragment : Fragment() {
     private var _binding: FragmentMyBooksBinding? = null
 
     private val binding get() = _binding!!
 
     private lateinit var scrollableList: RecyclerView
-
-    private val TAG = "MyBooksFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,11 +44,12 @@ class MyBooksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, "Loading books")
-        displayBooks(
-            UserDatasource.getUserBooks(
-                LoginPreferences.getUserLoginId(this.requireActivity())
-            )
-        )
+        displayBooks(getUserBooks())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        displayBooks(getUserBooks())
     }
 
     override fun onDestroy() {
@@ -60,4 +61,9 @@ class MyBooksFragment : Fragment() {
         val adapter = activity?.let { BookRowAdapter(it, books) }
         scrollableList.adapter = adapter
     }
+
+    private fun getUserBooks(): List<Book> =
+        UserDatasource.getUserBooks(
+            LoginPreferences.getUserLoginId(this.requireActivity())
+        )
 }

@@ -1,7 +1,6 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.databinding.ActivityMainBinding
-import ac.ic.bookapp.filesys.LoginPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
