@@ -31,6 +31,7 @@ class AddBookActivity : AppCompatActivity() {
         binding.scanBookButton.setOnClickListener {
             val intent = Intent(this, ScannerViewActivity::class.java)
             this.startActivity(intent)
+            finish()
         }
 
         binding.isbnInfo.setOnClickListener {
@@ -41,13 +42,18 @@ class AddBookActivity : AppCompatActivity() {
     }
 
     private fun addMyBook(isbn: String) {
-        if (Datasource.postBook(isbn).code == 200) {
-            Toast.makeText(applicationContext, "Book Added!", LENGTH_SHORT).show()
-            // TODO: starts MainActivity, might not be MyBooks when there are more
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } else {
+        try {
+            if (Datasource.postBook(isbn).code == 200) {
+                Toast.makeText(applicationContext, "Book Added!", LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(applicationContext, "Error", LENGTH_SHORT).show()
+                finish()
+            }
+        } catch (e: Exception) {
             Toast.makeText(applicationContext, "Error", LENGTH_SHORT).show()
+            finish()
         }
+
     }
 }
