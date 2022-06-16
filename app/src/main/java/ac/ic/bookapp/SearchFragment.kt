@@ -8,10 +8,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class SearchFragment : Fragment() {
@@ -30,9 +30,20 @@ class SearchFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val view = binding.root
-
         scrollableList = binding.searchList
         scrollableList.setHasFixedSize(true)
+        val layoutManager = LinearLayoutManager(
+            this.requireContext(),
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        scrollableList.layoutManager = layoutManager
+        scrollableList.addItemDecoration(
+            DividerItemDecoration(
+                this.requireContext(),
+                layoutManager.orientation
+            )
+        )
 
         return view
     }
@@ -62,8 +73,9 @@ class BorrowBookRowAdapter(
     RecyclerView.Adapter<BorrowBookRowAdapter.BorrowBookRowViewHolder>() {
 
     class BorrowBookRowViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val bookTitle: TextView = view.findViewById(R.id.my_books_book_text)
-        val borrowButton = view.findViewById<Button>(R.id.borrow_button)
+        val titleText: TextView = view.findViewById(R.id.search_row_title)
+        val isbnText: TextView = view.findViewById(R.id.search_row_isbn_value)
+        val ownersText: TextView = view.findViewById(R.id.search_row_owners_value)
         lateinit var book: Book
     }
 
@@ -73,26 +85,17 @@ class BorrowBookRowAdapter(
         parent: ViewGroup,
         viewType: Int
     ): BorrowBookRowViewHolder {
-        val adapterView =
-            LayoutInflater.from(parent.context).inflate(R.layout.search_book_row, parent, false)
+        val adapterView = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.search_row, parent, false)
         return BorrowBookRowViewHolder(adapterView)
     }
 
     override fun onBindViewHolder(holder: BorrowBookRowViewHolder, position: Int) {
         val book = mutableBooksList[position]
-        holder.bookTitle.text = book.title
+        holder.titleText.text = book.title
+        holder.isbnText.text = book.isbn
         holder.book = book
-
-        holder.borrowButton.setOnClickListener {
-            val toast = Toast.makeText(
-                context,
-                book.title + " borrowed!", Toast.LENGTH_LONG
-            )
-            toast.show()
-
-            mutableBooksList.removeAt(position)
-            notifyItemRemoved(position)
-        }
     }
 
     override fun getItemCount(): Int = mutableBooksList.size

@@ -109,7 +109,7 @@ class BookRowAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookRowViewHolder {
         val adapterView = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.my_books_book_raw, parent, false)
+            .inflate(R.layout.my_books_row, parent, false)
         return BookRowViewHolder(adapterView)
     }
 

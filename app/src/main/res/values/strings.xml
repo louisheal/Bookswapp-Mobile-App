@@ -39,4 +39,5 @@
     <string name="my_books_row_current_copies_text">Current copies</string>
     <string name="my_books_row_total_copies_text">Total copies</string>
     <string name="my_books_row_isbn_text">ISBN</string>
+    <string name="search_row_owners_text">Owners</string>
 </resources>
