@@ -5,7 +5,7 @@
     android:id="@+id/my_books_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:layout_margin="10dp"
     tools:context=".MyBooksFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -13,7 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        app:layoutManager="LinearLayoutManager" />
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_book_floating_button"
@@ -25,6 +29,7 @@
         android:contentDescription="@string/add_book_heading"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ImageContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

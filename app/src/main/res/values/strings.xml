@@ -35,4 +35,8 @@
         the book. Usually can be found on the
         barcode on the back cover of the book.</string>
     <string name="add_book_tooltip_text">Scan a Barcode or Enter the Book\'s ISBN</string>
+    <string name="my_books_default_book_icon_description">Default book icon</string>
+    <string name="my_books_row_current_copies_text">Current copies</string>
+    <string name="my_books_row_total_copies_text">Total copies</string>
+    <string name="my_books_row_isbn_text">ISBN</string>
 </resources>
