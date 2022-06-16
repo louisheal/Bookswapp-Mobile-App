@@ -1,12 +1,11 @@
 package ac.ic.bookapp
 
-import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.databinding.FragmentSearchBinding
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 
 class SearchFragment : Fragment() {
 

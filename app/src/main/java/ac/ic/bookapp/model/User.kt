@@ -1,13 +1,7 @@
 package ac.ic.bookapp.model
 
-data class Book(
-    val isbn: String,
-    val title: String,
-    val published: String
-)
-
 data class User(
-    val id: String,
+    val id: Long,
     val username: String,
     val passwdHash: String,
     val name: String,

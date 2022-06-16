@@ -1,17 +1,13 @@
 package ac.ic.bookapp
 
-import ac.ic.bookapp.data.Datasource
-import ac.ic.bookapp.databinding.ActivityMainBinding
 import ac.ic.bookapp.databinding.ActivityScannerViewBinding
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -20,13 +16,11 @@ import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
-import com.google.android.material.snackbar.Snackbar
-import com.google.zxing.BarcodeFormat
+
 
 const val CAMERA_REQUEST_CODE = 101
 
-class ScannerViewActivity : AppCompatActivity() {
-
+class ScannerViewActivity : AddBookActivity() {
     private lateinit var codeScanner: CodeScanner
     private lateinit var layout: View
     private lateinit var binding: ActivityScannerViewBinding
@@ -70,9 +64,8 @@ class ScannerViewActivity : AppCompatActivity() {
         // Callbacks
         codeScanner.decodeCallback = DecodeCallback {
             runOnUiThread {
-                Datasource.postBook(it.text)
-                Toast.makeText(applicationContext, "Book Added!", Toast.LENGTH_SHORT).show()
-                finish()
+                val isbn = it.text
+                addMyBook(isbn)
             }
         }
         codeScanner.errorCallback = ErrorCallback { // or ErrorCallback.SUPPRESS
@@ -119,6 +112,7 @@ class ScannerViewActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             CAMERA_REQUEST_CODE -> {
                 if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
