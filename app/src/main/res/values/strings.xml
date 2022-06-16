@@ -34,4 +34,5 @@
         ISBN is a unique code that identifies
         the book. Usually can be found on the
         barcode on the back cover of the book.</string>
+    <string name="add_book_tooltip_text">Scan a Barcode or Enter the Book\'s ISBN</string>
 </resources>

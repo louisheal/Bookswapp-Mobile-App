@@ -1,17 +1,18 @@
 package ac.ic.bookapp
 
-import ac.ic.bookapp.adaptors.BookRowAdapter
 import ac.ic.bookapp.data.BookDatasource
 import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
@@ -72,4 +73,30 @@ class MyBooksFragment : Fragment() {
         UserDatasource.getUserBooks(
             LoginPreferences.getUserLoginId(this.requireActivity())
         )
+}
+
+class BookRowAdapter
+    (
+    private val context: Context,
+    private val booksList: List<Book>
+) : RecyclerView.Adapter<BookRowAdapter.BookRowViewHolder>() {
+
+    class BookRowViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+        val bookTitle: TextView = view.findViewById(R.id.my_books_book_text)
+        lateinit var book: Book
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookRowViewHolder {
+        val adapterView =
+            LayoutInflater.from(parent.context).inflate(R.layout.my_books_book_raw, parent, false)
+        return BookRowViewHolder(adapterView)
+    }
+
+    override fun onBindViewHolder(holder: BookRowViewHolder, position: Int) {
+        val book = booksList[position]
+        holder.bookTitle.text = book.title
+        holder.book = book
+    }
+
+    override fun getItemCount(): Int = booksList.size
 }
