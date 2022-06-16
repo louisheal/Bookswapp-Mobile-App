@@ -10,7 +10,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 
 class BorrowBookRowAdapter(private val context: Context,
                            private val booksList: List<Book>):
@@ -37,7 +39,10 @@ class BorrowBookRowAdapter(private val context: Context,
         val book = mutableBooksList[position]
         holder.bookTitle.text = book.title
         holder.book = book
-
+        val imgURI = book.url.toUri().buildUpon().scheme("https").build()
+        holder.icon.load(imgURI) {
+            placeholder(R.drawable.ic_image)
+        }
         
 
         holder.borrowButton.setOnClickListener {

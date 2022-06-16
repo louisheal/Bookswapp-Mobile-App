@@ -11,7 +11,6 @@
         android:layout_width="40dp"
         android:layout_height="45dp"
         android:contentDescription="TODO"
-        app:imageURL=""
         app:srcCompat="@drawable/ic_book" />
 
     <TextView
