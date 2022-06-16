@@ -1,6 +1,8 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.data.BookDatasource
+import ac.ic.bookapp.data.CoverDatasource
+import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.databinding.FragmentSearchBinding
 import ac.ic.bookapp.model.Book
 import android.content.Context
@@ -79,7 +81,7 @@ class BorrowBookRowAdapter(private val context: Context,
         val titleText: TextView = view.findViewById(R.id.search_row_title)
         val isbnText: TextView = view.findViewById(R.id.search_row_isbn_value)
         val ownersText: TextView = view.findViewById(R.id.search_row_owners_value)
-        val icon = view.findViewById<ImageView>(R.id.search_row_book_picture)
+        val icon: ImageView = view.findViewById(R.id.search_row_book_picture)
         lateinit var book: Book
     }
 
@@ -100,7 +102,7 @@ class BorrowBookRowAdapter(private val context: Context,
         holder.titleText.text = book.title
         holder.book = book
         holder.isbnText.text = book.isbn
-        val imgURI = book.url.toUri().buildUpon().scheme("https").build()
+        val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
         holder.icon.load(imgURI) {
             placeholder(R.drawable.ic_image)
         }
