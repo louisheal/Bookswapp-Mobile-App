@@ -51,6 +51,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_book_heading" />
 
+    <TextView
+        android:id="@+id/isbnHintText"
+        android:layout_width="173dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="60dp"
+        android:background="#000000"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/isbn_text_input" />
+
     <Button
         android:id="@+id/scan_book_button"
         android:layout_width="192dp"
@@ -60,20 +71,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_book_heading" />
-
-    <ImageView
-        android:id="@+id/isbn_info"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_weight="1"
-        android:tooltipText="What is ISBN?"
-        app:layout_constraintBottom_toBottomOf="@+id/isbn_text_input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toEndOf="@+id/isbn_text_input"
-        app:layout_constraintTop_toTopOf="@+id/isbn_text_input"
-        app:srcCompat="@drawable/ic_info"
-        android:contentDescription="@string/isbn_help" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/isbn_text_input"
@@ -94,11 +91,25 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ImageView
+        android:id="@+id/isbn_info"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/isbn_help"
+        android:tooltipText="What is ISBN?"
+        app:layout_constraintBottom_toBottomOf="@+id/isbn_text_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toEndOf="@+id/isbn_text_input"
+        app:layout_constraintTop_toTopOf="@+id/isbn_text_input"
+        app:srcCompat="@drawable/ic_info" />
+
     <Button
         android:id="@+id/add_book_button"
         android:layout_width="192dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="100dp"
         android:text="@string/add_book"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

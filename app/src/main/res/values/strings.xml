@@ -20,6 +20,12 @@
     <string name="book_isbn_hint">Book ISBN</string>
     <string name="book_published_date_hint">Book Published Date</string>
     <string name="add_book_heading">Add New Book</string>
-    <string name="scan_a_barcode">Scan a Barcode...</string>
-    <string name="isbn_help">What is ISBN? Find out more</string>
+    <string name="scan_a_barcode">Scan a Barcode…</string>
+    <string name="permission_required">Camera access is required to display the camera preview.</string>
+    <string name="ok">OK</string>
+    <string name="permission_granted">Permission is granted. You can use the camera now.</string>
+    <string name="isbn_help">
+        ISBN is a unique code that identifies
+        the book. Usually can be found on the
+        barcode on the back cover of the book.</string>
 </resources>

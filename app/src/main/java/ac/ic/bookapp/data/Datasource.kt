@@ -4,6 +4,7 @@ import ac.ic.bookapp.model.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.runBlocking
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
@@ -22,12 +23,14 @@ object Datasource {
         return response
     }
 
-    fun postBook(isbn: String): Response {
-        var response = Response(0)
+    fun postBook(isbn: String) {
         runBlocking {
-            response = BookApi.retrofitService.postBook(isbn)
+            try {
+                BookApi.retrofitService.postBook(isbn)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
-        return response
     }
 
     fun getUsers(): List<User> {
@@ -59,7 +62,7 @@ object Datasource {
         suspend fun getUsers(): List<User>
 
         @POST("books")
-        suspend fun postBook(@Body isbn: String): Response
+        suspend fun postBook(@Body isbn: String): Response<Unit>
     }
 
     object BookApi {

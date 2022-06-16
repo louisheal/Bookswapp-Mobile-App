@@ -45,6 +45,11 @@ class MyBooksFragment : Fragment() {
         displayBooks(Datasource.getBooks())
     }
 
+    override fun onStart() {
+        super.onStart()
+        displayBooks(Datasource.getBooks())
+    }
+
     override fun onResume() {
         super.onResume()
         displayBooks(Datasource.getBooks())

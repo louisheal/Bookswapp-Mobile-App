@@ -34,26 +34,25 @@ class AddBookActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.isbnInfo.setOnClickListener {
-            val intent = Intent(Intent.ACTION_WEB_SEARCH)
-            intent.putExtra(SearchManager.QUERY, ISBN_INFO_QUERY)
-            startActivity(intent)
-        }
+        binding.isbnInfo.setOnClickListener { showHint() }
     }
 
     private fun addMyBook(isbn: String) {
         try {
-            if (Datasource.postBook(isbn).code == 200) {
-                Toast.makeText(applicationContext, "Book Added!", LENGTH_SHORT).show()
-                finish()
-            } else {
-                Toast.makeText(applicationContext, "Error", LENGTH_SHORT).show()
-                finish()
-            }
+            Datasource.postBook(isbn)
         } catch (e: Exception) {
             Toast.makeText(applicationContext, "Error", LENGTH_SHORT).show()
             finish()
         }
+        Toast.makeText(applicationContext, "Book Added!", LENGTH_SHORT).show()
+        finish()
+    }
 
+    private fun showHint() {
+        if (binding.isbnHintText.text == "") {
+            binding.isbnHintText.text = resources.getString(R.string.isbn_help);
+        } else {
+            binding.isbnHintText.text = ""
+        }
     }
 }
