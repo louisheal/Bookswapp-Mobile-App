@@ -8,11 +8,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 
 class SearchFragment : Fragment() {
 
@@ -66,16 +71,15 @@ class SearchFragment : Fragment() {
     }
 }
 
-class BorrowBookRowAdapter(
-    private val context: Context,
-    private val booksList: List<Book>
-) :
+class BorrowBookRowAdapter(private val context: Context,
+                           private val booksList: List<Book>):
     RecyclerView.Adapter<BorrowBookRowAdapter.BorrowBookRowViewHolder>() {
 
     class BorrowBookRowViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.search_row_title)
         val isbnText: TextView = view.findViewById(R.id.search_row_isbn_value)
         val ownersText: TextView = view.findViewById(R.id.search_row_owners_value)
+        val icon = view.findViewById<ImageView>(R.id.search_row_book_picture)
         lateinit var book: Book
     }
 
@@ -94,8 +98,12 @@ class BorrowBookRowAdapter(
     override fun onBindViewHolder(holder: BorrowBookRowViewHolder, position: Int) {
         val book = mutableBooksList[position]
         holder.titleText.text = book.title
-        holder.isbnText.text = book.isbn
         holder.book = book
+        holder.isbnText.text = book.isbn
+        val imgURI = book.url.toUri().buildUpon().scheme("https").build()
+        holder.icon.load(imgURI) {
+            placeholder(R.drawable.ic_image)
+        }
     }
 
     override fun getItemCount(): Int = mutableBooksList.size
