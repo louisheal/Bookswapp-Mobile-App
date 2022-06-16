@@ -6,7 +6,6 @@ import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.databinding.FragmentSearchBinding
 import ac.ic.bookapp.model.Book
 import android.content.Context
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -110,9 +109,9 @@ class BorrowBookRowAdapter(
             error(R.drawable.ic_book)
             target(
                 onStart = { placeholder -> holder.icon.setImageDrawable(placeholder) },
-                onSuccess = { result -> val image = (result as BitmapDrawable).bitmap
-                    if (image.height > 1 && image.width > 1)
-                        holder.icon.load(image)
+                onSuccess = { result ->
+                    if (!CoverDatasource.isEmptyCover(result))
+                        holder.icon.setImageDrawable(result)
                 },
                 onError = { error -> holder.icon.setImageDrawable(error) }
             )

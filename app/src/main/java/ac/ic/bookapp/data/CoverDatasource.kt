@@ -1,6 +1,8 @@
 package ac.ic.bookapp.data
 
 import ac.ic.bookapp.model.Book
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.core.net.toUri
 
@@ -26,5 +28,10 @@ object CoverDatasource {
             .buildUpon()
             .scheme("https")
             .build()
+    }
+
+    fun isEmptyCover(image: Drawable?): Boolean {
+        val bitmap = (image as BitmapDrawable).bitmap
+        return bitmap.height == 1 && bitmap.width == 1
     }
 }
