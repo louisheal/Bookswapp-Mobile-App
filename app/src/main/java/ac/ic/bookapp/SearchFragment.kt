@@ -10,11 +10,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -73,8 +70,10 @@ class SearchFragment : Fragment() {
     }
 }
 
-class BorrowBookRowAdapter(private val context: Context,
-                           private val booksList: List<Book>):
+class BorrowBookRowAdapter(
+    private val context: Context,
+    private val booksList: List<Book>
+) :
     RecyclerView.Adapter<BorrowBookRowAdapter.BorrowBookRowViewHolder>() {
 
     class BorrowBookRowViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {

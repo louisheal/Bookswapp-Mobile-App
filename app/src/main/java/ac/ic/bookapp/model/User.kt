@@ -5,7 +5,7 @@ data class User(
     val username: String,
     val passwdHash: String,
     val name: String,
-    val email: String,
-    val phone: String,
-    val joinDate: String
+    val email: String?,
+    val phone: String?,
+    val joinDate: String?
 )

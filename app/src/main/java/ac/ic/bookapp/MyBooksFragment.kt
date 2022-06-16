@@ -1,11 +1,11 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.BookRowAdapter.BookRowViewHolder
-import ac.ic.bookapp.data.BookDatasource
 import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
+import ac.ic.bookapp.model.Ownership
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -62,17 +62,17 @@ class MyBooksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, "Loading books")
-        displayBooks(getUserBooks())
+        displayBooks()
     }
 
     override fun onStart() {
         super.onStart()
-        displayBooks(BookDatasource.getBooks())
+        displayBooks()
     }
 
     override fun onResume() {
         super.onResume()
-        displayBooks(getUserBooks())
+        displayBooks()
     }
 
     override fun onDestroy() {
@@ -80,20 +80,20 @@ class MyBooksFragment : Fragment() {
         _binding = null
     }
 
-    private fun displayBooks(books: List<Book>) {
-        val adapter = activity?.let { BookRowAdapter(it, books) }
+    private fun displayBooks() {
+        val adapter = activity?.let { BookRowAdapter(it, getUserBooks()) }
         scrollableList.adapter = adapter
     }
 
-    private fun getUserBooks(): List<Book> =
-        UserDatasource.getUserBooks(
+    private fun getUserBooks(): List<Ownership> =
+        UserDatasource.getUserOwns(
             LoginPreferences.getUserLoginId(this.requireActivity())
         )
 }
 
 class BookRowAdapter(
     private val context: Context,
-    private val booksList: List<Book>
+    private val ownsList: List<Ownership>
 ) : RecyclerView.Adapter<BookRowViewHolder>() {
 
     class BookRowViewHolder(
@@ -114,15 +114,14 @@ class BookRowAdapter(
     }
 
     override fun onBindViewHolder(holder: BookRowViewHolder, position: Int) {
-//        val owns = ownsList[position]
-//        val book = owns.book
-        val book = booksList[position]
+        val owns = ownsList[position]
+        val book = owns.book
         holder.book = book
         holder.titleText.text = book.title
         holder.isbnText.text = book.isbn
-//        holder.totalCopiesText.text = owns.totalCopies
-//        holder.currentCopiesText.text = owns.currentCopies
+        holder.totalCopiesText.text = owns.totalCopies.toString()
+        holder.currentCopiesText.text = owns.currentCopies.toString()
     }
 
-    override fun getItemCount(): Int = booksList.size
+    override fun getItemCount(): Int = ownsList.size
 }
