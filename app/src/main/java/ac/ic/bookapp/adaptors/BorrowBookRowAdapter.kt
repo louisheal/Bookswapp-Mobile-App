@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ class BorrowBookRowAdapter(private val context: Context,
     class BorrowBookRowViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val bookTitle: TextView = view.findViewById(R.id.my_books_book_text)
         val borrowButton =  view.findViewById<Button>(R.id.borrow_button)
+        val icon = view.findViewById<ImageView>(R.id.search_book_picture)
         lateinit var book: Book
     }
 
@@ -35,6 +37,8 @@ class BorrowBookRowAdapter(private val context: Context,
         val book = mutableBooksList[position]
         holder.bookTitle.text = book.title
         holder.book = book
+
+        
 
         holder.borrowButton.setOnClickListener {
             val toast = Toast.makeText(
