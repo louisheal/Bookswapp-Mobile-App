@@ -1,10 +1,13 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.BookRowAdapter.BookRowViewHolder
+import ac.ic.bookapp.BorrowedRowAdapter.BorrowedRowViewHolder
+import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
+import ac.ic.bookapp.model.Loan
 import ac.ic.bookapp.model.Ownership
 import android.content.Context
 import android.content.Intent
@@ -13,11 +16,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
 private const val TAG = "MyBooksFragment"
@@ -27,7 +32,10 @@ class MyBooksFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    private lateinit var scrollableList: RecyclerView
+    private lateinit var ownedList: RecyclerView
+    private lateinit var borrowedList: RecyclerView
+
+//    private val userId = LoginPreferences.getUserLoginId(this.requireActivity())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,20 +45,35 @@ class MyBooksFragment : Fragment() {
         Log.d(TAG, "View creation")
         _binding = FragmentMyBooksBinding.inflate(inflater, container, false)
         val view = binding.root
-        scrollableList = view.findViewById(R.id.my_books_list)
-        scrollableList.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(
+        
+        ownedList = view.findViewById(R.id.my_books_list)
+        borrowedList = view.findViewById(R.id.borrowed_books_list)
+        ownedList.setHasFixedSize(true)
+        borrowedList.setHasFixedSize(true)
+
+        val layoutManager1 = LinearLayoutManager(
             this.requireContext(),
             LinearLayoutManager.VERTICAL,
             false
         )
-        scrollableList.layoutManager = layoutManager
-        scrollableList.addItemDecoration(
-            DividerItemDecoration(
-                this.requireContext(),
-                layoutManager.orientation
-            )
+        val layoutManager2 = LinearLayoutManager(
+            this.requireContext(),
+            LinearLayoutManager.VERTICAL,
+            false
         )
+        val decoration1 = DividerItemDecoration(
+            this.requireContext(),
+            layoutManager1.orientation
+        )
+        val decoration2 = DividerItemDecoration(
+            this.requireContext(),
+            layoutManager2.orientation
+        )
+
+        ownedList.layoutManager = layoutManager1
+        borrowedList.layoutManager = layoutManager2
+        ownedList.addItemDecoration(decoration1)
+        borrowedList.addItemDecoration(decoration2)
 
         binding.addBookFloatingButton.setOnClickListener {
             val intent = Intent(context, AddBookActivity::class.java)
@@ -81,20 +104,21 @@ class MyBooksFragment : Fragment() {
     }
 
     private fun displayBooks() {
-        val adapter = activity?.let { BookRowAdapter(it, getUserBooks()) }
-        scrollableList.adapter = adapter
+        ownedList.adapter = activity?.let { BookRowAdapter(it, getUserBooks()) }
+        borrowedList.adapter = activity?.let { BorrowedRowAdapter(it, getBorrowedBooks()) }
     }
 
     private fun getUserBooks(): List<Ownership> =
-        UserDatasource.getUserOwns(
-            LoginPreferences.getUserLoginId(this.requireActivity())
-        )
+        UserDatasource.getUserOwns(LoginPreferences.getUserLoginId(this.requireActivity()))
+
+    private fun getBorrowedBooks(): List<Loan> =
+        LoanDatasource.getUserBorrowedBooks(LoginPreferences.getUserLoginId(this.requireActivity()))
 }
 
 class BookRowAdapter(
     private val context: Context,
     private val ownsList: List<Ownership>
-) : RecyclerView.Adapter<BookRowViewHolder>() {
+) : Adapter<BookRowViewHolder>() {
 
     class BookRowViewHolder(
         private val view: View
@@ -124,4 +148,42 @@ class BookRowAdapter(
     }
 
     override fun getItemCount(): Int = ownsList.size
+}
+
+class BorrowedRowAdapter(
+    private val context: Context,
+    private val borrowedList: List<Loan>
+) : Adapter<BorrowedRowViewHolder>() {
+
+    class BorrowedRowViewHolder(
+        private val view: View
+    ) : ViewHolder(view) {
+        val titleText: TextView = view.findViewById(R.id.borrowed_books_row_title)
+        val isbnText: TextView = view.findViewById(R.id.borrowed_books_row_isbn_value)
+        val borrowedFromText: TextView = view.findViewById(R.id.borrowed_books_row_from_value)
+        val borrowedCopiesText: TextView = view.findViewById(R.id.borrowed_books_row_copies_value)
+//        val returnButton: Button = view.findViewById(R.id.borrowed_books_row_return_button)
+        lateinit var book: Book
+        lateinit var loan: Loan
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BorrowedRowViewHolder {
+        val adapterView = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.borrowed_books_row, parent, false)
+        return BorrowedRowViewHolder(adapterView)
+    }
+
+    override fun onBindViewHolder(holder: BorrowedRowViewHolder, position: Int) {
+        val loan = borrowedList[position]
+        val book = loan.book
+        holder.loan = loan
+        holder.book = book
+        holder.titleText.text = book.title
+        holder.isbnText.text = book.isbn
+        holder.borrowedFromText.text = loan.fromUser.name
+        holder.borrowedCopiesText.text = loan.copies.toString()
+    }
+
+    override fun getItemCount(): Int = borrowedList.size
 }

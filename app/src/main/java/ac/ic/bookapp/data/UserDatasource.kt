@@ -11,9 +11,9 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 data class OwnershipPost(
-    @Json(name = "book_id") val bookId: Long,
-    @Json(name = "total_copies") val totalCopies: Int,
-    @Json(name = "current_copies") val currentCopies: Int
+    val bookId: Long,
+    val totalCopies: Int,
+    val currentCopies: Int
 )
 
 object UserDatasource : Datasource<UserService>(UserService::class.java) {
