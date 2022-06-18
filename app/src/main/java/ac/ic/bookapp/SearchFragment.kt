@@ -102,20 +102,8 @@ class BorrowBookRowAdapter(
         holder.book = book
         holder.isbnText.text = book.isbn
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
+        CoverDatasource.loadCover(holder.icon, imgURI)
 
-
-        holder.icon.load(imgURI) {
-            placeholder(R.drawable.ic_book)
-            error(R.drawable.ic_book)
-            target(
-                onStart = { placeholder -> holder.icon.setImageDrawable(placeholder) },
-                onSuccess = { result ->
-                    if (!CoverDatasource.isEmptyCover(result))
-                        holder.icon.setImageDrawable(result)
-                },
-                onError = { error -> holder.icon.setImageDrawable(error) }
-            )
-        }
     }
 
     override fun getItemCount(): Int = mutableBooksList.size
