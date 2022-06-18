@@ -7,7 +7,7 @@
     android:padding="10dp">
 
     <ImageView
-        android:id="@+id/my_books_book_picture"
+        android:id="@+id/borrowed_books_book_picture"
         android:layout_width="86dp"
         android:layout_height="match_parent"
         android:contentDescription="@string/my_books_default_book_icon_description"

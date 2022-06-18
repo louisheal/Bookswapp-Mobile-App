@@ -2,8 +2,7 @@ package ac.ic.bookapp
 
 import ac.ic.bookapp.BookRowAdapter.BookRowViewHolder
 import ac.ic.bookapp.BorrowedRowAdapter.BorrowedRowViewHolder
-import ac.ic.bookapp.data.LoanDatasource
-import ac.ic.bookapp.data.UserDatasource
+import ac.ic.bookapp.data.*
 import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
@@ -16,7 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -127,6 +126,7 @@ class BookRowAdapter(
         val isbnText: TextView = view.findViewById(R.id.my_books_row_isbn_value)
         val totalCopiesText: TextView = view.findViewById(R.id.my_books_row_total_copies_value)
         val currentCopiesText: TextView = view.findViewById(R.id.my_books_row_current_copies_value)
+        val icon: ImageView = view.findViewById(R.id.borrowed_books_book_picture)
         lateinit var book: Book
     }
 
@@ -145,6 +145,11 @@ class BookRowAdapter(
         holder.isbnText.text = book.isbn
         holder.totalCopiesText.text = owns.totalCopies.toString()
         holder.currentCopiesText.text = owns.currentCopies.toString()
+
+        val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
+
+        CoverDatasource.loadCover(holder.icon, imgURI)
+
     }
 
     override fun getItemCount(): Int = ownsList.size
@@ -163,6 +168,7 @@ class BorrowedRowAdapter(
         val borrowedFromText: TextView = view.findViewById(R.id.borrowed_books_row_from_value)
         val borrowedCopiesText: TextView = view.findViewById(R.id.borrowed_books_row_copies_value)
 //        val returnButton: Button = view.findViewById(R.id.borrowed_books_row_return_button)
+        val icon: ImageView = view.findViewById(R.id.borrowed_books_book_picture)
         lateinit var book: Book
         lateinit var loan: Loan
     }
@@ -183,6 +189,10 @@ class BorrowedRowAdapter(
         holder.isbnText.text = book.isbn
         holder.borrowedFromText.text = loan.fromUser.name
         holder.borrowedCopiesText.text = loan.copies.toString()
+
+        val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
+
+        CoverDatasource.loadCover(holder.icon, imgURI)
     }
 
     override fun getItemCount(): Int = borrowedList.size
