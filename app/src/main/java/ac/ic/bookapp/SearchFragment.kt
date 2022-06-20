@@ -6,12 +6,14 @@ import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.databinding.FragmentSearchBinding
 import ac.ic.bookapp.model.Book
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,14 +67,20 @@ class SearchFragment : Fragment() {
     }
 
     private fun displayBorrowableBooks(books: List<Book>) {
-        val adapter = activity?.let { BorrowBookRowAdapter(it, books) }
+        val adapter = activity?.let {
+            BorrowBookRowAdapter(it, books, BorrowBookRowAdapter.OnClickListener { book ->
+                val intent = Intent(context, BorrowBookActivity::class.java)
+                context?.startActivity(intent)
+            })
+        }
         scrollableList.adapter = adapter
     }
 }
 
 class BorrowBookRowAdapter(
     private val context: Context,
-    private val booksList: List<Book>
+    private val booksList: List<Book>,
+    private val onClickListener: OnClickListener
 ) :
     RecyclerView.Adapter<BorrowBookRowAdapter.BorrowBookRowViewHolder>() {
 
@@ -103,8 +111,14 @@ class BorrowBookRowAdapter(
         holder.isbnText.text = book.isbn
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
         CoverDatasource.loadCover(holder.icon, imgURI)
-
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(book)
+        }
     }
 
     override fun getItemCount(): Int = mutableBooksList.size
+
+    class OnClickListener(val clickListener: (book: Book) -> Unit) {
+        fun onClick(book: Book) = clickListener(book)
+    }
 }

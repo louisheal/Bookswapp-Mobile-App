@@ -30,12 +30,10 @@
         app:srcCompat="@drawable/ic_add" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/book_holders_list"
         android:layout_width="393dp"
         android:layout_height="641dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_margin="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
