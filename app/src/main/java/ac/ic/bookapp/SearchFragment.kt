@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,14 +66,19 @@ class SearchFragment : Fragment() {
     }
 
     private fun displayBorrowableBooks(books: List<Book>) {
-        val adapter = activity?.let { BorrowBookRowAdapter(it, books) }
+        val adapter = activity?.let {
+            BorrowBookRowAdapter(it, books, BorrowBookRowAdapter.OnClickListener { book ->
+                Toast.makeText(this.requireContext(), book.title, Toast.LENGTH_SHORT).show()
+            })
+        }
         scrollableList.adapter = adapter
     }
 }
 
 class BorrowBookRowAdapter(
     private val context: Context,
-    private val booksList: List<Book>
+    private val booksList: List<Book>,
+    private val onClickListener: OnClickListener
 ) :
     RecyclerView.Adapter<BorrowBookRowAdapter.BorrowBookRowViewHolder>() {
 
@@ -103,8 +109,14 @@ class BorrowBookRowAdapter(
         holder.isbnText.text = book.isbn
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
         CoverDatasource.loadCover(holder.icon, imgURI)
-
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(book)
+        }
     }
 
     override fun getItemCount(): Int = mutableBooksList.size
+
+    class OnClickListener(val clickListener: (book: Book) -> Unit) {
+        fun onClick(book: Book) = clickListener(book)
+    }
 }
