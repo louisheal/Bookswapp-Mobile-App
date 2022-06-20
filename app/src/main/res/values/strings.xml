@@ -45,4 +45,6 @@
     <string name="borrowed_copies">Copies</string>
     <string name="borrowed_books_row_return">RETURN</string>
     <string name="borrowed_books_row_from">From user</string>
+    <string name="book_user">User#1</string>
+
 </resources>
