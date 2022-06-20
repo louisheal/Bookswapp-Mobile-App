@@ -1,17 +1,14 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.data.BookDatasource
+import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.ActivityAddBookBinding
 import ac.ic.bookapp.filesys.LoginPreferences
-import ac.ic.bookapp.data.UserDatasource
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatActivity
-import java.lang.NullPointerException
-
-private val ISBN_INFO_QUERY = "https://www.google.com/search?q=what+is+isbn"
 
 open class AddBookActivity : AppCompatActivity() {
 
@@ -52,7 +49,7 @@ open class AddBookActivity : AppCompatActivity() {
 
     private fun showHint() {
         if (binding.isbnHintText.text == "") {
-            binding.isbnHintText.text = resources.getString(R.string.isbn_help);
+            binding.isbnHintText.text = resources.getString(R.string.isbn_help)
         } else {
             binding.isbnHintText.text = ""
         }

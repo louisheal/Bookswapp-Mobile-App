@@ -1,6 +1,7 @@
 package ac.ic.bookapp.data
 
 import ac.ic.bookapp.model.Book
+import ac.ic.bookapp.model.Ownership
 import ac.ic.bookapp.model.User
 import com.squareup.moshi.Json
 import kotlinx.coroutines.runBlocking
@@ -10,9 +11,9 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 data class OwnershipPost(
-    @Json(name = "book_id") val bookId: Long,
-    @Json(name = "total_copies") val totalCopies: Int,
-    @Json(name = "current_copies") val currentCopies: Int
+    val bookId: Long,
+    val totalCopies: Int,
+    val currentCopies: Int
 )
 
 object UserDatasource : Datasource<UserService>(UserService::class.java) {
@@ -26,6 +27,12 @@ object UserDatasource : Datasource<UserService>(UserService::class.java) {
     fun getUserBooks(userId: Long): List<Book> {
         return runBlocking {
             service.getUserBooks(userId)
+        }
+    }
+
+    fun getUserOwns(userId: Long): List<Ownership> {
+        return runBlocking {
+            service.getUserOwns(userId)
         }
     }
 
@@ -43,6 +50,9 @@ interface UserService {
 
     @GET("users/{user_id}/books")
     suspend fun getUserBooks(@Path("user_id") userId: Long): List<Book>
+
+    @GET("users/{user_id}/owns")
+    suspend fun getUserOwns(@Path("user_id") userId: Long): List<Ownership>
 
     @POST("users/{user_id}/owns")
     suspend fun postOwnership(@Path("user_id") userId: Long, @Body body: OwnershipPost): Unit
