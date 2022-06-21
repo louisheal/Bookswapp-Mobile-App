@@ -9,8 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class BorrowBookActivity : AppCompatActivity() {
@@ -28,19 +26,6 @@ class BorrowBookActivity : AppCompatActivity() {
 
         bookHoldersList = view.findViewById(R.id.book_holders_list)
         bookHoldersList.setHasFixedSize(true)
-
-        val layoutManager = LinearLayoutManager(
-            this,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        bookHoldersList.layoutManager = layoutManager
-        bookHoldersList.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                layoutManager.orientation
-            )
-        )
 
         displayHolders()
     }
@@ -71,7 +56,7 @@ class BookHoldersAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolderViewHolder {
         val adapterView =
-            LayoutInflater.from(parent.context).inflate(R.layout.book_holder_row, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.row_book_holder, parent, false)
         return BookHolderViewHolder(adapterView)
     }
 

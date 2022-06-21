@@ -13,12 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 
 class SearchFragment : Fragment() {
 
@@ -33,25 +29,11 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        val view = binding.root
-        scrollableList = binding.searchList
-        scrollableList.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(
-            this.requireContext(),
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        scrollableList.layoutManager = layoutManager
-        scrollableList.addItemDecoration(
-            DividerItemDecoration(
-                this.requireContext(),
-                layoutManager.orientation
-            )
-        )
+        binding.searchList.setHasFixedSize(true)
 
-        return view
+        return binding.root
     }
 
     @Override
@@ -100,7 +82,7 @@ class BorrowBookRowAdapter(
     ): BorrowBookRowViewHolder {
         val adapterView = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.search_row, parent, false)
+            .inflate(R.layout.row_search, parent, false)
         return BorrowBookRowViewHolder(adapterView)
     }
 
