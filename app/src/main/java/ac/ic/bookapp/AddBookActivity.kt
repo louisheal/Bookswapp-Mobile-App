@@ -25,13 +25,14 @@ open class AddBookActivity : AppCompatActivity() {
         supportActionBar?.title = ""
 
         binding.addBookButton.setOnClickListener { addMyBook(binding.isbnEditText.text.toString()) }
-        binding.scanBookButton.setOnClickListener {
-            val intent = Intent(this, ScannerViewActivity::class.java)
-            this.startActivity(intent)
-            finish()
-        }
-
+        binding.scanBookButton.setOnClickListener { startScanner() }
         binding.isbnInfo.setOnClickListener { showHint() }
+    }
+
+    private fun startScanner() {
+        val intent = Intent(this, ScannerViewActivity::class.java)
+        this.startActivity(intent)
+        finish()
     }
 
     protected fun addMyBook(isbn: String) {

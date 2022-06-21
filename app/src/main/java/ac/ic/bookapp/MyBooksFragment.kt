@@ -6,8 +6,8 @@ import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Loan
 import ac.ic.bookapp.model.Ownership
-import ac.ic.bookapp.recycleViewAdapters.BookRowAdapter
-import ac.ic.bookapp.recycleViewAdapters.BorrowedRowAdapter
+import ac.ic.bookapp.recycleViewAdapters.OwnedBookRowAdapter
+import ac.ic.bookapp.recycleViewAdapters.BorrowedBookRowAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -43,10 +43,7 @@ class MyBooksFragment : Fragment() {
         ownedList.setHasFixedSize(true)
         borrowedList.setHasFixedSize(true)
 
-        binding.addBookFloatingButton.setOnClickListener {
-            val intent = Intent(context, AddBookActivity::class.java)
-            context?.startActivity(intent)
-        }
+        binding.addBookFloatingButton.setOnClickListener { startAddBookActivity() }
 
         return view
     }
@@ -71,9 +68,14 @@ class MyBooksFragment : Fragment() {
         _binding = null
     }
 
+    private fun startAddBookActivity() {
+        val intent = Intent(context, AddBookActivity::class.java)
+        context?.startActivity(intent)
+    }
+
     private fun displayBooks() {
-        ownedList.adapter = activity?.let { BookRowAdapter(getUserBooks()) }
-        borrowedList.adapter = activity?.let { BorrowedRowAdapter(getBorrowedBooks()) }
+        ownedList.adapter = OwnedBookRowAdapter(getUserBooks())
+        borrowedList.adapter = BorrowedBookRowAdapter(getBorrowedBooks())
     }
 
     private fun getUserBooks(): List<Ownership> =

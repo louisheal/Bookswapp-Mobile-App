@@ -56,7 +56,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".AddBookActivity" />
         </activity>
-        <activity android:name=".BorrowBookActivity" />
+        <activity android:name=".BookProfileActivity" />
 
     </application>
 

@@ -1,6 +1,6 @@
 package ac.ic.bookapp
 
-import ac.ic.bookapp.recycleViewAdapters.BorrowBookRowAdapter
+import ac.ic.bookapp.recycleViewAdapters.SearchBookRowAdapter
 import ac.ic.bookapp.data.BookDatasource
 import ac.ic.bookapp.databinding.FragmentSearchBinding
 import ac.ic.bookapp.model.Book
@@ -46,12 +46,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun displayBorrowableBooks(books: List<Book>) {
-        val adapter = activity?.let {
-            BorrowBookRowAdapter(books, BorrowBookRowAdapter.OnClickListener { book ->
-                val intent = Intent(context, BorrowBookActivity::class.java)
+        scrollableList.adapter =
+            SearchBookRowAdapter(books, SearchBookRowAdapter.OnClickListener { book ->
+                val intent = Intent(context, BookProfileActivity::class.java)
                 context?.startActivity(intent)
             })
-        }
-        scrollableList.adapter = adapter
     }
 }

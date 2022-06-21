@@ -11,11 +11,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BorrowBookRowAdapter(
+class SearchBookRowAdapter(
     private val booksList: List<Book>,
     private val onClickListener: OnClickListener
 ) :
-    RecyclerView.Adapter<BorrowBookRowAdapter.BorrowBookRowViewHolder>() {
+    RecyclerView.Adapter<SearchBookRowAdapter.BorrowBookRowViewHolder>() {
 
     class BorrowBookRowViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.search_row_title)

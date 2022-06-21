@@ -2,7 +2,6 @@ package ac.ic.bookapp.recycleViewAdapters
 
 import ac.ic.bookapp.R
 import ac.ic.bookapp.model.User
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -5,7 +5,6 @@ import ac.ic.bookapp.data.CoverDatasource
 import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.Loan
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BorrowedRowAdapter(
+class BorrowedBookRowAdapter(
     private val borrowedList: List<Loan>
-) : RecyclerView.Adapter<BorrowedRowAdapter.BorrowedRowViewHolder>() {
+) : RecyclerView.Adapter<BorrowedBookRowAdapter.BorrowedRowViewHolder>() {
 
     class BorrowedRowViewHolder(
         private val view: View
