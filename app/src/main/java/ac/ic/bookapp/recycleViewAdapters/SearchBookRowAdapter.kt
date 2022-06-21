@@ -15,9 +15,9 @@ class SearchBookRowAdapter(
     private val booksList: List<Book>,
     private val onClickListener: OnClickListener
 ) :
-    RecyclerView.Adapter<SearchBookRowAdapter.BorrowBookRowViewHolder>() {
+    RecyclerView.Adapter<SearchBookRowAdapter.SearchBookRowViewHolder>() {
 
-    class BorrowBookRowViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class SearchBookRowViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.search_row_title)
         val isbnText: TextView = view.findViewById(R.id.search_row_isbn_value)
         val ownersText: TextView = view.findViewById(R.id.search_row_owners_value)
@@ -30,14 +30,14 @@ class SearchBookRowAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BorrowBookRowViewHolder {
+    ): SearchBookRowViewHolder {
         val adapterView = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.row_search, parent, false)
-        return BorrowBookRowViewHolder(adapterView)
+        return SearchBookRowViewHolder(adapterView)
     }
 
-    override fun onBindViewHolder(holder: BorrowBookRowViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SearchBookRowViewHolder, position: Int) {
         val book = mutableBooksList[position]
         holder.titleText.text = book.title
         holder.book = book

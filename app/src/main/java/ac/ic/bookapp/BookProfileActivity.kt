@@ -3,7 +3,7 @@ package ac.ic.bookapp
 import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.ActivityBookProfileBinding
 import ac.ic.bookapp.model.User
-import ac.ic.bookapp.recycleViewAdapters.BookHoldersAdapter
+import ac.ic.bookapp.recycleViewAdapters.BookHolderRowAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +33,7 @@ class BookProfileActivity : AppCompatActivity() {
     }
 
     private fun displayHolders() {
-        bookHoldersList.adapter = BookHoldersAdapter(getHoldersList())
+        bookHoldersList.adapter = BookHolderRowAdapter(getHoldersList())
     }
 
     private fun getHoldersList(): List<User> = UserDatasource.getUsers()

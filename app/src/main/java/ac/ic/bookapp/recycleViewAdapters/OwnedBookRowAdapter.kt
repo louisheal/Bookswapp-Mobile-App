@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 class OwnedBookRowAdapter(
     private val ownsList: List<Ownership>
-) : RecyclerView.Adapter<OwnedBookRowAdapter.BookRowViewHolder>() {
+) : RecyclerView.Adapter<OwnedBookRowAdapter.OwnedBookRowViewHolder>() {
 
-    class BookRowViewHolder(
+    class OwnedBookRowViewHolder(
         private val view: View
     ) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.my_books_row_title)
@@ -27,14 +27,14 @@ class OwnedBookRowAdapter(
         lateinit var book: Book
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookRowViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OwnedBookRowViewHolder {
         val adapterView = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.row_my_books, parent, false)
-        return BookRowViewHolder(adapterView)
+        return OwnedBookRowViewHolder(adapterView)
     }
 
-    override fun onBindViewHolder(holder: BookRowViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OwnedBookRowViewHolder, position: Int) {
         val owns = ownsList[position]
         val book = owns.book
         holder.book = book

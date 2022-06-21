@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 class BorrowedBookRowAdapter(
     private val borrowedList: List<Loan>
-) : RecyclerView.Adapter<BorrowedBookRowAdapter.BorrowedRowViewHolder>() {
+) : RecyclerView.Adapter<BorrowedBookRowAdapter.BorrowedBookRowViewHolder>() {
 
-    class BorrowedRowViewHolder(
+    class BorrowedBookRowViewHolder(
         private val view: View
     ) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.borrowed_books_row_title)
@@ -30,14 +30,14 @@ class BorrowedBookRowAdapter(
         lateinit var loan: Loan
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BorrowedRowViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BorrowedBookRowViewHolder {
         val adapterView = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.row_borrowed_books, parent, false)
-        return BorrowedRowViewHolder(adapterView)
+        return BorrowedBookRowViewHolder(adapterView)
     }
 
-    override fun onBindViewHolder(holder: BorrowedRowViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BorrowedBookRowViewHolder, position: Int) {
         val loan = borrowedList[position]
         val book = loan.book
         holder.loan = loan

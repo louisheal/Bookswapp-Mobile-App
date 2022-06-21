@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BookHoldersAdapter
+class BookHolderRowAdapter
     (
     private val bookHoldersList: List<User>
-) : RecyclerView.Adapter<BookHoldersAdapter.BookHolderViewHolder>() {
+) : RecyclerView.Adapter<BookHolderRowAdapter.BookHolderViewHolder>() {
 
     class BookHolderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.holder_name)
