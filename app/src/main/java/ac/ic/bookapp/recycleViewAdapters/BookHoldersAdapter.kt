@@ -1,4 +1,4 @@
-package ac.ic.bookapp.adapters
+package ac.ic.bookapp.recycleViewAdapters
 
 import ac.ic.bookapp.R
 import ac.ic.bookapp.model.User
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class BookHoldersAdapter
     (
-    private val context: Context,
     private val bookHoldersList: List<User>
 ) : RecyclerView.Adapter<BookHoldersAdapter.BookHolderViewHolder>() {
 

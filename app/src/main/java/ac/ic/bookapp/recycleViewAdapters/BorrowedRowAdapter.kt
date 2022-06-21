@@ -1,0 +1,57 @@
+package ac.ic.bookapp.recycleViewAdapters
+
+import ac.ic.bookapp.R
+import ac.ic.bookapp.data.CoverDatasource
+import ac.ic.bookapp.data.CoverSize
+import ac.ic.bookapp.model.Book
+import ac.ic.bookapp.model.Loan
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+
+class BorrowedRowAdapter(
+    private val borrowedList: List<Loan>
+) : RecyclerView.Adapter<BorrowedRowAdapter.BorrowedRowViewHolder>() {
+
+    class BorrowedRowViewHolder(
+        private val view: View
+    ) : RecyclerView.ViewHolder(view) {
+        val titleText: TextView = view.findViewById(R.id.borrowed_books_row_title)
+        val isbnText: TextView = view.findViewById(R.id.borrowed_books_row_isbn_value)
+        val borrowedFromText: TextView = view.findViewById(R.id.borrowed_books_row_from_value)
+        val borrowedCopiesText: TextView = view.findViewById(R.id.borrowed_books_row_copies_value)
+
+        //        val returnButton: Button = view.findViewById(R.id.borrowed_books_row_return_button)
+        val icon: ImageView = view.findViewById(R.id.borrowed_books_book_picture)
+        lateinit var book: Book
+        lateinit var loan: Loan
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BorrowedRowViewHolder {
+        val adapterView = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.row_borrowed_books, parent, false)
+        return BorrowedRowViewHolder(adapterView)
+    }
+
+    override fun onBindViewHolder(holder: BorrowedRowViewHolder, position: Int) {
+        val loan = borrowedList[position]
+        val book = loan.book
+        holder.loan = loan
+        holder.book = book
+        holder.titleText.text = book.title
+        holder.isbnText.text = book.isbn
+        holder.borrowedFromText.text = loan.fromUser.name
+        holder.borrowedCopiesText.text = loan.copies.toString()
+
+        val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
+
+        CoverDatasource.loadCover(holder.icon, imgURI)
+    }
+
+    override fun getItemCount(): Int = borrowedList.size
+}

@@ -3,6 +3,7 @@ package ac.ic.bookapp
 import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.ActivityBorrowBookBinding
 import ac.ic.bookapp.model.User
+import ac.ic.bookapp.recycleViewAdapters.BookHoldersAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,32 +41,4 @@ class BorrowBookActivity : AppCompatActivity() {
     }
 
     private fun getHoldersList(): List<User> = UserDatasource.getUsers()
-}
-
-
-class BookHoldersAdapter
-    (
-    private val bookHoldersList: List<User>
-) : RecyclerView.Adapter<BookHoldersAdapter.BookHolderViewHolder>() {
-
-    class BookHolderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.holder_name)
-        val department: TextView = view.findViewById(R.id.holder_department)
-        lateinit var user: User
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolderViewHolder {
-        val adapterView =
-            LayoutInflater.from(parent.context).inflate(R.layout.row_book_holder, parent, false)
-        return BookHolderViewHolder(adapterView)
-    }
-
-    override fun onBindViewHolder(holder: BookHolderViewHolder, position: Int) {
-        val user = bookHoldersList[position]
-        holder.name.text = user.name
-        holder.department.text = "department"
-        holder.user = user
-    }
-
-    override fun getItemCount(): Int = bookHoldersList.size
 }
