@@ -1,9 +1,9 @@
 package ac.ic.bookapp.recycleViewAdapters
 
 import ac.ic.bookapp.MainActivity
-import ac.ic.bookapp.MyBooksFragment
 import ac.ic.bookapp.R
 import ac.ic.bookapp.data.LoanDatasource
+import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.User
 import android.content.Context
 import android.content.Intent
@@ -23,7 +23,7 @@ class BookHolderRowAdapter(
     class BookHolderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.holder_name)
         val department: TextView = view.findViewById(R.id.holder_department)
-        val borrowedBtn: Button = view.findViewById(R.id.borrow_btn)
+        val borrowButton: Button = view.findViewById(R.id.borrow_btn)
         lateinit var user: User
     }
 
@@ -38,7 +38,10 @@ class BookHolderRowAdapter(
         holder.name.text = owner.name
         holder.department.text = "department"
         holder.user = owner
-        holder.borrowedBtn.setOnClickListener { borrowBook(owner.id) ; startMyBookActivity() }
+        holder.borrowButton.setOnClickListener {
+            borrowBook(owner.id)
+            startMyBookActivity()
+        }
     }
 
     private fun startMyBookActivity() {
@@ -47,7 +50,11 @@ class BookHolderRowAdapter(
     }
 
     private fun borrowBook(ownerId: Long) {
-        LoanDatasource.postUserBorrowing(context, ownerId, bookId)
+        LoanDatasource.postUserLoanRequest(
+            LoginPreferences.getUserLoginId(context),
+            ownerId,
+            bookId
+        )
     }
 
     override fun getItemCount(): Int = bookOwnersList.size

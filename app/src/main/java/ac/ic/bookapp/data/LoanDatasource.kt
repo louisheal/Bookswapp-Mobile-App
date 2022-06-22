@@ -1,16 +1,19 @@
 package ac.ic.bookapp.data
 
-import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Loan
-import android.content.Context
+import ac.ic.bookapp.model.LoanRequest
 import kotlinx.coroutines.runBlocking
 import retrofit2.http.*
 
-data class LoanPost(
+data class LoanRequestPost(
     val fromUserId: Long,
     val toUserId: Long,
     val bookId: Long,
     val copies: Int
+)
+
+data class DecisionPost(
+    val accept: Boolean
 )
 
 object LoanDatasource : Datasource<LoanService>(LoanService::class.java) {
@@ -21,10 +24,25 @@ object LoanDatasource : Datasource<LoanService>(LoanService::class.java) {
         }
     }
 
-    fun postUserBorrowing(context: Context, ownerId: Long, bookId: Long) {
+    fun getUserIncomingLoanRequests(userId: Long): List<LoanRequest> {
+        return runBlocking {
+            service.getIncomingLoanRequests(userId)
+        }
+    }
+
+    fun postUserLoanRequest(userId: Long, ownerId: Long, bookId: Long) {
         runBlocking {
-            service.postUserBorrowing(
-                LoanPost(ownerId, LoginPreferences.getUserLoginId(context), bookId, 1)
+            service.postUserLoanRequest(
+                LoanRequestPost(ownerId, userId, bookId, 1)
+            )
+        }
+    }
+
+    fun postLoanRequestDecision(requestId: Long, accept: Boolean) {
+        runBlocking {
+            service.postLoanRequestDecision(
+                requestId,
+                DecisionPost(accept)
             )
         }
     }
@@ -35,7 +53,15 @@ interface LoanService {
     @GET("/loans")
     suspend fun getUserBorrowedBooks(@Query("to") userId: Long): List<Loan>
 
-    @POST("/loans")
-    suspend fun postUserBorrowing(@Body load: LoanPost)
+    @GET("/loans/requests")
+    suspend fun getIncomingLoanRequests(@Query("from") userId: Long): List<LoanRequest>
 
+    @POST("/loans/requests")
+    suspend fun postUserLoanRequest(@Body load: LoanRequestPost)
+
+    @POST("/loans/requests/{request_id}")
+    suspend fun postLoanRequestDecision(
+        @Path("request_id") requestId: Long,
+        @Body decision: DecisionPost
+    )
 }
