@@ -47,9 +47,8 @@ class SearchFragment : Fragment() {
 
     private fun displayBorrowableBooks(books: List<Book>) {
         scrollableList.adapter =
-            SearchBookRowAdapter(books, SearchBookRowAdapter.OnClickListener { book ->
-                val intent = Intent(context, BookProfileActivity::class.java)
-                context?.startActivity(intent)
-            })
+            activity?.let {
+                SearchBookRowAdapter(it, books)
+            }
     }
 }

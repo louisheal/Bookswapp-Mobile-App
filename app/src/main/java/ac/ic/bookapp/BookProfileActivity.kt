@@ -2,6 +2,7 @@ package ac.ic.bookapp
 
 import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.ActivityBookProfileBinding
+import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.User
 import ac.ic.bookapp.recycleViewAdapters.BookHolderRowAdapter
 import android.os.Bundle
@@ -17,11 +18,12 @@ class BookProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityBookProfileBinding.inflate(layoutInflater)
-        val view = binding.root
 
-        setContentView(view)
+        setContentView(binding.root)
 
-        bookHoldersList = view.findViewById(R.id.book_holders_list)
+        binding.bookTitle.text = (intent.getSerializableExtra("book") as Book).title
+
+        bookHoldersList = findViewById(R.id.book_holders_list)
         bookHoldersList.setHasFixedSize(true)
 
         displayHolders()
