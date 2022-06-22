@@ -2,6 +2,7 @@ package ac.ic.bookapp.data
 
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.Ownership
+import ac.ic.bookapp.model.User
 import kotlinx.coroutines.runBlocking
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -26,7 +27,7 @@ object BookDatasource : Datasource<BookService>(BookService::class.java) {
         }
     }
 
-    fun getOwners(bookId: String) {
+    fun getOwners(bookId: String): List<User> {
         return runBlocking {
             service.getOwners(bookId)
         }
@@ -41,5 +42,5 @@ interface BookService {
     suspend fun postBook(@Body isbn: String): Book
 
     @GET("books/{book_id}/owners")
-    suspend fun getOwners(@Path("book_id") bookId: String): List<Ownership>
+    suspend fun getOwners(@Path("book_id") bookId: String): List<User>
 }

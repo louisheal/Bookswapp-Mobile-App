@@ -1,21 +1,29 @@
 package ac.ic.bookapp.recycleViewAdapters
 
+import ac.ic.bookapp.MainActivity
+import ac.ic.bookapp.MyBooksFragment
 import ac.ic.bookapp.R
+import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.model.User
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BookHolderRowAdapter
-    (
-    private val bookHoldersList: List<User>
+class BookHolderRowAdapter(
+    private val context: Context,
+    private val bookId: Long,
+    private val bookOwnersList: List<User>
 ) : RecyclerView.Adapter<BookHolderRowAdapter.BookHolderViewHolder>() {
 
     class BookHolderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.holder_name)
         val department: TextView = view.findViewById(R.id.holder_department)
+        val borrowedBtn: Button = view.findViewById(R.id.borrow_btn)
         lateinit var user: User
     }
 
@@ -26,11 +34,21 @@ class BookHolderRowAdapter
     }
 
     override fun onBindViewHolder(holder: BookHolderViewHolder, position: Int) {
-        val user = bookHoldersList[position]
-        holder.name.text = user.name
+        val owner = bookOwnersList[position]
+        holder.name.text = owner.name
         holder.department.text = "department"
-        holder.user = user
+        holder.user = owner
+        holder.borrowedBtn.setOnClickListener { borrowBook(owner.id) ; startMyBookActivity() }
     }
 
-    override fun getItemCount(): Int = bookHoldersList.size
+    private fun startMyBookActivity() {
+        val intent = Intent(context, MainActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    private fun borrowBook(ownerId: Long) {
+        LoanDatasource.postUserBorrowing(context, ownerId, bookId)
+    }
+
+    override fun getItemCount(): Int = bookOwnersList.size
 }
