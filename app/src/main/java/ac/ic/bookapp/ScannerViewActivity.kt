@@ -42,15 +42,8 @@ class ScannerViewActivity : AddBookActivity() {
         codeScanner.isAutoFocusEnabled = true
         codeScanner.isFlashEnabled = false
 
-        codeScanner.decodeCallback = DecodeCallback {
-            runOnUiThread {
-                val isbn = it.text
-                addMyBook(isbn)
-            }
-        }
-        scannerView.setOnClickListener {
-            codeScanner.startPreview()
-        }
+        codeScanner.decodeCallback = DecodeCallback { runOnUiThread { addMyBook(it.text) } }
+        scannerView.setOnClickListener { codeScanner.startPreview() }
     }
 
     override fun onResume() {

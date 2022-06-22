@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/user_picture"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:contentDescription="TODO"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="228dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/holder_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:id="@+id/holder_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Department" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/borrow_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="borrow"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+</TableRow>
