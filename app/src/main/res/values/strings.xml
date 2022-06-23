@@ -64,5 +64,6 @@
     <string name="published">Published</string>
     <string name="owners">Owners</string>
     <string name="borrow_from">Borrow from:</string>
+    <string name="available_books">Available books</string>
 
 </resources>
