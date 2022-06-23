@@ -31,7 +31,7 @@ object UserDatasource : Datasource<UserService>(UserService::class.java) {
 
     fun getUserOwns(userId: Long): List<Ownership> {
         return runBlocking {
-            service.getUserOwns(userId)
+            service.getUserOwns(userId).filter { it.currentCopies > 0 }
         }
     }
 
