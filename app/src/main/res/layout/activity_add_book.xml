@@ -53,8 +53,8 @@
 
     <TextView
         android:id="@+id/isbnHintText"
-        android:layout_width="146dp"
-        android:layout_height="82dp"
+        android:layout_width="145dp"
+        android:layout_height="104dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="60dp"
         android:background="#00000000"
@@ -110,7 +110,7 @@
         android:id="@+id/add_book_button"
         android:layout_width="192dp"
         android:layout_height="48dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="160dp"
         android:text="@string/add_book"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
