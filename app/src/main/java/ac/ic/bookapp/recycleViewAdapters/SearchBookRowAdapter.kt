@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TableRow
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -25,7 +26,7 @@ class SearchBookRowAdapter(
         val isbnText: TextView = view.findViewById(R.id.search_row_isbn_value)
         val ownersText: TextView = view.findViewById(R.id.search_row_owners_value)
         val icon: ImageView = view.findViewById(R.id.search_row_book_picture)
-        val borrowButton: Button = view.findViewById(R.id.borrow_button)
+        val row: TableRow = view.findViewById(R.id.row)
         lateinit var book: Book
     }
 
@@ -47,7 +48,7 @@ class SearchBookRowAdapter(
         holder.book = book
         holder.isbnText.text = book.isbn
 
-        holder.borrowButton.setOnClickListener {
+        holder.row.setOnClickListener {
             val intent = Intent(context, BookProfileActivity::class.java)
             intent.putExtra("book", holder.book)
             context.startActivity(intent)
