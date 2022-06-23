@@ -26,7 +26,6 @@ class SearchBookRowAdapter(
         val isbnText: TextView = view.findViewById(R.id.search_row_isbn_value)
         val ownersText: TextView = view.findViewById(R.id.search_row_owners_value)
         val icon: ImageView = view.findViewById(R.id.search_row_book_picture)
-        val row: TableRow = view.findViewById(R.id.row)
         lateinit var book: Book
     }
 
@@ -47,12 +46,6 @@ class SearchBookRowAdapter(
         holder.titleText.text = book.title
         holder.book = book
         holder.isbnText.text = book.isbn
-
-        holder.row.setOnClickListener {
-            val intent = Intent(context, BookProfileActivity::class.java)
-            intent.putExtra("book", holder.book)
-            context.startActivity(intent)
-        }
 
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
         CoverDatasource.loadCover(holder.icon, imgURI)
