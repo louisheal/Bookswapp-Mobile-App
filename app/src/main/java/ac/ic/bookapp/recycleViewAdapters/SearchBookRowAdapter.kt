@@ -44,7 +44,6 @@ class SearchBookRowAdapter(
         holder.titleText.text = book.title
         holder.book = book
         holder.isbnText.text = book.isbn
-
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
         CoverDatasource.loadCover(holder.icon, imgURI)
         holder.itemView.setOnClickListener { startBookProfileActivity(book) }

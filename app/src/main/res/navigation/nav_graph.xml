@@ -15,4 +15,9 @@
         android:name="ac.ic.bookapp.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/notifsFragment"
+        android:name="ac.ic.bookapp.NotifsFragment"
+        android:label="fragment_notifs"
+        tools:layout="@layout/fragment_notifs" />
 </navigation>

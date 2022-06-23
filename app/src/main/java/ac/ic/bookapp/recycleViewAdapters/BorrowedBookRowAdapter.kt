@@ -39,13 +39,13 @@ class BorrowedBookRowAdapter(
 
     override fun onBindViewHolder(holder: BorrowedBookRowViewHolder, position: Int) {
         val loan = borrowedList[position]
-        val book = loan.book
+        val book = loan.request.book
         holder.loan = loan
         holder.book = book
         holder.titleText.text = book.title
         holder.isbnText.text = book.isbn
-        holder.borrowedFromText.text = loan.fromUser.name
-        holder.borrowedCopiesText.text = loan.copies.toString()
+        holder.borrowedFromText.text = loan.request.fromUser.name
+        holder.borrowedCopiesText.text = loan.request.copies.toString()
 
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
 

@@ -3,7 +3,6 @@ package ac.ic.bookapp.data
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.Ownership
 import ac.ic.bookapp.model.User
-import com.squareup.moshi.Json
 import kotlinx.coroutines.runBlocking
 import retrofit2.http.Body
 import retrofit2.http.GET

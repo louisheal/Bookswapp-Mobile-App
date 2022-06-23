@@ -1,21 +1,32 @@
 package ac.ic.bookapp.recycleViewAdapters
 
+import ac.ic.bookapp.MainActivity
 import ac.ic.bookapp.R
+import ac.ic.bookapp.data.LoanDatasource
+import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.User
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class BookHolderRowAdapter
-    (
-    private val bookHoldersList: List<User>
+class BookHolderRowAdapter(
+    private val context: Activity,
+    private val bookId: Long,
+    private val bookOwnersList: List<User>
 ) : RecyclerView.Adapter<BookHolderRowAdapter.BookHolderViewHolder>() {
 
     class BookHolderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.holder_name)
-        val department: TextView = view.findViewById(R.id.holder_department)
+        val name: TextView = view.findViewById(R.id.borrow_row_name_value)
+        val institution: TextView = view.findViewById(R.id.borrow_row_institution_value)
+        val department: TextView = view.findViewById(R.id.borrow_row_department_value)
+        val borrowButton: Button = view.findViewById(R.id.borrow_btn)
         lateinit var user: User
     }
 
@@ -26,11 +37,29 @@ class BookHolderRowAdapter
     }
 
     override fun onBindViewHolder(holder: BookHolderViewHolder, position: Int) {
-        val user = bookHoldersList[position]
-        holder.name.text = user.name
-        holder.department.text = "department"
-        holder.user = user
+        val owner = bookOwnersList[position]
+        holder.name.text = owner.name
+        holder.institution.text = "Institution placeholder"
+        holder.department.text = "Department placeholder"
+        holder.user = owner
+        holder.borrowButton.setOnClickListener {
+            borrowBook(owner.id)
+            requestSentToast()
+            context.finish()
+        }
     }
 
-    override fun getItemCount(): Int = bookHoldersList.size
+    private fun requestSentToast() {
+        Toast.makeText(context, "Borrow request was sent!", Toast.LENGTH_LONG).show()
+    }
+
+    private fun borrowBook(ownerId: Long) {
+        LoanDatasource.postUserLoanRequest(
+            LoginPreferences.getUserLoginId(context),
+            ownerId,
+            bookId
+        )
+    }
+
+    override fun getItemCount(): Int = bookOwnersList.size
 }

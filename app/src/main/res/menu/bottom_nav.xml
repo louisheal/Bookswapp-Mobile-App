@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+<!--    <item-->
+<!--        android:id="@+id/profileFragment"-->
+<!--        android:icon="@android:drawable/ic_menu_myplaces"-->
+<!--        android:title="@string/profile" />-->
+
     <item
         android:id="@+id/myBooksFragment"
         android:title="@string/my_books"
@@ -10,5 +15,10 @@
         android:id="@+id/searchFragment"
         android:title="@string/search"
         android:icon="@drawable/ic_search" />
+
+    <item
+        android:id="@+id/notifsFragment"
+        android:icon="@android:drawable/ic_dialog_email"
+        android:title="@string/notifications" />
 
 </menu>
