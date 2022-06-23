@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 private const val TAG = "NotifsFragment"
 
@@ -59,6 +60,8 @@ class NotifsFragment : Fragment() {
 
     private fun displayNotifs() {
         notifsList.adapter = NotifRowAdapter(this, getLoanRequests())
+        val nav = this.requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        nav.removeBadge(R.id.notifsFragment)
     }
 
     private fun getLoanRequests(): List<LoanRequest> =

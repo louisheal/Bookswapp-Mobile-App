@@ -1,11 +1,15 @@
 package ac.ic.bookapp
 
+import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.databinding.ActivityMainBinding
+import ac.ic.bookapp.filesys.LoginPreferences
+import ac.ic.bookapp.model.LoanRequest
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 private const val TAG = "MainActivity"
 
@@ -25,9 +29,21 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
         val navController = navHost.navController
         bottomNavigationView.setupWithNavController(navController)
+        setupNotificationCount(bottomNavigationView)
 
         Log.d(TAG, "Main Activity created")
     }
+
+    private fun setupNotificationCount(bottomNavigationView: BottomNavigationView) {
+        val notifCount = getLoanRequests().size
+        if (notifCount > 0)
+            bottomNavigationView.getOrCreateBadge(R.id.notifsFragment).number = notifCount
+    }
+
+    private fun getLoanRequests(): List<LoanRequest> =
+        LoanDatasource.getUserIncomingLoanRequests(
+            LoginPreferences.getUserLoginId(this)
+        )
 
 
 }

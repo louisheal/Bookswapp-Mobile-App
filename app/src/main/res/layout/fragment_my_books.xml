@@ -38,7 +38,7 @@
                 android:layout_height="20dp" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/ownedBooksTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/owned_books"
@@ -47,6 +47,25 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/my_books_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                app:layoutManager="LinearLayoutManager" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/lentBooksTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lentBooksTitle"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lent_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="none"
