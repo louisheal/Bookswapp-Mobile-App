@@ -8,6 +8,7 @@ import ac.ic.bookapp.model.Loan
 import ac.ic.bookapp.model.Ownership
 import ac.ic.bookapp.recycleViewAdapters.OwnedBookRowAdapter
 import ac.ic.bookapp.recycleViewAdapters.BorrowedBookRowAdapter
+import ac.ic.bookapp.recycleViewAdapters.LentBookRowAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,7 @@ class MyBooksFragment : Fragment() {
 
     private lateinit var ownedList: RecyclerView
     private lateinit var borrowedList: RecyclerView
+    private lateinit var lentList: RecyclerView
 
 //    private val userId = LoginPreferences.getUserLoginId(this.requireActivity())
 
@@ -40,8 +42,11 @@ class MyBooksFragment : Fragment() {
 
         ownedList = view.findViewById(R.id.my_books_list)
         borrowedList = view.findViewById(R.id.borrowed_books_list)
+        lentList = view.findViewById(R.id.lent_list)
+
         ownedList.setHasFixedSize(true)
         borrowedList.setHasFixedSize(true)
+        lentList.setHasFixedSize(true)
 
         binding.addBookFloatingButton.setOnClickListener {
             startAddBookActivity()
@@ -78,7 +83,11 @@ class MyBooksFragment : Fragment() {
     private fun displayBooks() {
         ownedList.adapter = OwnedBookRowAdapter(getUserBooks())
         borrowedList.adapter = BorrowedBookRowAdapter(getBorrowedBooks())
+        lentList.adapter = LentBookRowAdapter(getLentBooks())
     }
+
+    private fun getLentBooks(): List<Loan> =
+        LoanDatasource.getUserLentBooks(LoginPreferences.getUserLoginId(this.requireActivity()))
 
     private fun getUserBooks(): List<Ownership> =
         UserDatasource.getUserOwns(LoginPreferences.getUserLoginId(this.requireActivity()))

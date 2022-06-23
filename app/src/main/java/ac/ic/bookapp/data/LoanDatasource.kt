@@ -24,6 +24,12 @@ object LoanDatasource : Datasource<LoanService>(LoanService::class.java) {
         }
     }
 
+    fun getUserLentBooks(userId: Long): List<Loan> {
+        return runBlocking {
+            service.getUserLentBooks(userId)
+        }
+    }
+
     fun getUserIncomingLoanRequests(userId: Long): List<LoanRequest> {
         return runBlocking {
             service.getIncomingLoanRequests(userId)
@@ -52,6 +58,10 @@ interface LoanService {
 
     @GET("/loans")
     suspend fun getUserBorrowedBooks(@Query("to") userId: Long): List<Loan>
+
+    @GET("/loans")
+    suspend fun getUserLentBooks(@Query("from") userId: Long): List<Loan>
+
 
     @GET("/loans/requests")
     suspend fun getIncomingLoanRequests(@Query("from") userId: Long): List<LoanRequest>
