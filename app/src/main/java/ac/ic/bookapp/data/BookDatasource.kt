@@ -4,15 +4,15 @@ import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.Ownership
 import ac.ic.bookapp.model.User
+import android.content.Context
 import kotlinx.coroutines.runBlocking
 import retrofit2.http.*
 
 object BookDatasource : Datasource<BookService>(BookService::class.java) {
 
-    fun getBooks(): List<Book> {
+    fun getBooks(context: Context): List<Book> {
         return runBlocking {
-            //TODO: change exceptUID to be current logged in user id
-            service.getBooks(0)
+            service.getBooks(LoginPreferences.getUserLoginId(context))
         }
     }
 
@@ -35,7 +35,7 @@ object BookDatasource : Datasource<BookService>(BookService::class.java) {
 
 interface BookService {
     @GET("books")
-    suspend fun getBooks(@Query("except_uid") exceptUID: Long): List<Book>
+    suspend fun getBooks(@Query("exceptUser") exceptUID: Long): List<Book>
 
     @POST("books")
     suspend fun postBook(@Body isbn: String): Book

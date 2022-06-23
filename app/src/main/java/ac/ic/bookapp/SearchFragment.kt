@@ -36,7 +36,7 @@ class SearchFragment : Fragment() {
     @Override
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayBorrowableBooks(BookDatasource.getBooks())
+        displayBorrowableBooks(BookDatasource.getBooks(requireContext()))
     }
 
     @Override

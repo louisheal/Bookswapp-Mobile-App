@@ -5,6 +5,7 @@ import ac.ic.bookapp.R
 import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.User
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -12,10 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class BookHolderRowAdapter(
-    private val context: Context,
+    private val context: Activity,
     private val bookId: Long,
     private val bookOwnersList: List<User>
 ) : RecyclerView.Adapter<BookHolderRowAdapter.BookHolderViewHolder>() {
@@ -40,13 +42,13 @@ class BookHolderRowAdapter(
         holder.user = owner
         holder.borrowButton.setOnClickListener {
             borrowBook(owner.id)
-            startMyBookActivity()
+            requestSentToast()
+            context.finish()
         }
     }
 
-    private fun startMyBookActivity() {
-        val intent = Intent(context, MainActivity::class.java)
-        context.startActivity(intent)
+    private fun requestSentToast() {
+        Toast.makeText(context, "Borrow request was sent!", Toast.LENGTH_LONG).show()
     }
 
     private fun borrowBook(ownerId: Long) {

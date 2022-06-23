@@ -10,25 +10,27 @@
 
     <TextView
         android:id="@+id/notifs_none"
-        android:layout_width="85dp"
-        android:layout_height="19dp"
-        android:text="@string/notifs_row_no_new_notifs"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/notifs_scrollview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notifications"
+        android:textSize="24sp"
+        android:textAppearance="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<!--    app:layout_constraintBottom_toBottomOf="@+id/notifs_scrollview"-->
+
     <ScrollView
         android:id="@+id/notifs_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbarStyle="insideOverlay"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/notifs_none"
         tools:visibility="visible">
 
         <LinearLayout
