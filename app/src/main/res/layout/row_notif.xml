@@ -33,7 +33,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/book_picture"
+                    android:id="@+id/notifs_row_book_picture"
                     android:layout_width="73dp"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/book_picture_content_description"
@@ -45,7 +45,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/notifs_row_title_value"
+                        android:id="@+id/notifs_row_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold" />

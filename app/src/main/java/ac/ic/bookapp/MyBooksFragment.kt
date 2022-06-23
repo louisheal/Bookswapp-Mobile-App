@@ -43,7 +43,9 @@ class MyBooksFragment : Fragment() {
         ownedList.setHasFixedSize(true)
         borrowedList.setHasFixedSize(true)
 
-        binding.addBookFloatingButton.setOnClickListener { startAddBookActivity() }
+        binding.addBookFloatingButton.setOnClickListener {
+            startAddBookActivity()
+        }
 
         return view
     }

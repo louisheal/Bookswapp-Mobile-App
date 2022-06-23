@@ -17,7 +17,7 @@ class OwnedBookRowAdapter(
 ) : RecyclerView.Adapter<OwnedBookRowAdapter.OwnedBookRowViewHolder>() {
 
     class OwnedBookRowViewHolder(
-        private val view: View
+        view: View
     ) : RecyclerView.ViewHolder(view) {
         val titleText: TextView = view.findViewById(R.id.my_books_row_title)
         val isbnText: TextView = view.findViewById(R.id.my_books_row_isbn_value)
@@ -44,9 +44,7 @@ class OwnedBookRowAdapter(
         holder.currentCopiesText.text = owns.currentCopies.toString()
 
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
-
         CoverDatasource.loadCover(holder.icon, imgURI)
-
     }
 
     override fun getItemCount(): Int = ownsList.size

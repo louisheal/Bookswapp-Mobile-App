@@ -23,7 +23,7 @@ object LoginPreferences {
 
     fun getUserLoginId(context: Context): Long {
         val key = context.resources.getString(R.string.login_user_id_key)
-        val default = 3.toLong()//context.resources.getString(R.string.login_dev_id).toLong()
+        val default = context.resources.getString(R.string.login_dev_id).toLong()
         return getPref(context).getLong(key, default)
     }
 
