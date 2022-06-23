@@ -20,7 +20,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/blue"
+            android:foreground="?attr/colorPrimaryVariant"
             app:popupTheme="@style/Theme.BookApp.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -67,7 +67,6 @@
         android:layout_width="192dp"
         android:layout_height="48dp"
         android:layout_marginTop="112dp"
-        android:backgroundTint="@color/light_blue"
         android:text="@string/scan_barcode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +88,7 @@
             android:id="@+id/isbn_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#616161"
+            android:textColorHint="@color/white"
             tools:ignore="TextContrastCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -106,15 +105,13 @@
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toEndOf="@+id/isbn_text_input"
         app:layout_constraintTop_toTopOf="@+id/isbn_text_input"
-        app:srcCompat="@drawable/ic_info"
-        app:tint="@color/light_blue" />
+        app:srcCompat="@drawable/ic_info" />
 
     <Button
         android:id="@+id/add_book_button"
         android:layout_width="192dp"
         android:layout_height="48dp"
         android:layout_marginTop="100dp"
-        android:backgroundTint="@color/light_blue"
         android:text="@string/add_book"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
