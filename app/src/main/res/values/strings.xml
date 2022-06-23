@@ -61,5 +61,10 @@
     <string name="notifs_row_no_new_notifs">All caught up!</string>
     <string name="lentBooksTitle">Lent Books</string>
     <string name="lent_book_to_row">"Lent to: "</string>
+    <string name="borrow_row_borrow_button">Borrow</string>
+    <string name="book_image">Book image</string>
+    <string name="published">Published</string>
+    <string name="owners">Owners</string>
+    <string name="borrow_from">Borrow from:</string>
 
 </resources>

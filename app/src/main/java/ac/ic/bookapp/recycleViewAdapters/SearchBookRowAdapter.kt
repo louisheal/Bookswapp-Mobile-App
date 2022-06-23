@@ -10,9 +10,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.TableRow
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -46,7 +44,6 @@ class SearchBookRowAdapter(
         holder.titleText.text = book.title
         holder.book = book
         holder.isbnText.text = book.isbn
-
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
         CoverDatasource.loadCover(holder.icon, imgURI)
         holder.itemView.setOnClickListener { startBookProfileActivity(book) }

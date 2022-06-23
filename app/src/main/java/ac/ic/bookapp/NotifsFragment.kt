@@ -1,7 +1,6 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.data.LoanDatasource
-import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.databinding.FragmentNotifsBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.LoanRequest
@@ -11,9 +10,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 private const val TAG = "NotifsFragment"
 
@@ -61,6 +60,8 @@ class NotifsFragment : Fragment() {
 
     private fun displayNotifs() {
         notifsList.adapter = NotifRowAdapter(this, getLoanRequests())
+        val nav = this.requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        nav.removeBadge(R.id.notifsFragment)
     }
 
     private fun getLoanRequests(): List<LoanRequest> =

@@ -1,6 +1,5 @@
 package ac.ic.bookapp.recycleViewAdapters
 
-import ac.ic.bookapp.MainActivity
 import ac.ic.bookapp.NotifsFragment
 import ac.ic.bookapp.R
 import ac.ic.bookapp.data.CoverDatasource
@@ -8,14 +7,13 @@ import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.model.LoanRequest
 import ac.ic.bookapp.recycleViewAdapters.NotifRowAdapter.NotifViewHolder
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 
@@ -60,6 +58,7 @@ class NotifRowAdapter(
         holder.acceptButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, true)
             notifsFragment.onResume()
+            Toast.makeText(notifsFragment.context, "Book loaned to ${requester.name}!", Toast.LENGTH_SHORT).show()
         }
         holder.denyButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, false)
