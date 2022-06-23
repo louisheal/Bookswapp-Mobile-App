@@ -40,5 +40,5 @@ class BookProfileActivity : AppCompatActivity() {
         bookHoldersList.adapter = BookHolderRowAdapter(this, book.id, getOwnersList())
     }
 
-    private fun getOwnersList(): List<User> = BookDatasource.getOwners(book.id.toString())
+    private fun getOwnersList(): List<User> = BookDatasource.getOwners(book.id)
 }

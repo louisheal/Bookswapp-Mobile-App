@@ -1,7 +1,6 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.data.LoanDatasource
-import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.databinding.FragmentNotifsBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.LoanRequest
@@ -11,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 

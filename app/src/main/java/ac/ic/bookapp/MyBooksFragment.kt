@@ -6,8 +6,8 @@ import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Loan
 import ac.ic.bookapp.model.Ownership
-import ac.ic.bookapp.recycleViewAdapters.OwnedBookRowAdapter
 import ac.ic.bookapp.recycleViewAdapters.BorrowedBookRowAdapter
+import ac.ic.bookapp.recycleViewAdapters.OwnedBookRowAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log

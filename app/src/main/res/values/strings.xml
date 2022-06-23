@@ -59,5 +59,10 @@
     <string name="notifs_row_accept_button_text">Accept</string>
     <string name="notifs_row_deny_button_text">Deny</string>
     <string name="notifs_row_no_new_notifs">All caught up!</string>
+    <string name="borrow_row_borrow_button">Borrow</string>
+    <string name="book_image">Book image</string>
+    <string name="published">Published</string>
+    <string name="owners">Owners</string>
+    <string name="borrow_from">Borrow from:</string>
 
 </resources>

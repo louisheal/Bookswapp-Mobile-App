@@ -23,8 +23,9 @@ class BookHolderRowAdapter(
 ) : RecyclerView.Adapter<BookHolderRowAdapter.BookHolderViewHolder>() {
 
     class BookHolderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.holder_name)
-        val department: TextView = view.findViewById(R.id.holder_department)
+        val name: TextView = view.findViewById(R.id.borrow_row_name_value)
+        val institution: TextView = view.findViewById(R.id.borrow_row_institution_value)
+        val department: TextView = view.findViewById(R.id.borrow_row_department_value)
         val borrowButton: Button = view.findViewById(R.id.borrow_btn)
         lateinit var user: User
     }
@@ -38,7 +39,8 @@ class BookHolderRowAdapter(
     override fun onBindViewHolder(holder: BookHolderViewHolder, position: Int) {
         val owner = bookOwnersList[position]
         holder.name.text = owner.name
-        holder.department.text = "department"
+        holder.institution.text = "Institution placeholder"
+        holder.department.text = "Department placeholder"
         holder.user = owner
         holder.borrowButton.setOnClickListener {
             borrowBook(owner.id)

@@ -1,10 +1,10 @@
 package ac.ic.bookapp
 
-import ac.ic.bookapp.recycleViewAdapters.SearchBookRowAdapter
 import ac.ic.bookapp.data.BookDatasource
 import ac.ic.bookapp.databinding.FragmentSearchBinding
+import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
-import android.content.Intent
+import ac.ic.bookapp.recycleViewAdapters.SearchBookRowAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,7 +36,9 @@ class SearchFragment : Fragment() {
     @Override
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayBorrowableBooks(BookDatasource.getBooks(requireContext()))
+        displayBorrowableBooks(
+            BookDatasource.getBooks(LoginPreferences.getUserLoginId(this.requireActivity()))
+        )
     }
 
     @Override
