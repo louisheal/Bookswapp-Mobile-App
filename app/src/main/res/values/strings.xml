@@ -67,5 +67,6 @@
     <string name="owners">Owners</string>
     <string name="borrow_from">Borrow from:</string>
     <string name="available_books">Available books</string>
+    <string name="popup_message">Popup Message.</string>
 
 </resources>
