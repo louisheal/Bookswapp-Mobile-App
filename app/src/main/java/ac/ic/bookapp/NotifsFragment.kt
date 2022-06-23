@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
@@ -59,7 +60,7 @@ class NotifsFragment : Fragment() {
     }
 
     private fun displayNotifs() {
-        notifsList.adapter = NotifRowAdapter(getLoanRequests())
+        notifsList.adapter = NotifRowAdapter(this, getLoanRequests())
     }
 
     private fun getLoanRequests(): List<LoanRequest> =
