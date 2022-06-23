@@ -47,7 +47,7 @@ class NotifRowAdapter(
     override fun onBindViewHolder(holder: NotifViewHolder, position: Int) {
         val notif = notifs[position]
         val book = notif.book
-        val requester = notif.fromUser
+        val requester = notif.toUser
         holder.notif = notif
         holder.titleText.text = book.title
         holder.isbnText.text = book.isbn
@@ -57,8 +57,8 @@ class NotifRowAdapter(
         holder.departmentText.text = "Department placeholder"
         holder.acceptButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, true)
+            notifsFragment.displayRequestConfirmation(book.title, requester.name)
             notifsFragment.onResume()
-            Toast.makeText(notifsFragment.context, "Book loaned to ${requester.name}!", Toast.LENGTH_SHORT).show()
         }
         holder.denyButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, false)

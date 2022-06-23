@@ -68,4 +68,9 @@ class NotifsFragment : Fragment() {
         LoanDatasource.getUserIncomingLoanRequests(
             LoginPreferences.getUserLoginId(this.requireActivity())
         )
+
+    fun displayRequestConfirmation(title: String, name: String) {
+        val newFragment = RequestConfirmedDialogFragment(title, name)
+        newFragment.show(parentFragmentManager, "dialog")
+    }
 }
