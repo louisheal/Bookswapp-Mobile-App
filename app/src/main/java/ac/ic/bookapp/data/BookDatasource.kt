@@ -1,8 +1,6 @@
 package ac.ic.bookapp.data
 
-import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
-import ac.ic.bookapp.model.Ownership
 import ac.ic.bookapp.model.User
 import android.content.Context
 import kotlinx.coroutines.runBlocking
@@ -10,9 +8,9 @@ import retrofit2.http.*
 
 object BookDatasource : Datasource<BookService>(BookService::class.java) {
 
-    fun getBooks(context: Context): List<Book> {
+    fun getBooks(exceptUser: Long? = null): List<Book> {
         return runBlocking {
-            service.getBooks(LoginPreferences.getUserLoginId(context))
+            service.getBooks(exceptUser)
         }
     }
 
@@ -26,7 +24,7 @@ object BookDatasource : Datasource<BookService>(BookService::class.java) {
         }
     }
 
-    fun getOwners(bookId: String): List<User> {
+    fun getOwners(bookId: Long): List<User> {
         return runBlocking {
             service.getOwners(bookId)
         }
@@ -35,11 +33,11 @@ object BookDatasource : Datasource<BookService>(BookService::class.java) {
 
 interface BookService {
     @GET("books")
-    suspend fun getBooks(@Query("exceptUser") exceptUID: Long): List<Book>
+    suspend fun getBooks(@Query("exceptUser") exceptUserId: Long?): List<Book>
 
     @POST("books")
     suspend fun postBook(@Body isbn: String): Book
 
     @GET("books/{book_id}/owners")
-    suspend fun getOwners(@Path("book_id") bookId: String): List<User>
+    suspend fun getOwners(@Path("book_id") bookId: Long): List<User>
 }
