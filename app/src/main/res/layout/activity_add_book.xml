@@ -20,7 +20,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:foreground="?attr/colorPrimaryVariant"
+            android:foreground="@color/blue"
             app:popupTheme="@style/Theme.BookApp.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -88,7 +88,6 @@
             android:id="@+id/isbn_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/white"
             tools:ignore="TextContrastCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>

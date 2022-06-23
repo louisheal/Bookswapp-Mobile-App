@@ -2,16 +2,24 @@
     <!-- Base application theme. -->
     <style name="Theme.BookApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="android:textColorPrimary">@color/dark_blue</item>
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryVariant">@color/dark_blue</item>
-        <item name="colorPrimaryDark">@color/blue</item>
-        <item name="android:windowBackground">@color/white</item>
-        <item name="colorControlNormal">@color/white</item>
-        <item name="colorControlActivated">@color/white</item>
-        <item name="colorControlHighlight">@color/white</item>
+        <item name="colorPrimary">@color/light_blue</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/dark_blue</item>
+        <item name="colorSecondaryVariant">@color/dark_blue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Other colors. -->
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorOnBackground">@color/dark_blue</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/dark_blue</item>
+        <item name="colorError">#FF0000</item>
+        <item name="colorOnError">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryDark</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Typography. -->
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:fontFamily">@font/arimo</item>
     </style>
 
     <style name="Theme.BookApp.NoActionBar">
