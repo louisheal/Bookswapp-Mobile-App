@@ -58,7 +58,7 @@ class NotifRowAdapter(
         holder.acceptButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, true)
             notifsFragment.displayRequestConfirmation(book.title, requester.name)
-            notifsFragment.onResume()
+            
         }
         holder.denyButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, false)

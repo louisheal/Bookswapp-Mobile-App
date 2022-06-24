@@ -68,5 +68,11 @@
     <string name="borrow_from">Borrow from:</string>
     <string name="available_books">Available books</string>
     <string name="popup_message">Popup Message.</string>
+    <string name="add_book_button">Add book button</string>
+    <string name="you_haven_t_borrowed_any_books_yet">You haven\'t borrowed any books yet!</string>
+    <string name="you_haven_t_lent_out_any_books_yet">You haven\'t lent out any books yet!</string>
+    <string name="add_books_you_own_with_the_button_below">Add books you own with the <b>+</b> button below.</string>
+    <string name="no_books_yet">No books yet!</string>
+    <string name="all_caught_up">All caught up!</string>
 
 </resources>

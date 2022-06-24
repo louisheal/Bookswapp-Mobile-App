@@ -5,10 +5,12 @@ import ac.ic.bookapp.databinding.FragmentSearchBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.recycleViewAdapters.SearchBookRowAdapter
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
@@ -20,6 +22,8 @@ class SearchFragment : Fragment() {
 
     private lateinit var scrollableList: RecyclerView
 
+    private lateinit var emptySearchText: TextView
+
     @Override
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +33,8 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         scrollableList = binding.searchList
         scrollableList.setHasFixedSize(true)
+
+        emptySearchText = binding.searchBooksEmptyText
 
         return binding.root
     }
@@ -48,9 +54,13 @@ class SearchFragment : Fragment() {
     }
 
     private fun displayBorrowableBooks(books: List<Book>) {
-        scrollableList.adapter =
-            activity?.let {
-                SearchBookRowAdapter(it, books)
-            }
+        if (books.isEmpty()) {
+            emptySearchText.visibility = View.VISIBLE
+        } else {
+            scrollableList.adapter =
+                activity?.let {
+                    SearchBookRowAdapter(it, books)
+                }
+        }
     }
 }

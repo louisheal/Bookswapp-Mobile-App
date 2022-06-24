@@ -2,6 +2,7 @@ package ac.ic.bookapp
 
 import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.data.UserDatasource
+import ac.ic.bookapp.data.UserDatasource.getUserBooks
 import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Loan
@@ -15,6 +16,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
@@ -29,7 +31,9 @@ class MyBooksFragment : Fragment() {
     private lateinit var borrowedList: RecyclerView
     private lateinit var lentList: RecyclerView
 
-//    private val userId = LoginPreferences.getUserLoginId(this.requireActivity())
+    private lateinit var emptyOwnedListText: TextView
+    private lateinit var emptyBorrowedListText: TextView
+    private lateinit var emptyLentListText: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,9 +44,12 @@ class MyBooksFragment : Fragment() {
         _binding = FragmentMyBooksBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        ownedList = view.findViewById(R.id.my_books_list)
-        borrowedList = view.findViewById(R.id.borrowed_books_list)
-        lentList = view.findViewById(R.id.lent_list)
+        ownedList = binding.myBooksList
+        borrowedList = binding.borrowedBooksList
+        lentList = binding.lentList
+        emptyOwnedListText = binding.ownedBooksEmptyText
+        emptyBorrowedListText = binding.borrowedBooksEmptyText
+        emptyLentListText = binding.lentBooksEmptyText
 
         ownedList.setHasFixedSize(true)
         borrowedList.setHasFixedSize(true)
@@ -81,9 +88,24 @@ class MyBooksFragment : Fragment() {
     }
 
     private fun displayBooks() {
-        ownedList.adapter = OwnedBookRowAdapter(getUserBooks())
-        borrowedList.adapter = BorrowedBookRowAdapter(getBorrowedBooks())
-        lentList.adapter = LentBookRowAdapter(getLentBooks())
+        val ownedBooks = getUserBooks()
+        val borrowedBooks = getBorrowedBooks()
+        val lentBooks = getLentBooks()
+        if (ownedBooks.isEmpty()) {
+            emptyOwnedListText.visibility = View.VISIBLE
+        } else {
+            ownedList.adapter = OwnedBookRowAdapter(ownedBooks)
+        }
+        if (borrowedBooks.isEmpty()) {
+            emptyBorrowedListText.visibility = View.VISIBLE
+        } else {
+            borrowedList.adapter = BorrowedBookRowAdapter(borrowedBooks)
+        }
+        if (lentBooks.isEmpty()) {
+            emptyLentListText.visibility = View.VISIBLE
+        } else {
+            lentList.adapter = LentBookRowAdapter(lentBooks)
+        }
     }
 
     private fun getLentBooks(): List<Loan> =

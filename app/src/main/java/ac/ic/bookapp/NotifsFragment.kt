@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -23,6 +24,8 @@ class NotifsFragment : Fragment() {
 
     private lateinit var notifsList: RecyclerView
 
+    private lateinit var emptyNotifsText: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,8 +35,9 @@ class NotifsFragment : Fragment() {
         _binding = FragmentNotifsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        notifsList = view.findViewById(R.id.notifs_list)
+        notifsList = binding.notifsList
         notifsList.setHasFixedSize(true)
+        emptyNotifsText = binding.notifsEmptyText
 
         return view
     }
@@ -59,7 +63,12 @@ class NotifsFragment : Fragment() {
     }
 
     private fun displayNotifs() {
-        notifsList.adapter = NotifRowAdapter(this, getLoanRequests())
+        val notifs = getLoanRequests()
+        if (notifs.isEmpty()) {
+            emptyNotifsText.visibility = View.VISIBLE
+        } else {
+            notifsList.adapter = NotifRowAdapter(this, getLoanRequests())
+        }
         val nav = this.requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
         nav.removeBadge(R.id.notifsFragment)
     }
