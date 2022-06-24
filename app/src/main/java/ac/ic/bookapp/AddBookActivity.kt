@@ -36,16 +36,15 @@ open class AddBookActivity : AppCompatActivity() {
     }
 
     protected fun addMyBook(isbn: String) {
-        val toastText: String = try {
+        try {
             val book = BookDatasource.postBook(isbn)!!
             val userId = LoginPreferences.getUserLoginId(this)
             UserDatasource.postOwnership(userId, book.id, 1, 1)
-            "Book Added!"
+            Toast.makeText(applicationContext, "Book Added!", LENGTH_SHORT).show()
+            finish()
         } catch (e: NullPointerException) {
-            "Error: ISBN not found"
+            Toast.makeText(applicationContext, "Error: ISBN not found", LENGTH_SHORT).show()
         }
-        Toast.makeText(applicationContext, toastText, LENGTH_SHORT).show()
-        finish()
     }
 
     private fun showHint() {
