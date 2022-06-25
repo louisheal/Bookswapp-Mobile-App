@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.sendbird.android.SendBird
 
 private const val TAG = "MainActivity"
 
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "Creating Main Activity")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        SendBird.init("07375028-AE3C-4FC9-9D5D-428AE1B180B6", this)
 
         val bottomNavigationView = binding.bottomNavigationView
         val navHost =

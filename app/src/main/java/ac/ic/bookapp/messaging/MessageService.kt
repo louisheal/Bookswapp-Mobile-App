@@ -10,6 +10,9 @@ import com.sendbird.android.SendBird
 import com.sendbird.android.SendBirdException
 
 object MessageService {
+
+    val EXTRA_CHANNEL_URL: String = "EXTRA_CHANNEL_URL"
+
     fun connectToSendBird(userID: String, nickname: String, context: Context) {
         SendBird.connect(userID) { user, e ->
             if (e != null) {

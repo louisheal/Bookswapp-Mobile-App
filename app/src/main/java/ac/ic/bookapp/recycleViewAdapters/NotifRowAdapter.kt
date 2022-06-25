@@ -5,8 +5,14 @@ import ac.ic.bookapp.R
 import ac.ic.bookapp.data.CoverDatasource
 import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.data.LoanDatasource
+import ac.ic.bookapp.filesys.LoginPreferences
+import ac.ic.bookapp.messaging.ChannelActivity
+import ac.ic.bookapp.messaging.MessageService
 import ac.ic.bookapp.model.LoanRequest
 import ac.ic.bookapp.recycleViewAdapters.NotifRowAdapter.NotifViewHolder
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +22,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.sendbird.android.GroupChannel
+import com.sendbird.android.GroupChannelParams
+import com.sendbird.android.SendBird
+import com.sendbird.android.User
 
 class NotifRowAdapter(
     private val notifsFragment: NotifsFragment,
@@ -34,6 +44,8 @@ class NotifRowAdapter(
         val departmentText: TextView = view.findViewById(R.id.notifs_row_department_value)
         val acceptButton: Button = view.findViewById(R.id.notifs_row_accept_button)
         val denyButton: Button = view.findViewById(R.id.notifs_row_deny_button)
+
+        val context = view.context
         lateinit var notif: LoanRequest
     }
 
@@ -56,9 +68,9 @@ class NotifRowAdapter(
         holder.institutionText.text = "Institution placeholder"
         holder.departmentText.text = "Department placeholder"
         holder.acceptButton.setOnClickListener {
-            LoanDatasource.postLoanRequestDecision(notif.id, true)
-            notifsFragment.displayRequestConfirmation(book.title, requester.name)
-            
+            //LoanDatasource.postLoanRequestDecision(notif.id, true)
+            //notifsFragment.displayRequestConfirmation(book.title, requester.name)
+            createMessageChannel(requester.id, holder.context)
         }
         holder.denyButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, false)
@@ -67,6 +79,33 @@ class NotifRowAdapter(
 
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
         CoverDatasource.loadCover(holder.bookIcon, imgURI)
+    }
+
+    private fun createMessageChannel(borrowerId: Long, context: Context) {
+        val lenderId = LoginPreferences.getUserLoginId(context)
+        MessageService.connectToSendBird(lenderId.toString(),
+            LoginPreferences.getUsername(context), context)
+        val user: User? = SendBird.getCurrentUser()
+        if (user == null)
+            Log.d("User", "User Null")
+        val params = GroupChannelParams()
+
+        val users = ArrayList<String>()
+//        users.add(SendBird.getCurrentUser().userId)
+        users.add(lenderId.toString())
+        users.add(borrowerId.toString())
+
+        params.addUserIds(users)
+
+        GroupChannel.createChannel(params) { groupChannel, e ->
+            if (e != null) {
+                Log.e("TAG", e.message!!)
+            } else {
+                val intent = Intent(context, ChannelActivity::class.java)
+                intent.putExtra(MessageService.EXTRA_CHANNEL_URL, groupChannel.url)
+                context.startActivity(intent)
+            }
+        }
     }
 
     override fun getItemCount(): Int = notifs.size
