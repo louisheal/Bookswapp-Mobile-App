@@ -58,6 +58,20 @@
         </activity>
         <activity android:name=".BookProfileActivity" />
 
+        <activity android:name=".messaging.ChannelCreateActivity"/>
+        <activity
+            android:name=".messaging.ChannelListActivity"
+            android:exported="false"
+            android:label="ChannelListActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.BookApp.NoActionBar">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".messaging.ChannelActivity" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
