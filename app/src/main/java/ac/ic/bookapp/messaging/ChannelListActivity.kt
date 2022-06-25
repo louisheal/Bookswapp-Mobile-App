@@ -5,10 +5,12 @@ import ac.ic.bookapp.databinding.ActivityChannelBinding
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sendbird.android.GroupChannel
 
 
@@ -25,7 +27,7 @@ class ChannelListActivity : AppCompatActivity(), ChannelListAdapter.OnChannelCli
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChannelBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_channel)
+        setContentView(binding.root)
 
         adapter = ChannelListAdapter(this)
         recyclerView = binding.recyclerGroupChannels

@@ -29,7 +29,7 @@ class ChannelCreateActivity : AppCompatActivity(), ChannelCreateAdapter.OnItemCh
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_create)
+        setContentView(binding.root)
 
         selectedUsers = ArrayList()
 

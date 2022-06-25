@@ -30,7 +30,7 @@ class ChannelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_chat)
+        setContentView(binding.root)
 
         setUpRecyclerView()
         setButtonListeners()
