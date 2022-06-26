@@ -79,6 +79,7 @@ class ChannelActivity : AppCompatActivity() {
         val back = binding.buttonGchatBack
         back.setOnClickListener {
             val intent = Intent(this, ChannelListActivity::class.java)
+            Log.d("Chat Channel Test", "Starting Channel List")
             startActivity(intent)
         }
 

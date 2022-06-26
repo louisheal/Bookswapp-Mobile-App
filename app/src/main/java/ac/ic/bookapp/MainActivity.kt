@@ -11,6 +11,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sendbird.android.SendBird
+import com.sendbird.android.SendBirdException
+import com.sendbird.android.handlers.InitResultHandler
 
 private const val TAG = "MainActivity"
 
@@ -25,7 +27,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        SendBird.init("07375028-AE3C-4FC9-9D5D-428AE1B180B6", this)
+        val handler: InitResultHandler = object: InitResultHandler {
+            override fun onInitFailed(e: SendBirdException) {
+                Log.d(TAG, "SendBird Init failed")
+            }
+
+            override fun onInitSucceed() {
+                Log.d(TAG, "SendBird Init succeeded")
+            }
+
+            override fun onMigrationStarted() {
+                Log.d(TAG, "SendBird updated")
+            }
+        }
+        SendBird.init("07375028-AE3C-4FC9-9D5D-428AE1B180B6", this, true, handler)
 
         val bottomNavigationView = binding.bottomNavigationView
         val navHost =

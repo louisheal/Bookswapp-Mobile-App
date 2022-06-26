@@ -61,6 +61,7 @@ class ChannelListActivity : AppCompatActivity(), ChannelListAdapter.OnChannelCli
     override fun onItemClicked(channel: GroupChannel) {
         val intent = Intent(this, ChannelActivity::class.java)
         intent.putExtra(EXTRA_CHANNEL_URL, channel.url)
+        Log.d("Chat List Test", channel.url)
         startActivity(intent)
     }
 }
