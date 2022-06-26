@@ -5,25 +5,17 @@ import ac.ic.bookapp.R
 import ac.ic.bookapp.data.CoverDatasource
 import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.data.LoanDatasource
-import ac.ic.bookapp.filesys.LoginPreferences
-import ac.ic.bookapp.messaging.ChannelActivity
-import ac.ic.bookapp.messaging.ChannelListActivity
 import ac.ic.bookapp.messaging.MessageService
 import ac.ic.bookapp.model.LoanRequest
 import ac.ic.bookapp.recycleViewAdapters.NotifRowAdapter.NotifViewHolder
-import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.sendbird.android.*
 
 class NotifRowAdapter(
     private val notifsFragment: NotifsFragment,
@@ -68,7 +60,7 @@ class NotifRowAdapter(
         holder.acceptButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, true)
             notifsFragment.displayRequestConfirmation(book.title, requester.name)
-            createMessageChannel(requester.id, holder.context)
+            MessageService.openMessageChannelAndSendAcceptance(requester.id, holder.context, book)
         }
         holder.denyButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, false)
@@ -79,69 +71,7 @@ class NotifRowAdapter(
         CoverDatasource.loadCover(holder.bookIcon, imgURI)
     }
 
-    private fun createMessageChannel(borrowerId: Long, context: Context) {
-        val TAG = "Notifications"
-        Log.d(TAG, "creating message channel")
-        val lenderId = LoginPreferences.getUserLoginId(context)
-//        MessageService.connectToSendBird(lenderId.toString(),
-//            LoginPreferences.getUsername(context), context)
 
-        SendBird.connect(lenderId.toString()) { user: User?, e: SendBirdException? ->
-            if (user != null) {
-                if (e != null) {
-                    Log.e(TAG, e.message!!)
-                } else {
-                    Log.d(TAG, "Connection succeeded")
-                    val curUser: User? = SendBird.getCurrentUser()
-                    val params = GroupChannelParams()
-
-                    val users = ArrayList<String>()
-//        users.add(SendBird.getCurrentUser().userId)
-                    users.add(lenderId.toString())
-                    users.add(borrowerId.toString())
-                    Log.d(TAG, "Users: ${users.toString()}")
-                    params.addUserIds(users)
-
-                    GroupChannel.createChannelWithUserIds(users, true) {groupChannel: GroupChannel?, e: SendBirdException? ->
-                        if (e != null) {
-                            Log.e(TAG, "Channel creation failed")
-                            Log.e(TAG, e.message!!)
-                        }
-                        val url = groupChannel?.url
-                        Log.i(TAG, "Url: ${url}")
-                        val intent = Intent(context, ChannelActivity::class.java)
-                        intent.putExtra(MessageService.EXTRA_CHANNEL_URL, url)
-                        context.startActivity(intent)
-                    }
-                }
-            } else {
-                Log.e(TAG, "Connection failed: user null")
-            }
-        }
-
-
-
-//        GroupChannel.createChannel(params) { groupChannel, e ->
-//            if (e != null) {
-//                Log.e("TAG", e.message!!)
-//            } else {
-//                val intent = Intent(context, ChannelActivity::class.java)
-//                intent.putExtra(MessageService.EXTRA_CHANNEL_URL, groupChannel.url)
-//                Log.d("Chat Test", groupChannel.url)
-//                context.startActivity(intent)
-//
-//                val params = UserMessageParams()
-//                    .setMessage("Test")
-//                groupChannel.sendUserMessage(params,
-//                    BaseChannel.SendUserMessageHandler { userMessage, e ->
-//                        if (e != null) {    // Error.
-//                            return@SendUserMessageHandler
-//                        }
-//                        //adapter.addFirst(userMessage)
-//                    })
-//            }
-//        }
-    }
 
     override fun getItemCount(): Int = notifs.size
 }
