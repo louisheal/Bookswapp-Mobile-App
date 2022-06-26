@@ -29,6 +29,12 @@ object BookDatasource : Datasource<BookService>(BookService::class.java) {
             service.getOwners(bookId)
         }
     }
+
+    fun getOwnersCount(bookId: Long, exceptUserId: Long): Int {
+        return runBlocking {
+            service.getOwnersCount(bookId, exceptUserId)
+        }
+    }
 }
 
 interface BookService {
@@ -40,4 +46,10 @@ interface BookService {
 
     @GET("books/{book_id}/owners")
     suspend fun getOwners(@Path("book_id") bookId: Long): List<User>
+
+    @GET("books/{book_id}/owners/count")
+    suspend fun getOwnersCount(
+        @Path("book_id") bookId: Long,
+        @Query("exceptUser") exceptUserId: Long
+    ): Int
 }

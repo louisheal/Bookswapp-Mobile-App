@@ -2,8 +2,10 @@ package ac.ic.bookapp.recycleViewAdapters
 
 import ac.ic.bookapp.BookProfileActivity
 import ac.ic.bookapp.R
+import ac.ic.bookapp.data.BookDatasource
 import ac.ic.bookapp.data.CoverDatasource
 import ac.ic.bookapp.data.CoverSize
+import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
 import android.content.Context
 import android.content.Intent
@@ -44,10 +46,13 @@ class SearchBookRowAdapter(
         holder.titleText.text = book.title
         holder.book = book
         holder.isbnText.text = book.isbn
+        holder.ownersText.text = BookDatasource.getOwnersCount(
+            book.id,
+            LoginPreferences.getUserLoginId(context)
+        ).toString()
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
         CoverDatasource.loadCover(holder.icon, imgURI)
         holder.itemView.setOnClickListener { startBookProfileActivity(book) }
-
     }
 
     override fun getItemCount(): Int = mutableBooksList.size

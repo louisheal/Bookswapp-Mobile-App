@@ -39,8 +39,8 @@ class BookHolderRowAdapter(
     override fun onBindViewHolder(holder: BookHolderViewHolder, position: Int) {
         val owner = bookOwnersList[position]
         holder.name.text = owner.name
-        holder.institution.text = "Institution placeholder"
-        holder.department.text = "Department placeholder"
+        holder.institution.text = owner.institution
+        holder.department.text = owner.department
         holder.user = owner
         holder.borrowButton.setOnClickListener {
             borrowBook(owner.id)
