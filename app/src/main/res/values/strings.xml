@@ -74,5 +74,7 @@
     <string name="add_books_you_own_with_the_button_below">Add books you own with the <b>+</b> button below.</string>
     <string name="no_books_yet">No books yet!</string>
     <string name="all_caught_up">All caught up!</string>
+    <string name="message_text">Messages</string>
+    <string name="Messages">Messages</string>
 
 </resources>

@@ -58,6 +58,11 @@
         </activity>
         <activity android:name=".BookProfileActivity" />
 
+        <activity android:name=".messaging.ChannelActivity"
+            android:theme="@style/Theme.BookApp"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

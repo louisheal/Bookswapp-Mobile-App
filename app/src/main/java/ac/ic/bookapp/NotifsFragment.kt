@@ -3,6 +3,7 @@ package ac.ic.bookapp
 import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.databinding.FragmentNotifsBinding
 import ac.ic.bookapp.filesys.LoginPreferences
+import ac.ic.bookapp.messaging.MessageService
 import ac.ic.bookapp.model.LoanRequest
 import ac.ic.bookapp.recycleViewAdapters.NotifRowAdapter
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.sendbird.android.SendBird
 
 private const val TAG = "NotifsFragment"
 

@@ -21,4 +21,9 @@
         android:icon="@drawable/ic_bell"
         android:title="@string/notifications" />
 
+    <item
+        android:id="@+id/messagingFragment"
+        android:icon="@drawable/ic_message"
+        android:title="@string/Messages" />
+
 </menu>

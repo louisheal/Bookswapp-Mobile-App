@@ -5,6 +5,7 @@ import ac.ic.bookapp.R
 import ac.ic.bookapp.data.CoverDatasource
 import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.data.LoanDatasource
+import ac.ic.bookapp.messaging.MessageService
 import ac.ic.bookapp.model.LoanRequest
 import ac.ic.bookapp.recycleViewAdapters.NotifRowAdapter.NotifViewHolder
 import android.view.LayoutInflater
@@ -13,7 +14,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 
@@ -34,6 +34,8 @@ class NotifRowAdapter(
         val departmentText: TextView = view.findViewById(R.id.notifs_row_department_value)
         val acceptButton: Button = view.findViewById(R.id.notifs_row_accept_button)
         val denyButton: Button = view.findViewById(R.id.notifs_row_deny_button)
+
+        val context = view.context
         lateinit var notif: LoanRequest
     }
 
@@ -58,7 +60,7 @@ class NotifRowAdapter(
         holder.acceptButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, true)
             notifsFragment.displayRequestConfirmation(book.title, requester.name)
-            
+            MessageService.openMessageChannelAndSendAcceptance(requester.id, holder.context, book)
         }
         holder.denyButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, false)
@@ -68,6 +70,8 @@ class NotifRowAdapter(
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
         CoverDatasource.loadCover(holder.bookIcon, imgURI)
     }
+
+
 
     override fun getItemCount(): Int = notifs.size
 }
