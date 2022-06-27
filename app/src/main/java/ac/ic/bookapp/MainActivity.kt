@@ -3,6 +3,7 @@ package ac.ic.bookapp
 import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.databinding.ActivityMainBinding
 import ac.ic.bookapp.filesys.LoginPreferences
+import ac.ic.bookapp.messaging.MessageService
 import ac.ic.bookapp.model.LoanRequest
 import android.os.Bundle
 import android.util.Log
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun onInitSucceed() {
                 Log.d(TAG, "SendBird Init succeeded")
+                MessageService.connectToSendBird(LoginPreferences.getUserLoginId(this@MainActivity).toString(),
+                    LoginPreferences.getUsername(this@MainActivity), this@MainActivity)
             }
 
             override fun onMigrationStarted() {

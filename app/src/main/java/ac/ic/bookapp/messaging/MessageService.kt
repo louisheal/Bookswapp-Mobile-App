@@ -22,14 +22,6 @@ object MessageService {
                     if (e != null) {
                         Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
                     }
-//                    OpenChannel.createChannel(OpenChannel.OpenChannelCreateHandler() {channel: OpenChannel, e: SendBirdException? ->
-//                        if (e != null) {
-//                            Log.e("Channel", e.message!!)
-//                        }
-//                        OpenChannel.getChannel(channel.url, OpenChannel.OpenChannelGetHandler {  })
-//                    })
-                    val intent = Intent(context, ChannelListActivity::class.java)
-                    context.startActivity(intent)
                 }
             }
         }
@@ -46,13 +38,12 @@ object MessageService {
                     Log.e(TAG, e.message!!)
                 } else {
                     Log.d(TAG, "Connection succeeded")
-                    val curUser: User? = SendBird.getCurrentUser()
                     val params = GroupChannelParams()
 
                     val users = ArrayList<String>()
                     users.add(lenderId.toString())
                     users.add(borrowerId.toString())
-                    Log.d(TAG, "Users: ${users.toString()}")
+                    Log.d(TAG, "Users: ${users}")
                     params.addUserIds(users)
 
                     GroupChannel.createChannelWithUserIds(users, true) { groupChannel: GroupChannel?, e: SendBirdException? ->

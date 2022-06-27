@@ -47,10 +47,6 @@ class NotifsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, "Loading notifs")
         displayNotifs()
-
-        binding.messageButton.setOnClickListener {
-            MessageService.connectToSendBird("3", "Anand5329", requireContext())
-        }
     }
 
     override fun onStart() {

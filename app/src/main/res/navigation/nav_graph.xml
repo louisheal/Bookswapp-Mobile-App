@@ -20,4 +20,10 @@
         android:name="ac.ic.bookapp.NotifsFragment"
         android:label="fragment_notifs"
         tools:layout="@layout/fragment_notifs" />
+    <fragment
+        android:id="@+id/messagingFragment"
+        android:name="ac.ic.bookapp.messaging.ChannelListFragment"
+        android:label="ChannelListFragment"
+        tools:layout="@layout/fragment_channel_list"/>
+
 </navigation>
