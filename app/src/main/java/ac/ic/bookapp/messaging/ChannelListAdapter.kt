@@ -1,15 +1,15 @@
 package ac.ic.bookapp.messaging
 
 import ac.ic.bookapp.R
+import ac.ic.bookapp.filesys.LoginPreferences
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.sendbird.android.AdminMessage
-import com.sendbird.android.FileMessage
-import com.sendbird.android.GroupChannel
-import com.sendbird.android.UserMessage
+import com.sendbird.android.*
 
 class ChannelListAdapter(listener: OnChannelClickedListener) : RecyclerView.Adapter<ChannelListAdapter.ChannelHolder>() {
     interface OnChannelClickedListener {
@@ -46,6 +46,7 @@ class ChannelListAdapter(listener: OnChannelClickedListener) : RecyclerView.Adap
         val channelName: TextView = v.findViewById(R.id.text_channel_name)
         val channelRecentMessage: TextView = v.findViewById(R.id.text_channel_recent)
         val channelMemberCount: TextView = v.findViewById(R.id.text_channel_member_count)
+        val context = v.context
 
 
         fun bindViews(groupChannel: GroupChannel, listener: OnChannelClickedListener) {
@@ -69,8 +70,20 @@ class ChannelListAdapter(listener: OnChannelClickedListener) : RecyclerView.Adap
                 listener.onItemClicked(groupChannel)
             }
 
-            channelName.text = groupChannel.members[0].nickname
+            channelName.text = getChannelName(groupChannel, context)
             channelMemberCount.text = groupChannel.memberCount.toString()
+        }
+
+        private fun getChannelName(channel: GroupChannel, context: Context): String {
+            val members: MutableList<Member> = mutableListOf()
+            Log.d("ChannelSize", channel.memberCount.toString())
+            for (member in channel.members) {
+                Log.d("Channel", member.nickname)
+                if (member.userId != LoginPreferences.getUserLoginId(context).toString()) {
+                    members.add(member)
+                }
+            }
+            return members.joinToString { it.nickname }
         }
 
     }
