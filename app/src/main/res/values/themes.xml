@@ -29,5 +29,14 @@
 
     <style name="Theme.BookApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.BookApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.BookApp.PopupOverlay" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+
+    <style name="Theme.BookApp.Button" parent="Theme.BookApp">
+        <item name="android:tint">@color/dark_blue</item>
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
+    <style name="Theme.BookApp.Channel" parent="Theme.BookApp">
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>

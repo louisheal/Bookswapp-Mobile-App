@@ -16,20 +16,16 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_gchannel"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="@style/Widget.AppCompat.Toolbar"
-            app:popupTheme="@style/Theme.AppCompat.Light">
+            android:layout_height="?attr/actionBarSize">
 
             <TextView
                 android:id="@+id/button_gchat_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="Back"
                 android:layout_marginTop="16dp"
-                android:textColor="#e0e0e0"
-                android:textSize="20sp"
-                />
+                android:text="Back"
+                android:textSize="20sp" />
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -80,14 +76,14 @@
             android:maxLines="6"
             tools:ignore="Autofill" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_gchat_send"
-            android:layout_width="64dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:background="?attr/selectableItemBackground"
-            android:text="Send"
-            android:textColor="@color/design_default_color_primary" />
+            android:layout_marginEnd="2dp"
+            app:srcCompat="@drawable/ic_send"
+            android:theme="@style/Theme.BookApp.Button"/>
 
     </RelativeLayout>
 

@@ -11,7 +11,7 @@
         <!-- Other colors. -->
         <item name="android:colorBackground">@color/dark_blue</item>
         <item name="colorOnBackground">@color/white</item>
-        <item name="colorSurface">@color/white</item>
+        <item name="colorSurface">@color/blue</item>
         <item name="colorOnSurface">@color/dark_blue</item>
         <item name="colorError">#FF0000</item>
         <item name="colorOnError">@color/white</item>
@@ -21,4 +21,16 @@
         <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:fontFamily">@font/arimo</item>
     </style>
+
+    <style name="Theme.BookApp.PopupOverlay" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+
+    <style name="Theme.BookApp.Button" parent="Theme.BookApp">
+        <item name="android:tint">@color/white</item>
+        <item name="android:backgroundTint">@color/dark_blue</item>
+    </style>
+    <style name="Theme.BookApp.Channel" parent="Theme.BookApp">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/dark_blue</item>
+    </style>
+
 </resources>

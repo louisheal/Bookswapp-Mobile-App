@@ -11,7 +11,8 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.BookApp.Channel">
 
             <TextView
                 android:id="@+id/text_channel_name"
@@ -22,7 +23,6 @@
                 android:layout_alignParentStart="true"
                 android:maxLength="14"
                 android:maxLines="1"
-                android:textColor="#000000"
                 android:textSize="16sp" />
 
             <TextView
@@ -34,7 +34,6 @@
                 android:layout_toEndOf="@+id/text_channel_name"
                 android:maxLength="14"
                 android:maxLines="1"
-                android:textColor="#000000"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -55,7 +54,7 @@
                 android:layout_height="1dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="16dp"
-                android:background="#e0e0e0" />
+                />
         </RelativeLayout>
 
 
