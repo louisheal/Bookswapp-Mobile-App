@@ -1,8 +1,7 @@
 package ac.ic.bookapp.messaging
 
-import ac.ic.bookapp.R
+
 import ac.ic.bookapp.databinding.ActivityChatBinding
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -61,7 +60,9 @@ class ChannelActivity : AppCompatActivity() {
                     if (baseChannel.url == channelUrl) {
                         // Add new message to view
                         adapter.addFirst(baseMessage)
-                        groupChannel.markAsRead()
+                        groupChannel.markAsRead() {
+                            Log.e("MessageMarkAsRead",it.message!!)
+                        }
                     }
                 }
             })
@@ -126,6 +127,7 @@ class ChannelActivity : AppCompatActivity() {
                     adapter.loadMessages(messages!!)
                 }
             })
+        groupChannel.markAsRead()
 
     }
 

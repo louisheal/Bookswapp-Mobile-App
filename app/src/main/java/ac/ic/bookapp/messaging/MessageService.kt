@@ -12,8 +12,9 @@ import com.sendbird.android.*
 object MessageService {
 
     val EXTRA_CHANNEL_URL: String = "EXTRA_CHANNEL_URL"
+    private val UNIQUE_HANDLER_ID = "1on1_Handler"
 
-    fun connectToSendBird(userID: String, nickname: String, context: Context) {
+    fun connectToSendBird(userID: String, nickname: String, context: Context, func: () -> Unit) {
         SendBird.connect(userID) { user, e ->
             if (e != null) {
                 Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
@@ -22,6 +23,7 @@ object MessageService {
                     if (e != null) {
                         Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
                     }
+                    func()
                 }
             }
         }
@@ -66,7 +68,7 @@ object MessageService {
 
 
                         val intent = Intent(context, ChannelActivity::class.java)
-                        intent.putExtra(MessageService.EXTRA_CHANNEL_URL, url)
+                        intent.putExtra(EXTRA_CHANNEL_URL, url)
                         context.startActivity(intent)
                     }
                 }
@@ -74,19 +76,15 @@ object MessageService {
                 Log.e(TAG, "Connection failed: user null")
             }
         }
+    }
+
+    fun createChannelHandler(func: () -> Unit) {
+        SendBird.getTotalUnreadChannelCount() { i: Int, sendBirdException: SendBirdException? ->
+            Log.d("MessageService", i.toString())
+            if (i > 0)
+                func()
+        }
 
 
-
-//        GroupChannel.createChannel(params) { groupChannel, e ->
-//            if (e != null) {
-//                Log.e("TAG", e.message!!)
-//            } else {
-//                val intent = Intent(context, ChannelActivity::class.java)
-//                intent.putExtra(MessageService.EXTRA_CHANNEL_URL, groupChannel.url)
-//                Log.d("Chat Test", groupChannel.url)
-//                context.startActivity(intent)
-//
-//            }
-//        }
     }
 }

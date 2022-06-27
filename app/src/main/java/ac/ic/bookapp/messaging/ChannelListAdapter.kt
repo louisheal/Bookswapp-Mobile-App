@@ -71,7 +71,7 @@ class ChannelListAdapter(listener: OnChannelClickedListener) : RecyclerView.Adap
             }
 
             channelName.text = getChannelName(groupChannel, context)
-            channelMemberCount.text = groupChannel.memberCount.toString()
+            channelMemberCount.text = groupChannel.unreadMessageCount.toString()//groupChannel.memberCount.toString()
         }
 
         private fun getChannelName(channel: GroupChannel, context: Context): String {

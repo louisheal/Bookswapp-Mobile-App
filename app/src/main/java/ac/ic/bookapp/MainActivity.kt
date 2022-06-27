@@ -28,6 +28,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val bottomNavigationView = binding.bottomNavigationView
+        val navHost =
+            supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
+        val navController = navHost.navController
+        bottomNavigationView.setupWithNavController(navController)
+        setupNotificationCount(bottomNavigationView)
+
         val handler: InitResultHandler = object: InitResultHandler {
             override fun onInitFailed(e: SendBirdException) {
                 Log.d(TAG, "SendBird Init failed")
@@ -36,7 +43,9 @@ class MainActivity : AppCompatActivity() {
             override fun onInitSucceed() {
                 Log.d(TAG, "SendBird Init succeeded")
                 MessageService.connectToSendBird(LoginPreferences.getUserLoginId(this@MainActivity).toString(),
-                    LoginPreferences.getUsername(this@MainActivity), this@MainActivity)
+                    LoginPreferences.getUsername(this@MainActivity), this@MainActivity) {
+                    MessageService.createChannelHandler(setupMessageNotification(bottomNavigationView))
+                }
             }
 
             override fun onMigrationStarted() {
@@ -45,12 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
         SendBird.init("07375028-AE3C-4FC9-9D5D-428AE1B180B6", this, true, handler)
 
-        val bottomNavigationView = binding.bottomNavigationView
-        val navHost =
-            supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
-        val navController = navHost.navController
-        bottomNavigationView.setupWithNavController(navController)
-        setupNotificationCount(bottomNavigationView)
+
 
         Log.d(TAG, "Main Activity created")
     }
@@ -66,6 +70,11 @@ class MainActivity : AppCompatActivity() {
             LoginPreferences.getUserLoginId(this)
         )
 
+    private fun setupMessageNotification(bottomNavigationView: BottomNavigationView): () -> Unit {
+        return {
+            bottomNavigationView.getOrCreateBadge(R.id.messagingFragment)
+        }
+    }
 
 }
 

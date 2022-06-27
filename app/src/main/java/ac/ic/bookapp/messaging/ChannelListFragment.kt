@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sendbird.android.GroupChannel
 
 class ChannelListFragment: Fragment(R.layout.fragment_channel_list), ChannelListAdapter.OnChannelClickedListener {
@@ -41,6 +42,7 @@ class ChannelListFragment: Fragment(R.layout.fragment_channel_list), ChannelList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         addChannels()
+        removeBadge()
     }
 
     override fun onStart() {
@@ -73,5 +75,10 @@ class ChannelListFragment: Fragment(R.layout.fragment_channel_list), ChannelList
             }
             adapter.addChannels(list)
         }
+    }
+
+    private fun removeBadge() {
+        val nav = this.requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        nav.removeBadge(R.id.messagingFragment)
     }
 }
