@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class BorrowedBookRowAdapter(
     private val myBooksFragment: MyBooksFragment,
-    private val borrowedList: List<Loan>
+    private var borrowedList: List<Loan>
 ) : RecyclerView.Adapter<BorrowedBookRowAdapter.BorrowedBookRowViewHolder>() {
 
     class BorrowedBookRowViewHolder(
@@ -56,6 +56,7 @@ class BorrowedBookRowAdapter(
             LoanDatasource.postLoanReturn(loan.id)
             MessageService.openMessageChannelAndSendReturn(loan.request.fromUser.id,
                 holder.context, book)
+            removeItem(position)
         }
 
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
@@ -64,4 +65,11 @@ class BorrowedBookRowAdapter(
     }
 
     override fun getItemCount(): Int = borrowedList.size
+
+    private fun removeItem(position: Int) {
+        val mutableList = borrowedList.toMutableList()
+        mutableList.removeAt(position)
+        borrowedList = mutableList
+        notifyItemRemoved(position)
+    }
 }

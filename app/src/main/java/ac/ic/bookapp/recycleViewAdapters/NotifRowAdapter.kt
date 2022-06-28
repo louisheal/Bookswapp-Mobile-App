@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 
 class NotifRowAdapter(
     private val notifsFragment: NotifsFragment,
-    private val notifs: List<LoanRequest>
+    private var notifs: List<LoanRequest>
 ) : Adapter<NotifViewHolder>() {
 
     class NotifViewHolder(
@@ -61,6 +61,7 @@ class NotifRowAdapter(
             LoanDatasource.postLoanRequestDecision(notif.id, true)
             notifsFragment.displayRequestConfirmation(book.title, requester.name)
             MessageService.openMessageChannelAndSendAcceptance(requester.id, holder.context, book)
+            removeItem(position)
         }
         holder.denyButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, false)
@@ -74,4 +75,11 @@ class NotifRowAdapter(
 
 
     override fun getItemCount(): Int = notifs.size
+
+    private fun removeItem(position: Int) {
+        val mNotifs = notifs.toMutableList()
+        mNotifs.removeAt(position)
+        notifs = mNotifs
+        notifyItemRemoved(position)
+    }
 }
