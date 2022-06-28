@@ -99,7 +99,7 @@ class MyBooksFragment : Fragment() {
         if (borrowedBooks.isEmpty()) {
             emptyBorrowedListText.visibility = View.VISIBLE
         } else {
-            borrowedList.adapter = BorrowedBookRowAdapter(borrowedBooks)
+            borrowedList.adapter = BorrowedBookRowAdapter(this, borrowedBooks)
         }
         if (lentBooks.isEmpty()) {
             emptyLentListText.visibility = View.VISIBLE

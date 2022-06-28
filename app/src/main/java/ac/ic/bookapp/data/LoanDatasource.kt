@@ -2,6 +2,7 @@ package ac.ic.bookapp.data
 
 import ac.ic.bookapp.model.Loan
 import ac.ic.bookapp.model.LoanRequest
+import ac.ic.bookapp.model.Return
 import kotlinx.coroutines.runBlocking
 import retrofit2.http.*
 
@@ -14,6 +15,11 @@ data class LoanRequestPost(
 
 data class DecisionPost(
     val accept: Boolean
+)
+
+data class ReturnPost(
+    val loanId: Long,
+    val copies: Int
 )
 
 object LoanDatasource : Datasource<LoanService>(LoanService::class.java) {
@@ -36,6 +42,12 @@ object LoanDatasource : Datasource<LoanService>(LoanService::class.java) {
         }
     }
 
+    fun getLoanReturns(loanId: Long): List<Return>  {
+        return runBlocking {
+            service.getReturnsOfLoan(loanId)
+        }
+    }
+
     fun postUserLoanRequest(userId: Long, ownerId: Long, bookId: Long) {
         runBlocking {
             service.postUserLoanRequest(
@@ -49,6 +61,15 @@ object LoanDatasource : Datasource<LoanService>(LoanService::class.java) {
             service.postLoanRequestDecision(
                 requestId,
                 DecisionPost(accept)
+            )
+        }
+    }
+
+    fun postLoanReturn(loanId: Long) {
+        runBlocking {
+            service.postReturn(
+                loanId,
+                ReturnPost(loanId, 1)
             )
         }
     }
@@ -66,6 +87,9 @@ interface LoanService {
     @GET("/loans/requests")
     suspend fun getIncomingLoanRequests(@Query("from") userId: Long): List<LoanRequest>
 
+    @GET("/loans/{loan_id}/returns")
+    suspend fun getReturnsOfLoan(@Path("loan_id") loanId: Long): List<Return>
+
     @POST("/loans/requests")
     suspend fun postUserLoanRequest(@Body load: LoanRequestPost)
 
@@ -73,5 +97,11 @@ interface LoanService {
     suspend fun postLoanRequestDecision(
         @Path("request_id") requestId: Long,
         @Body decision: DecisionPost
+    )
+
+    @POST("/loans/{loan_id}/returns")
+    suspend fun postReturn(
+        @Path("loan_id") loanId: Long,
+        @Body ret: ReturnPost
     )
 }

@@ -76,5 +76,6 @@
     <string name="all_caught_up">All caught up!</string>
     <string name="message_text">Messages</string>
     <string name="Messages">Messages</string>
+    <string name="Return">Return</string>
 
 </resources>

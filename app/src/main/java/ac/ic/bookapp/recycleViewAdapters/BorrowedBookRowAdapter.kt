@@ -1,18 +1,22 @@
 package ac.ic.bookapp.recycleViewAdapters
 
+import ac.ic.bookapp.MyBooksFragment
 import ac.ic.bookapp.R
 import ac.ic.bookapp.data.CoverDatasource
 import ac.ic.bookapp.data.CoverSize
+import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.Loan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class BorrowedBookRowAdapter(
+    private val myBooksFragment: MyBooksFragment,
     private val borrowedList: List<Loan>
 ) : RecyclerView.Adapter<BorrowedBookRowAdapter.BorrowedBookRowViewHolder>() {
 
@@ -23,8 +27,7 @@ class BorrowedBookRowAdapter(
         val isbnText: TextView = view.findViewById(R.id.borrowed_books_row_isbn_value)
         val borrowedFromText: TextView = view.findViewById(R.id.borrowed_books_row_from_value)
         val borrowedCopiesText: TextView = view.findViewById(R.id.borrowed_books_row_copies_value)
-
-        //        val returnButton: Button = view.findViewById(R.id.borrowed_books_row_return_button)
+        val returnButton: Button = view.findViewById(R.id.borrowed_book_row_return_button)
         val icon: ImageView = view.findViewById(R.id.borrowed_books_book_picture)
         lateinit var book: Book
         lateinit var loan: Loan
@@ -46,6 +49,11 @@ class BorrowedBookRowAdapter(
         holder.isbnText.text = book.isbn
         holder.borrowedFromText.text = loan.request.fromUser.name
         holder.borrowedCopiesText.text = loan.request.copies.toString()
+
+        holder.returnButton.setOnClickListener {
+            LoanDatasource.postLoanReturn(loan.id)
+            myBooksFragment.onResume()
+        }
 
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
 

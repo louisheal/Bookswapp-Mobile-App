@@ -1,124 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/borrowed_books_book_picture"
-        android:layout_width="86dp"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/my_books_default_book_icon_description"
-        app:srcCompat="@drawable/ic_book" />
-
-    <Space
-        android:id="@+id/space"
-        android:layout_width="10dp"
-        android:layout_height="match_parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/borrowed_books_row_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/borrowed_books_book_picture"
+            android:layout_width="86dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/my_books_default_book_icon_description"
+            app:srcCompat="@drawable/ic_book" />
 
         <Space
+            android:id="@+id/space"
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="7dp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/borrowed_books_row_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold" />
 
-            <TableRow
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="7dp" />
+
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/borrowed_books_row_isbn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/my_books_row_isbn_text" />
-
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:id="@+id/borrowed_books_row_isbn_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Space
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="5dp" />
-            </TableRow>
+                    android:layout_height="match_parent">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                    <TextView
+                        android:id="@+id/borrowed_books_row_isbn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/my_books_row_isbn_text" />
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/borrowed_books_row_from" />
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent" />
 
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/borrowed_books_row_isbn_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/borrowed_books_row_from_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Space
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="5dp" />
-            </TableRow>
+                    android:layout_height="match_parent">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp" />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/borrowed_books_row_copies"
-                    android:layout_width="85dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/borrowed_copies" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/borrowed_books_row_from" />
 
-                <TextView
-                    android:id="@+id/borrowed_books_row_copies_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent" />
 
-            </TableRow>
+                    <TextView
+                        android:id="@+id/borrowed_books_row_from_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </TableRow>
 
-        </TableLayout>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-    </LinearLayout>
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp" />
+                </TableRow>
 
-</TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/borrowed_books_row_copies"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/borrowed_copies" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/borrowed_books_row_copies_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+
+    </TableRow>
+
+    <Button
+        android:id="@+id/borrowed_book_row_return_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Return" />
+</LinearLayout>
