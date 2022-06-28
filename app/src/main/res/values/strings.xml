@@ -76,5 +76,8 @@
     <string name="all_caught_up">All caught up!</string>
     <string name="message_text">Messages</string>
     <string name="Messages">Messages</string>
+    <string name="owned_tab_title">Owned</string>
+    <string name="lent_tab_title">Lent</string>
+    <string name="borrowed_tab_title">Borrowed</string>
 
 </resources>
