@@ -1,4 +1,4 @@
-package ac.ic.bookapp.recycleViewAdapters
+package ac.ic.bookapp.ui.myBooks
 
 import ac.ic.bookapp.R
 import ac.ic.bookapp.data.CoverDatasource

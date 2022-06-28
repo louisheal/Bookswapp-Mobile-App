@@ -1,13 +1,12 @@
-package ac.ic.bookapp.recycleViewAdapters
+package ac.ic.bookapp.ui.notifs
 
-import ac.ic.bookapp.NotifsFragment
 import ac.ic.bookapp.R
 import ac.ic.bookapp.data.CoverDatasource
 import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.messaging.MessageService
 import ac.ic.bookapp.model.LoanRequest
-import ac.ic.bookapp.recycleViewAdapters.NotifRowAdapter.NotifViewHolder
+import ac.ic.bookapp.ui.notifs.NotifRowAdapter.NotifViewHolder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

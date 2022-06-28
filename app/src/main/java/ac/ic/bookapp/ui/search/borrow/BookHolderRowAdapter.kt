@@ -1,13 +1,10 @@
-package ac.ic.bookapp.recycleViewAdapters
+package ac.ic.bookapp.ui.search.borrow
 
-import ac.ic.bookapp.MainActivity
 import ac.ic.bookapp.R
 import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.User
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

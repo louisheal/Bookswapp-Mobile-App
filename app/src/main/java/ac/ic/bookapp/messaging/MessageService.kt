@@ -1,6 +1,5 @@
 package ac.ic.bookapp.messaging
 
-import ac.ic.bookapp.AddBookActivity
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
 import android.content.Context

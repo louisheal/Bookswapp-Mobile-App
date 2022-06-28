@@ -1,11 +1,9 @@
-package ac.ic.bookapp
+package ac.ic.bookapp.ui.search
 
 import ac.ic.bookapp.data.BookDatasource
 import ac.ic.bookapp.databinding.FragmentSearchBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Book
-import ac.ic.bookapp.recycleViewAdapters.SearchBookRowAdapter
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

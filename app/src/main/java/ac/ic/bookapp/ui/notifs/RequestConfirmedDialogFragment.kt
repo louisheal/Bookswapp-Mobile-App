@@ -1,8 +1,7 @@
-package ac.ic.bookapp
+package ac.ic.bookapp.ui.notifs
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 
@@ -14,10 +13,9 @@ class RequestConfirmedDialogFragment(val title: String, val name: String) : Dial
             builder.setMessage("You have lent \"$title\" to $name!\n" +
                     "Please meet at the Imperial Library tomorrow at 12pm.")
             builder.apply {
-                setPositiveButton("Confirm",
-                    DialogInterface.OnClickListener { dialog, id ->
-                        dialog.cancel()
-                    })
+                setPositiveButton("Confirm") { dialog, _ ->
+                    dialog.cancel()
+                }
             }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null!")
