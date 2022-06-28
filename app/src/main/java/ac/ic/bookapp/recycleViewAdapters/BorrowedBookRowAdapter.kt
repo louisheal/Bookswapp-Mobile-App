@@ -5,6 +5,7 @@ import ac.ic.bookapp.R
 import ac.ic.bookapp.data.CoverDatasource
 import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.data.LoanDatasource
+import ac.ic.bookapp.messaging.MessageService
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.Loan
 import android.view.LayoutInflater
@@ -29,6 +30,7 @@ class BorrowedBookRowAdapter(
         val borrowedCopiesText: TextView = view.findViewById(R.id.borrowed_books_row_copies_value)
         val returnButton: Button = view.findViewById(R.id.borrowed_book_row_return_button)
         val icon: ImageView = view.findViewById(R.id.borrowed_books_book_picture)
+        val context = view.context
         lateinit var book: Book
         lateinit var loan: Loan
     }
@@ -52,7 +54,8 @@ class BorrowedBookRowAdapter(
 
         holder.returnButton.setOnClickListener {
             LoanDatasource.postLoanReturn(loan.id)
-            myBooksFragment.onResume()
+            MessageService.openMessageChannelAndSendReturn(loan.request.fromUser.id,
+                holder.context, book)
         }
 
         val imgURI = CoverDatasource.getBookCover(book, CoverSize.MEDIUM)
