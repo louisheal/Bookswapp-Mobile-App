@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
@@ -32,10 +31,17 @@ class BorrowedBooksFragment : Fragment() {
         emptyBorrowedListText = binding.borrowedBooksEmptyText
         borrowedBooksList.setHasFixedSize(true)
 
+        with(binding.borrowedBooksRefresh) {
+            setOnRefreshListener {
+                displayBooks()
+                isRefreshing = false
+            }
+        }
+
         displayBooks()
-        val view = binding.root
-        return view
+        return binding.root
     }
+
 
     private fun displayBooks() {
         val borrowedBooks = getBorrowedBooks()

@@ -33,9 +33,17 @@ class OwnedBooksFragment : Fragment() {
         _binding = FragmentOwnedBooksBinding.inflate(inflater, container, false)
         ownedList = binding.ownedList
         emptyOwnedListText = binding.ownedBooksEmptyText
+
         ownedList.setHasFixedSize(true)
         binding.addBookFloatingButton.setOnClickListener {
             startAddBookActivity()
+        }
+
+        with(binding.ownedBooksRefresh) {
+            setOnRefreshListener {
+                displayBooks()
+                isRefreshing = false
+            }
         }
 
         displayBooks()

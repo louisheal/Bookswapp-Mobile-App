@@ -3,9 +3,7 @@ package ac.ic.bookapp
 import ac.ic.bookapp.data.BookDatasource
 import ac.ic.bookapp.databinding.FragmentSearchBinding
 import ac.ic.bookapp.filesys.LoginPreferences
-import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.recycleViewAdapters.SearchBookRowAdapter
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,15 +34,20 @@ class SearchFragment : Fragment() {
 
         emptySearchText = binding.searchBooksEmptyText
 
+        with(binding.searchBooksRefresh) {
+            setOnRefreshListener {
+                displayBorrowableBooks()
+                isRefreshing = false
+            }
+        }
+
         return binding.root
     }
 
     @Override
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayBorrowableBooks(
-            BookDatasource.getBooks(LoginPreferences.getUserLoginId(this.requireActivity()))
-        )
+        displayBorrowableBooks()
     }
 
     @Override
@@ -53,7 +56,8 @@ class SearchFragment : Fragment() {
         _binding = null
     }
 
-    private fun displayBorrowableBooks(books: List<Book>) {
+    private fun displayBorrowableBooks() {
+        val books = BookDatasource.getBooks(LoginPreferences.getUserLoginId(this.requireActivity()))
         if (books.isEmpty()) {
             emptySearchText.visibility = View.VISIBLE
         } else {

@@ -1,5 +1,6 @@
 package ac.ic.bookapp.myBooksTabFragments
 
+import ac.ic.bookapp.SwipeRefreshLayoutWithEmpty
 import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.databinding.FragmentLentBooksBinding
 import ac.ic.bookapp.filesys.LoginPreferences
@@ -31,6 +32,14 @@ class LentBooksFragment : Fragment() {
         lentBooksList = binding.lentBooksList
         emptyLentListText = binding.lentBooksEmptyText
         lentBooksList.setHasFixedSize(true)
+
+        with(binding.lentBooksRefresh ) {
+
+            setOnRefreshListener {
+                displayBooks()
+                isRefreshing = false
+            }
+        }
 
         displayBooks()
         return binding.root
