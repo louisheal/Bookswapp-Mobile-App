@@ -6,6 +6,8 @@ import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.messaging.MessageService
 import ac.ic.bookapp.model.LoanRequest
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -14,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sendbird.android.SendBird
 import com.sendbird.android.SendBirdException
 import com.sendbird.android.handlers.InitResultHandler
+import java.util.*
 
 private const val TAG = "MainActivity"
 
@@ -60,9 +63,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNotificationCount(bottomNavigationView: BottomNavigationView) {
-        val notifCount = getLoanRequests().size
-        if (notifCount > 0)
-            bottomNavigationView.getOrCreateBadge(R.id.notifsFragment).number = notifCount
+        val mainHandler = Handler(Looper.getMainLooper())
+
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                val notifCount = getLoanRequests().size
+                if (notifCount > 0)
+                    bottomNavigationView.getOrCreateBadge(R.id.notifsFragment).number = notifCount
+                mainHandler.postDelayed(this, 1000)
+            }
+        })
+
     }
 
     private fun getLoanRequests(): List<LoanRequest> =
