@@ -13,10 +13,14 @@ object Backend {
             .add(KotlinJsonAdapterFactory())
             .build()
 
-    val staging: Retrofit =
+    val staging: Retrofit = createRetrofit("http://drp19-staging.herokuapp.com/")
+
+    val production: Retrofit = createRetrofit("http://drp19.herokuapp.com/")
+
+    private fun createRetrofit(url: String) =
         Retrofit
             .Builder()
-            .baseUrl("http://drp19-staging.herokuapp.com/")
+            .baseUrl(url)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 }
