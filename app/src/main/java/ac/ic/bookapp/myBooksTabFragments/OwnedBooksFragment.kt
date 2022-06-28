@@ -59,6 +59,26 @@ class OwnedBooksFragment : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        displayBooks()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        displayBooks()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        displayBooks()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+
     private fun getUserBooks(): List<Ownership> =
         UserDatasource.getUserOwns(LoginPreferences.getUserLoginId(this.requireActivity()))
 

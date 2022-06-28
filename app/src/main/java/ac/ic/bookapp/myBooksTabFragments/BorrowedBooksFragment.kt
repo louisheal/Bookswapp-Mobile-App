@@ -42,6 +42,25 @@ class BorrowedBooksFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        displayBooks()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        displayBooks()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        displayBooks()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 
     private fun displayBooks() {
         val borrowedBooks = getBorrowedBooks()
