@@ -6,40 +6,46 @@ import ac.ic.bookapp.model.User
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
-
 object LoginRepository {
 
-    // in-memory cache of the loggedInUser object
-    var user: User? = null
+    private var _authToken: String? = null
+    var authToken: String = ""
+        private set
+        get() = _authToken!!
+
+    var loggedIn: User? = null
         private set
 
     val isLoggedIn: Boolean
-        get() = user != null
+        get() = loggedIn != null
 
     init {
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
-        user = null
+        loggedIn = null
     }
 
     fun logout() {
-        user = null
+        loggedIn = null
         LoginDatasource.logout()
     }
 
     fun login(username: String, password: String): Result<User> {
-        // handle login
-        val result = LoginDatasource.login(username, password)
+        val authResult = LoginDatasource.login(username, password)
 
-        if (result is Result.Success) {
-            setLoggedInUser(result.data)
+        if (authResult is Result.Success) {
+            _authToken = authResult.data
+            setLoggedInUser(
+                UserDatasource.getCurrentUser()
+            )
+            return Result.Success(loggedIn!!)
         }
 
-        return result
+        return Result.Error(Exception("Could not log in."))
     }
 
     private fun setLoggedInUser(loggedInUser: User) {
-        this.user = loggedInUser
+        this.loggedIn = loggedInUser
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }

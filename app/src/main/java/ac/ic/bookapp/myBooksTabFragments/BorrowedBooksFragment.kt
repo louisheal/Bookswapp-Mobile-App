@@ -4,13 +4,12 @@ import ac.ic.bookapp.data.LoanDatasource
 import ac.ic.bookapp.databinding.FragmentBorrowedBooksBinding
 import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Loan
-import ac.ic.bookapp.recycleViewAdapters.BorrowedBookRowAdapter
+import ac.ic.bookapp.ui.myBooks.BorrowedBookRowAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 

@@ -15,7 +15,12 @@ data class OwnershipPost(
     val currentCopies: Int
 )
 
-object UserDatasource : Datasource<UserService>(UserService::class.java) {
+object UserDatasource : AuthenticatedDatasource<UserService>(UserService::class.java) {
+
+    fun getCurrentUser(): User =
+        runBlocking {
+            service.getCurrentUser()
+        }
 
     fun getUsers(): List<User> {
         return runBlocking {
@@ -46,6 +51,9 @@ interface UserService {
 
     @GET("users")
     suspend fun getUsers(): List<User>
+
+    @GET("users/current")
+    suspend fun getCurrentUser(): User
 
     @GET("users/{user_id}/books")
     suspend fun getUserBooks(@Path("user_id") userId: Long): List<Book>

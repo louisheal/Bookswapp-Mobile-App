@@ -2,11 +2,10 @@ package ac.ic.bookapp.data
 
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.User
-import android.content.Context
 import kotlinx.coroutines.runBlocking
 import retrofit2.http.*
 
-object BookDatasource : Datasource<BookService>(BookService::class.java) {
+object BookDatasource : AuthenticatedDatasource<BookService>(BookService::class.java) {
 
     fun getBooks(exceptUser: Long? = null): List<Book> {
         return runBlocking {
