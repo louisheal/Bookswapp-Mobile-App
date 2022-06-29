@@ -17,7 +17,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class BorrowedBookRowAdapter(
-    private val myBooksFragment: MyBooksFragment,
     private var borrowedList: List<Loan>
 ) : RecyclerView.Adapter<BorrowedBookRowAdapter.BorrowedBookRowViewHolder>() {
 
