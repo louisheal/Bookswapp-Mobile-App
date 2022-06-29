@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/myBooksFragment"
-        android:name="ac.ic.bookapp.MyBooksFragment"
+        android:name="ac.ic.bookapp.ui.myBooks.MyBooksFragment"
         android:label="fragment_my_books"
         tools:layout="@layout/fragment_my_books" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="ac.ic.bookapp.SearchFragment"
+        android:name="ac.ic.bookapp.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/notifsFragment"
-        android:name="ac.ic.bookapp.NotifsFragment"
+        android:name="ac.ic.bookapp.ui.notifs.NotifsFragment"
         android:label="fragment_notifs"
         tools:layout="@layout/fragment_notifs" />
     <fragment

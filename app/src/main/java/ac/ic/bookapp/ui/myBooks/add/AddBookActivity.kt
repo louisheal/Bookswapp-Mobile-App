@@ -1,9 +1,10 @@
-package ac.ic.bookapp
+package ac.ic.bookapp.ui.myBooks.add
 
+import ac.ic.bookapp.R
 import ac.ic.bookapp.data.BookDatasource
+import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.ActivityAddBookBinding
-import ac.ic.bookapp.filesys.LoginPreferences
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -38,7 +39,7 @@ open class AddBookActivity : AppCompatActivity() {
     protected fun addMyBook(isbn: String) {
         try {
             val book = BookDatasource.postBook(isbn)!!
-            val userId = LoginPreferences.getUserLoginId(this)
+            val userId = LoginRepository.getUserId()
             UserDatasource.postOwnership(userId, book.id, 1, 1)
             Toast.makeText(applicationContext, "Book Added!", LENGTH_SHORT).show()
             finish()

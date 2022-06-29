@@ -1,10 +1,10 @@
 package ac.ic.bookapp.myBooksTabFragments
 
 import ac.ic.bookapp.data.LoanDatasource
+import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.databinding.FragmentBorrowedBooksBinding
-import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Loan
-import ac.ic.bookapp.recycleViewAdapters.BorrowedBookRowAdapter
+import ac.ic.bookapp.ui.myBooks.BorrowedBookRowAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -72,5 +72,5 @@ class BorrowedBooksFragment : Fragment() {
     }
 
     private fun getBorrowedBooks(): List<Loan> =
-        LoanDatasource.getUserBorrowedBooks(LoginPreferences.getUserLoginId(this.requireActivity()))
+        LoanDatasource.getUserBorrowedBooks(LoginRepository.getUserId())
 }

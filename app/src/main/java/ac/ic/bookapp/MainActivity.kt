@@ -1,8 +1,8 @@
 package ac.ic.bookapp
 
 import ac.ic.bookapp.data.LoanDatasource
+import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.databinding.ActivityMainBinding
-import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.messaging.MessageService
 import ac.ic.bookapp.model.LoanRequest
 import android.os.Bundle
@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun onInitSucceed() {
                 Log.d(TAG, "SendBird Init succeeded")
-                MessageService.connectToSendBird(LoginPreferences.getUserLoginId(this@MainActivity).toString(),
-                    LoginPreferences.getUsername(this@MainActivity), this@MainActivity) {
+                MessageService.connectToSendBird(LoginRepository.getUserId().toString(),
+                    LoginRepository.getUsername(), this@MainActivity) {
                     MessageService.createChannelHandler(setupMessageNotification(bottomNavigationView))
                 }
             }
@@ -56,8 +56,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         SendBird.init("07375028-AE3C-4FC9-9D5D-428AE1B180B6", this, true, handler)
-
-
 
         Log.d(TAG, "Main Activity created")
     }
@@ -78,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getLoanRequests(): List<LoanRequest> =
         LoanDatasource.getUserIncomingLoanRequests(
-            LoginPreferences.getUserLoginId(this)
+            LoginRepository.getUserId()
         )
 
     private fun setupMessageNotification(bottomNavigationView: BottomNavigationView): () -> Unit {

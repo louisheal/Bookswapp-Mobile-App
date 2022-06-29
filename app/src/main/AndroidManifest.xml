@@ -21,52 +21,54 @@
         android:theme="@style/Theme.BookApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
-
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".ui.login.LoginActivity"
+            android:noHistory="true"
+            android:exported="true"
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".AddBookActivity"
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.myBooks.add.AddBookActivity"
             android:exported="false"
             android:label="@string/title_activity_add_book"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.BookApp.NoActionBar">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
-            android:name=".ScannerViewActivity"
+            android:name=".ui.myBooks.add.ScannerViewActivity"
             android:exported="false"
             android:label="Scanner"
-            android:parentActivityName=".AddBookActivity"
+            android:parentActivityName=".ui.myBooks.add.AddBookActivity"
             android:theme="@style/Theme.BookApp.NoActionBar">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AddBookActivity" />
+                android:value=".ui.myBooks.add.AddBookActivity" />
         </activity>
-        <activity android:name=".BookProfileActivity" />
-
-        <activity android:name=".messaging.ChannelActivity"
-            android:theme="@style/Theme.BookApp"
-            android:parentActivityName=".MainActivity">
-        </activity>
+        <activity android:name=".ui.search.borrow.BookProfileActivity" />
+        <activity
+            android:name=".messaging.ChannelActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.BookApp" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>

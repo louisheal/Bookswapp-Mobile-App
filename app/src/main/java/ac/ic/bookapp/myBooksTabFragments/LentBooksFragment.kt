@@ -2,16 +2,15 @@ package ac.ic.bookapp.myBooksTabFragments
 
 import ac.ic.bookapp.SwipeRefreshLayoutWithEmpty
 import ac.ic.bookapp.data.LoanDatasource
+import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.databinding.FragmentLentBooksBinding
-import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Loan
-import ac.ic.bookapp.recycleViewAdapters.LentBookRowAdapter
+import ac.ic.bookapp.ui.myBooks.LentBookRowAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
@@ -75,6 +74,6 @@ class LentBooksFragment : Fragment() {
     }
 
     private fun getLentBooks(): List<Loan> =
-        LoanDatasource.getUserLentBooks(LoginPreferences.getUserLoginId(this.requireActivity()))
+        LoanDatasource.getUserLentBooks(LoginRepository.getUserId())
 
 }

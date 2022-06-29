@@ -1,5 +1,6 @@
-package ac.ic.bookapp
+package ac.ic.bookapp.ui.myBooks.add
 
+import ac.ic.bookapp.R
 import ac.ic.bookapp.databinding.ActivityScannerViewBinding
 import android.Manifest
 import android.content.pm.PackageManager
@@ -9,7 +10,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.*
-
 
 const val CAMERA_REQUEST_CODE = 101
 

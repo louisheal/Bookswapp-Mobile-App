@@ -1,6 +1,6 @@
 package ac.ic.bookapp.messaging
 
-import ac.ic.bookapp.filesys.LoginPreferences
+import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.model.Book
 import android.content.Context
 import android.content.Intent
@@ -32,7 +32,7 @@ object MessageService {
     private fun connectAndOpenChannel(otherId: String, context: Context, func: (GroupChannel?) -> Unit) {
         val TAG = "Notifications"
         Log.d(TAG, "creating message channel")
-        val myId = LoginPreferences.getUserLoginId(context)
+        val myId = LoginRepository.getUserId()
 
         SendBird.connect(myId.toString()) { user: User?, e: SendBirdException? ->
             if (user != null) {

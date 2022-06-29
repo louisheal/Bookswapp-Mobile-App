@@ -1,11 +1,11 @@
 package ac.ic.bookapp.myBooksTabFragments
 
-import ac.ic.bookapp.AddBookActivity
+import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.FragmentOwnedBooksBinding
-import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.Ownership
-import ac.ic.bookapp.recycleViewAdapters.OwnedBookRowAdapter
+import ac.ic.bookapp.ui.myBooks.OwnedBookRowAdapter
+import ac.ic.bookapp.ui.myBooks.add.AddBookActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -80,7 +80,7 @@ class OwnedBooksFragment : Fragment() {
 
 
     private fun getUserBooks(): List<Ownership> =
-        UserDatasource.getUserOwns(LoginPreferences.getUserLoginId(this.requireActivity()))
+        UserDatasource.getUserOwns(LoginRepository.getUserId())
 
     private fun startAddBookActivity() {
         val intent = Intent(context, AddBookActivity::class.java)

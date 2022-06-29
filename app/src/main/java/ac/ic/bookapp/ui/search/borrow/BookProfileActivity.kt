@@ -1,12 +1,12 @@
-package ac.ic.bookapp
+package ac.ic.bookapp.ui.search.borrow
 
+import ac.ic.bookapp.R
 import ac.ic.bookapp.data.BookDatasource
 import ac.ic.bookapp.data.CoverDatasource
 import ac.ic.bookapp.data.CoverSize
 import ac.ic.bookapp.databinding.ActivityBookProfileBinding
 import ac.ic.bookapp.model.Book
 import ac.ic.bookapp.model.User
-import ac.ic.bookapp.recycleViewAdapters.BookHolderRowAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView

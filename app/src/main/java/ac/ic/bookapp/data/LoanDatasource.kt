@@ -22,7 +22,7 @@ data class ReturnPost(
     val copies: Int
 )
 
-object LoanDatasource : Datasource<LoanService>(LoanService::class.java) {
+object LoanDatasource : AuthenticatedDatasource<LoanService>(LoanService::class.java) {
 
     fun getUserBorrowedBooks(userId: Long): List<Loan> {
         return runBlocking {
@@ -82,7 +82,6 @@ interface LoanService {
 
     @GET("/loans")
     suspend fun getUserLentBooks(@Query("from") userId: Long): List<Loan>
-
 
     @GET("/loans/requests")
     suspend fun getIncomingLoanRequests(@Query("from") userId: Long): List<LoanRequest>

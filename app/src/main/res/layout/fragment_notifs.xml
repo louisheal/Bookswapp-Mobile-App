@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    tools:context=".NotifsFragment">
+    tools:context=".ui.notifs.NotifsFragment">
 
     <TextView
         android:id="@+id/notifs_none"

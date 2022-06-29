@@ -1,7 +1,7 @@
 package ac.ic.bookapp.messaging
 
 import ac.ic.bookapp.R
-import ac.ic.bookapp.filesys.LoginPreferences
+import ac.ic.bookapp.data.LoginRepository
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -79,7 +79,7 @@ class ChannelListAdapter(listener: OnChannelClickedListener) : RecyclerView.Adap
             Log.d("ChannelSize", channel.memberCount.toString())
             for (member in channel.members) {
                 Log.d("Channel", member.nickname)
-                if (member.userId != LoginPreferences.getUserLoginId(context).toString()) {
+                if (member.userId != LoginRepository.getUserId().toString()) {
                     members.add(member)
                 }
             }

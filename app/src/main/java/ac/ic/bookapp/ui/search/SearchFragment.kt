@@ -1,9 +1,8 @@
-package ac.ic.bookapp
+package ac.ic.bookapp.ui.search
 
 import ac.ic.bookapp.data.BookDatasource
+import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.databinding.FragmentSearchBinding
-import ac.ic.bookapp.filesys.LoginPreferences
-import ac.ic.bookapp.recycleViewAdapters.SearchBookRowAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +56,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun displayBorrowableBooks() {
-        val books = BookDatasource.getBooks(LoginPreferences.getUserLoginId(this.requireActivity()))
+        val books = BookDatasource.getBooks(LoginRepository.getUserId())
         if (books.isEmpty()) {
             emptySearchText.visibility = View.VISIBLE
         } else {

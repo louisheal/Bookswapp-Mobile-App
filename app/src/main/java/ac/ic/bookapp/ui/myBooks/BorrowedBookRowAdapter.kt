@@ -1,6 +1,5 @@
-package ac.ic.bookapp.recycleViewAdapters
+package ac.ic.bookapp.ui.myBooks
 
-import ac.ic.bookapp.MyBooksFragment
 import ac.ic.bookapp.R
 import ac.ic.bookapp.data.CoverDatasource
 import ac.ic.bookapp.data.CoverSize

@@ -1,16 +1,10 @@
-package ac.ic.bookapp
+package ac.ic.bookapp.ui.myBooks
 
-import ac.ic.bookapp.data.LoanDatasource
-import ac.ic.bookapp.data.UserDatasource
 import ac.ic.bookapp.databinding.FragmentMyBooksBinding
-import ac.ic.bookapp.filesys.LoginPreferences
-import ac.ic.bookapp.model.Loan
-import ac.ic.bookapp.model.Ownership
 import ac.ic.bookapp.myBooksTabFragments.BorrowedBooksFragment
 import ac.ic.bookapp.myBooksTabFragments.LentBooksFragment
 import ac.ic.bookapp.myBooksTabFragments.OwnedBooksFragment
 import ac.ic.bookapp.viewPagerAdapter.MyBooksPagerAdapter
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
