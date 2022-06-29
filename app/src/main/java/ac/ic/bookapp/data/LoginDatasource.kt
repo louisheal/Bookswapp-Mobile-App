@@ -40,7 +40,10 @@ object LoginDatasource : Datasource<LoginService>(LoginService::class.java) {
         val request = chain.request()
         val response = chain.proceed(request)
 
-        authToken = response.header(AUTHORIZATION)!!
+        val authHeader = response.header(AUTHORIZATION)
+        if (authHeader != null) {
+            authToken = response.header(AUTHORIZATION)!!
+        }
 
         return response
     }

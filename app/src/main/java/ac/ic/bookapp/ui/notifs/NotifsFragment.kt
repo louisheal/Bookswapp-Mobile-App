@@ -2,8 +2,8 @@ package ac.ic.bookapp.ui.notifs
 
 import ac.ic.bookapp.R
 import ac.ic.bookapp.data.LoanDatasource
+import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.databinding.FragmentNotifsBinding
-import ac.ic.bookapp.filesys.LoginPreferences
 import ac.ic.bookapp.model.LoanRequest
 import android.os.Bundle
 import android.util.Log
@@ -75,7 +75,7 @@ class NotifsFragment : Fragment() {
 
     private fun getLoanRequests(): List<LoanRequest> =
         LoanDatasource.getUserIncomingLoanRequests(
-            LoginPreferences.getUserLoginId(this.requireActivity())
+            LoginRepository.getUserId()
         )
 
     fun displayRequestConfirmation(title: String, name: String) {

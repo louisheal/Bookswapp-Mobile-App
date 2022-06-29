@@ -13,8 +13,7 @@ object LoginRepository {
         private set
         get() = _authToken!!
 
-    var loggedIn: User? = null
-        private set
+    private var loggedIn: User? = null
 
     val isLoggedIn: Boolean
         get() = loggedIn != null
@@ -43,6 +42,10 @@ object LoginRepository {
 
         return Result.Error(Exception("Could not log in."))
     }
+    
+    fun getUserId() = loggedIn!!.id
+
+    fun getUsername() = loggedIn!!.username
 
     private fun setLoggedInUser(loggedInUser: User) {
         this.loggedIn = loggedInUser

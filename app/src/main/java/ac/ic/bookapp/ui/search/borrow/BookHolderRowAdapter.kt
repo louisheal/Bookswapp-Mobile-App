@@ -2,7 +2,7 @@ package ac.ic.bookapp.ui.search.borrow
 
 import ac.ic.bookapp.R
 import ac.ic.bookapp.data.LoanDatasource
-import ac.ic.bookapp.filesys.LoginPreferences
+import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.model.User
 import android.app.Activity
 import android.view.LayoutInflater
@@ -52,7 +52,7 @@ class BookHolderRowAdapter(
 
     private fun borrowBook(ownerId: Long) {
         LoanDatasource.postUserLoanRequest(
-            LoginPreferences.getUserLoginId(context),
+            LoginRepository.getUserId(),
             ownerId,
             bookId
         )

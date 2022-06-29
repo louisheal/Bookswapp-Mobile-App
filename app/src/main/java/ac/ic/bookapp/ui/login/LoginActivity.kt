@@ -1,9 +1,11 @@
 package ac.ic.bookapp.ui.login
 
+import ac.ic.bookapp.MainActivity
 import ac.ic.bookapp.R
 import ac.ic.bookapp.databinding.ActivityLoginBinding
 import ac.ic.bookapp.model.User
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -60,8 +62,10 @@ class LoginActivity : AppCompatActivity() {
             }
             setResult(Activity.RESULT_OK)
 
-            //Complete and destroy login activity once successful
-            finish()
+            if (loginResult.success != null) {
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                this@LoginActivity.startActivity(intent)
+            }
         })
 
         username.afterTextChanged {

@@ -1,6 +1,6 @@
 package ac.ic.bookapp.messaging
 
-import ac.ic.bookapp.filesys.LoginPreferences
+import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.model.Book
 import android.content.Context
 import android.content.Intent
@@ -31,7 +31,7 @@ object MessageService {
     fun openMessageChannelAndSendAcceptance(borrowerId: Long, context: Context, book: Book) {
         val TAG = "Notifications"
         Log.d(TAG, "creating message channel")
-        val lenderId = LoginPreferences.getUserLoginId(context)
+        val lenderId = LoginRepository.getUserId()
 
         SendBird.connect(lenderId.toString()) { user: User?, e: SendBirdException? ->
             if (user != null) {
@@ -58,7 +58,7 @@ object MessageService {
                         val params = UserMessageParams()
                             .setMessage("Borrow Request Accepted: ${book.title}")
                         groupChannel?.sendUserMessage(params,
-                            BaseChannel.SendUserMessageHandler { userMessage, e ->
+                            BaseChannel.SendUserMessageHandler { _, e ->
                                 if (e != null) {    // Error.
                                     return@SendUserMessageHandler
                                 }
