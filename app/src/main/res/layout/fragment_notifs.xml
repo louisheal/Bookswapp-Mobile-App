@@ -9,18 +9,6 @@
     tools:context=".NotifsFragment">
 
     <TextView
-        android:id="@+id/notifs_empty_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/all_caught_up"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notifs_none"
-        tools:visibility="visible" />
-
-    <TextView
         android:id="@+id/notifs_none"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,25 +19,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    app:layout_constraintBottom_toBottomOf="@+id/notifs_scrollview"-->
-
-    <ScrollView
-        android:id="@+id/notifs_scrollview"
+    <Space
+        android:id="@+id/space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/notifs_none"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:scrollbarStyle="insideOverlay"
-        android:visibility="visible"
+        android:layout_height="20dp" />
+
+
+    <ac.ic.bookapp.SwipeRefreshLayoutWithEmpty
+        android:id="@+id/notifs_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notifs_none"
-        tools:visibility="visible">
+        app:layout_constraintTop_toBottomOf="@+id/space">
 
-        <LinearLayout
+        <!--Needed so that swipe refresh layout works with empty list -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/notifs_list"
@@ -58,7 +49,16 @@
                 android:scrollbars="none"
                 app:layoutManager="LinearLayoutManager" />
 
-        </LinearLayout>
-    </ScrollView>
+            <TextView
+                android:id="@+id/notifs_empty_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/all_caught_up"
+                android:visibility="invisible"
+                android:layout_gravity="center"
+                tools:visibility="visible" />
+
+        </FrameLayout>
+    </ac.ic.bookapp.SwipeRefreshLayoutWithEmpty>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

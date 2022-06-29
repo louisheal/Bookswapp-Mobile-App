@@ -41,6 +41,13 @@ class NotifsFragment : Fragment() {
         notifsList.setHasFixedSize(true)
         emptyNotifsText = binding.notifsEmptyText
 
+        with(binding.notifsRefresh) {
+            setOnRefreshListener {
+                displayNotifs()
+                isRefreshing = false
+            }
+        }
+
         return view
     }
 
