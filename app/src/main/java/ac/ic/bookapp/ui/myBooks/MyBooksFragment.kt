@@ -4,7 +4,6 @@ import ac.ic.bookapp.databinding.FragmentMyBooksBinding
 import ac.ic.bookapp.myBooksTabFragments.BorrowedBooksFragment
 import ac.ic.bookapp.myBooksTabFragments.LentBooksFragment
 import ac.ic.bookapp.myBooksTabFragments.OwnedBooksFragment
-import ac.ic.bookapp.viewPagerAdapter.MyBooksPagerAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater

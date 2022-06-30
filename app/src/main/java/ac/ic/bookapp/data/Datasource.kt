@@ -8,7 +8,7 @@ import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-private val URL = Backend.STAGING.url
+private val URL = Backend.PRODUCTION.url
 
 abstract class Datasource<T>(
     private val apiClass: Class<T>

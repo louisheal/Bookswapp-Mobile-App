@@ -1,4 +1,4 @@
-package ac.ic.bookapp.viewPagerAdapter
+package ac.ic.bookapp.ui.myBooks
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
