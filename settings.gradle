@@ -14,5 +14,5 @@ dependencyResolutionManagement {
         maven { url "https://repo.sendbird.com/public/maven" }
     }
 }
-rootProject.name = "BookApp"
+rootProject.name = "BookSwapp"
 include ':app'

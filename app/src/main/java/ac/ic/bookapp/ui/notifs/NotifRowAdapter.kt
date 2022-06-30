@@ -58,7 +58,6 @@ class NotifRowAdapter(
         holder.departmentText.text = "Department placeholder"
         holder.acceptButton.setOnClickListener {
             LoanDatasource.postLoanRequestDecision(notif.id, true)
-            notifsFragment.displayRequestConfirmation(book.title, requester.name)
             MessageService.openMessageChannelAndSendAcceptance(requester.id, holder.context, book)
             removeItem(position)
         }

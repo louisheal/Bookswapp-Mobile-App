@@ -1,9 +1,12 @@
 package ac.ic.bookapp.ui.search
 
+import ac.ic.bookapp.R
 import ac.ic.bookapp.data.BookDatasource
 import ac.ic.bookapp.data.LoginRepository
 import ac.ic.bookapp.databinding.FragmentSearchBinding
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +42,14 @@ class SearchFragment : Fragment() {
                 isRefreshing = false
             }
         }
+
+        val mainHandler = Handler(Looper.getMainLooper())
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                displayBorrowableBooks()
+                mainHandler.postDelayed(this, 2000)
+            }
+        })
 
         return binding.root
     }

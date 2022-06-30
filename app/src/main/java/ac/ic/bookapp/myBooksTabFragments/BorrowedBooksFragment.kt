@@ -6,6 +6,8 @@ import ac.ic.bookapp.databinding.FragmentBorrowedBooksBinding
 import ac.ic.bookapp.model.Loan
 import ac.ic.bookapp.ui.myBooks.BorrowedBookRowAdapter
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,22 +40,14 @@ class BorrowedBooksFragment : Fragment() {
             }
         }
 
-        displayBooks()
+        val mainHandler = Handler(Looper.getMainLooper())
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                displayBooks()
+                mainHandler.postDelayed(this, 2000)
+            }
+        })
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        displayBooks()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        displayBooks()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        displayBooks()
     }
 
     override fun onDestroy() {
