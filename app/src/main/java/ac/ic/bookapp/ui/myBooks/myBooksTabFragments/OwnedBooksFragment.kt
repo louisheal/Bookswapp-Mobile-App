@@ -48,13 +48,6 @@ class OwnedBooksFragment : Fragment() {
             }
         }
 
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                displayBooks()
-                mainHandler.postDelayed(this, 2000)
-            }
-        })
         return binding.root
     }
 
@@ -71,8 +64,7 @@ class OwnedBooksFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
-
+    
     private fun getUserBooks(): List<Ownership> =
         UserDatasource.getUserOwns(LoginRepository.getUserId())
 

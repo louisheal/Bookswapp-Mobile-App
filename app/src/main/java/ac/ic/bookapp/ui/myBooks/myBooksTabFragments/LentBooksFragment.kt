@@ -42,13 +42,6 @@ class LentBooksFragment : Fragment() {
             }
         }
 
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
-            override fun run() {
-                displayBooks()
-                mainHandler.postDelayed(this, 2000)
-            }
-        })
         return binding.root
     }
 
